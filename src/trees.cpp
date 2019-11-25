@@ -32,10 +32,22 @@ void treePrune(node* tree){
 	if (tree->children){
 		node* child = tree->children;
 		for(int i=0; i<8; i++){
-			treePrune(ptr);
+			treePrune(child);
 			child++;
 		};
 	} else if (tree->num == 0){
+		delete tree;
+	};
+};
+
+void treeChop(node* tree){
+	if (tree->children){
+		node* child = tree->children;
+		for(int i=0; i<8; i++){
+			chopTree(child);
+			child++;
+		};
+	} else{
 		delete tree;
 	};
 };

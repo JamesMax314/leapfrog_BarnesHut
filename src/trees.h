@@ -19,7 +19,7 @@ struct node{
 	double width;
 	double centre;
 
-	int num;
+	int num; // number of particles in tree
 	node* children;
 	node* parent;
 
