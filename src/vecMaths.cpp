@@ -1,29 +1,37 @@
-#include <math.h>
+#include <cmath>
+#include <vector>
 
-double modulus(vector<double>& v1, vector<double>& v1, bool square = false){
+using namespace std;
+
+double dot(vector<double>& v1, vector<double>& v2, bool square){
 	double out = 0;
 	for(int i=0; i<3; i++){
 		out += v1[i]*v1[i] + v2[i]*v2[i];
-	};
-	if(square == false){
+	}
+	if(!square){
 		return pow(out, 0.5);
 	} else{
 		return out;
-	};
-};
+	}
+}
+
+double modulus(vector<double> vec, bool square){
+    double out = dot(vec, vec, square);
+    return out;
+}
 
 vector<double> vecAdd(vector<double> v1, vector<double> v2){
 	vector<double> out;
 	for(int i=0; i<3; i++){
 		out[i] = v1[i] + v2[i];
-	};
+	}
 	return out;
-};
+}
 
-vector<double> scalMult(double scal, vector<double> v){
+vector<double> scalMult(double scal, vector<double> &v){
 	vector<double> out;
 	for(int i=0; i<3; i++){
 		out[i] = scal*v[i];
-	};
+	}
 	return out;
-};
+}

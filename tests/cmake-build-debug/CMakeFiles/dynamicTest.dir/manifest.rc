@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "D:/MainDrive/University/Computing/leapfrog_BarnesHut/tests/cmake-build-debug/CMakeFiles/dynamicTest.dir/embed.manifest"

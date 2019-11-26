@@ -1,26 +1,33 @@
 #ifndef BODIES
 #define BODIES
 
+#include <vector>
+
+using namespace std;
+
 struct body{
-	double mass;
+	double mass{};
 	vector<double> pos;
 	vector<double> vel;
 	vector<double> acc;
-	double ek;
-	double ep;
+	double ek{};
+	double ep{};
+
+    body();
+    body(double&, vector<double>&, vector<double>&, vector<double>&, double&, double&);
 };
 
-body::body(){};
+body::body() = default;
 
-body::body(double m, vector<double> p, vector<double> v,
- vector<double> a, double k, double pe){
+body::body(double &m, vector<double> &p, vector<double> &v,
+ vector<double> &a, double &k, double &pe){
 	mass = m;
 	pos = p;
 	vel = v;
 	acc = a;
 	ek = k;
 	ep = pe;
-};
+}
 
 // Macros to retrieve body data; x is a pointer
 #define Vel(x) (((body*) (x))->vel) // cast x to type body* then retrieve vel
