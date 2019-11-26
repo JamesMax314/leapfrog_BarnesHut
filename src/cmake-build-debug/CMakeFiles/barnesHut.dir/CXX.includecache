@@ -10,33 +10,9 @@ D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.h
 vector
 -
 
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/leapfrog.cpp
-vector
+D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/main.cpp
+iostream
 -
 bodies.h
 D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.h
-trees.h
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.h
-vecMaths.h
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.h
-
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.cpp
-cmath
--
-vecMaths.h
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.h
-trees.h
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.h
-
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.h
-vector
--
-tuple
--
-bodies.h
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.h
-
-D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.h
-vector
--
 

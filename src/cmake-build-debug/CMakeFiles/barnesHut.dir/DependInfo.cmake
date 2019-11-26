@@ -4,10 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/leapfrog.cpp" "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/barnesHut.dir/leapfrog.cpp.obj"
   "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/main.cpp" "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/barnesHut.dir/main.cpp.obj"
-  "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.cpp" "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/barnesHut.dir/trees.cpp.obj"
-  "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.cpp" "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/barnesHut.dir/vecMaths.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 

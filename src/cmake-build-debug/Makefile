@@ -124,33 +124,6 @@ barnesHut\fast:
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\build
 .PHONY : barnesHut\fast
 
-leapfrog.obj: leapfrog.cpp.obj
-
-.PHONY : leapfrog.obj
-
-# target to build an object file
-leapfrog.cpp.obj:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\leapfrog.cpp.obj
-.PHONY : leapfrog.cpp.obj
-
-leapfrog.i: leapfrog.cpp.i
-
-.PHONY : leapfrog.i
-
-# target to preprocess a source file
-leapfrog.cpp.i:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\leapfrog.cpp.i
-.PHONY : leapfrog.cpp.i
-
-leapfrog.s: leapfrog.cpp.s
-
-.PHONY : leapfrog.s
-
-# target to generate assembly for a file
-leapfrog.cpp.s:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\leapfrog.cpp.s
-.PHONY : leapfrog.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -178,60 +151,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\main.cpp.s
 .PHONY : main.cpp.s
 
-trees.obj: trees.cpp.obj
-
-.PHONY : trees.obj
-
-# target to build an object file
-trees.cpp.obj:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\trees.cpp.obj
-.PHONY : trees.cpp.obj
-
-trees.i: trees.cpp.i
-
-.PHONY : trees.i
-
-# target to preprocess a source file
-trees.cpp.i:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\trees.cpp.i
-.PHONY : trees.cpp.i
-
-trees.s: trees.cpp.s
-
-.PHONY : trees.s
-
-# target to generate assembly for a file
-trees.cpp.s:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\trees.cpp.s
-.PHONY : trees.cpp.s
-
-vecMaths.obj: vecMaths.cpp.obj
-
-.PHONY : vecMaths.obj
-
-# target to build an object file
-vecMaths.cpp.obj:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\vecMaths.cpp.obj
-.PHONY : vecMaths.cpp.obj
-
-vecMaths.i: vecMaths.cpp.i
-
-.PHONY : vecMaths.i
-
-# target to preprocess a source file
-vecMaths.cpp.i:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\vecMaths.cpp.i
-.PHONY : vecMaths.cpp.i
-
-vecMaths.s: vecMaths.cpp.s
-
-.PHONY : vecMaths.s
-
-# target to generate assembly for a file
-vecMaths.cpp.s:
-	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\vecMaths.cpp.s
-.PHONY : vecMaths.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -241,18 +160,9 @@ help:
 	@echo ... barnesHut
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... leapfrog.obj
-	@echo ... leapfrog.i
-	@echo ... leapfrog.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
-	@echo ... trees.obj
-	@echo ... trees.i
-	@echo ... trees.s
-	@echo ... vecMaths.obj
-	@echo ... vecMaths.i
-	@echo ... vecMaths.s
 .PHONY : help
 
 

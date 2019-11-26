@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.cpp
+bodies.h
+D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.h
+
+D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.h
+vector
+-
+

@@ -2,11 +2,36 @@
 #include "vecMaths.h"
 #include "trees.h"
 
-vector<body> bodies;
-using namespace barnesHut;
+/// node constructors
+node::node() = default;
 
-// Node functions
-bool inNode(vector<double> pos, node* nod){
+// node constructors
+node::node(double w, vector<double> &c){
+    num = 0;
+    numChildren = 0;
+    width = w;
+    centre = c;
+};
+
+node::node(node* tree){
+    num = 0;
+    numChildren = 0;
+    parent = tree;
+    children = nullptr;
+    width = tree->width/2;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// barnesHut constructor
+barnesHut::barnesHut(vector<body> &bods, vector<double> dim): bodies(bods) {
+    width = dim[0];
+    centre = {dim[0]/2, dim[0]/2};
+    root = new node(width, centre);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// barnesHut functions
+bool barnesHut::inNode(vector<double> pos, node* nod){
 	for(int i=0; i<3; i++){
 	    vector<double> displacement = vecAdd(pos, scalMult(-1, nod->centre));
 	    double distance = modulus(displacement, false);
@@ -17,7 +42,7 @@ bool inNode(vector<double> pos, node* nod){
 	return true;
 };
 
-void addChildren(node* tree){
+void barnesHut::addChildren(node* tree){
 	tree->children = new node[8]();
     tree->numChildren = 8;
     for(int i=0; i<8; i++){
@@ -36,7 +61,7 @@ void addChildren(node* tree){
 	};
 };
 
-void treePrune(node* tree){
+void barnesHut::treePrune(node* tree){
 	if (tree->children){
 		node* child = tree->children;
 		for(int i=0; i<8; i++){
@@ -49,7 +74,7 @@ void treePrune(node* tree){
 	};
 };
 
-void treeChop(node* tree){
+void barnesHut::treeChop(node* tree){
 	if (tree->children){
 		node* child = tree->children;
 		for(int i=0; i<8; i++){
@@ -64,8 +89,10 @@ void treeChop(node* tree){
 
 
 // Tree building functions
-void treeBuild(node* root){ // double width, double centre){
-	//node* tree = new node(width, centre);
+void barnesHut::treeBuild(){ // double width, double centre){
+    if(!root){
+        root = new node(width, centre);
+    }
 	addChildren(root);
 	for(int i=0; i<bodies.size(); i++){
 		treeInsert(root, i);
@@ -73,7 +100,7 @@ void treeBuild(node* root){ // double width, double centre){
 	treePrune(root);
 }
 
-void treeInsert(node* tree, int i){
+void barnesHut::treeInsert(node* tree, int i){
 	if (tree->num > 1){
 		node* child = tree->children;
 		for(int j=0; j<8; j++) {
@@ -112,13 +139,13 @@ void treeInsert(node* tree, int i){
 
 
 // Kinematic functions
-void acceleration(node* tree){
+void barnesHut::acceleration(node* tree){
 	for(int i=0; i<bodies.size(); i++){
 		bodies[i].acc = treeAcc(tree, i);
 	};
 };
 
-vector<double> treeAcc(node* tree, int i){
+vector<double> barnesHut::treeAcc(node* tree, int i){
 	vector<double> f;
 	if (tree->num == 1 && tree->bodyindx != i){
 		f = ngl(bodies[i].pos, tree->pos, tree->mass);
@@ -134,9 +161,10 @@ vector<double> treeAcc(node* tree, int i){
 			}
 		}
 	}
+    return f;
 }
 
-vector<double> ngl(vector<double> &r1, vector<double> &r2, double mass){
+vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mass){
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
 	out = scalMult(-mass*G*pow(modulus(delta, false), 3), delta);

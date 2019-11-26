@@ -1,8 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/barnesHut.dir/main.cpp.obj"
-  "CMakeFiles/barnesHut.dir/leapfrog.cpp.obj"
-  "CMakeFiles/barnesHut.dir/trees.cpp.obj"
-  "CMakeFiles/barnesHut.dir/vecMaths.cpp.obj"
   "barnesHut.pdb"
   "barnesHut.exe"
   "barnesHut.exe.manifest"

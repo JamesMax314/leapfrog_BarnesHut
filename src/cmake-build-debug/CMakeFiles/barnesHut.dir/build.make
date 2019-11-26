@@ -77,82 +77,19 @@ CMakeFiles\barnesHut.dir\main.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\barnesHut.dir\main.cpp.s /c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\main.cpp
 <<
 
-CMakeFiles\barnesHut.dir\leapfrog.cpp.obj: CMakeFiles\barnesHut.dir\flags.make
-CMakeFiles\barnesHut.dir\leapfrog.cpp.obj: ..\leapfrog.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/barnesHut.dir/leapfrog.cpp.obj"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\barnesHut.dir\leapfrog.cpp.obj /FdCMakeFiles\barnesHut.dir\ /FS -c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\leapfrog.cpp
-<<
-
-CMakeFiles\barnesHut.dir\leapfrog.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/barnesHut.dir/leapfrog.cpp.i"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe > CMakeFiles\barnesHut.dir\leapfrog.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\leapfrog.cpp
-<<
-
-CMakeFiles\barnesHut.dir\leapfrog.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/barnesHut.dir/leapfrog.cpp.s"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\barnesHut.dir\leapfrog.cpp.s /c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\leapfrog.cpp
-<<
-
-CMakeFiles\barnesHut.dir\trees.cpp.obj: CMakeFiles\barnesHut.dir\flags.make
-CMakeFiles\barnesHut.dir\trees.cpp.obj: ..\trees.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/barnesHut.dir/trees.cpp.obj"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\barnesHut.dir\trees.cpp.obj /FdCMakeFiles\barnesHut.dir\ /FS -c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\trees.cpp
-<<
-
-CMakeFiles\barnesHut.dir\trees.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/barnesHut.dir/trees.cpp.i"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe > CMakeFiles\barnesHut.dir\trees.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\trees.cpp
-<<
-
-CMakeFiles\barnesHut.dir\trees.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/barnesHut.dir/trees.cpp.s"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\barnesHut.dir\trees.cpp.s /c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\trees.cpp
-<<
-
-CMakeFiles\barnesHut.dir\vecMaths.cpp.obj: CMakeFiles\barnesHut.dir\flags.make
-CMakeFiles\barnesHut.dir\vecMaths.cpp.obj: ..\vecMaths.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/barnesHut.dir/vecMaths.cpp.obj"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\barnesHut.dir\vecMaths.cpp.obj /FdCMakeFiles\barnesHut.dir\ /FS -c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\vecMaths.cpp
-<<
-
-CMakeFiles\barnesHut.dir\vecMaths.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/barnesHut.dir/vecMaths.cpp.i"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe > CMakeFiles\barnesHut.dir\vecMaths.cpp.i @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\vecMaths.cpp
-<<
-
-CMakeFiles\barnesHut.dir\vecMaths.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/barnesHut.dir/vecMaths.cpp.s"
-	C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\cl.exe @<<
- /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\barnesHut.dir\vecMaths.cpp.s /c D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\vecMaths.cpp
-<<
-
 # Object files for target barnesHut
 barnesHut_OBJECTS = \
-"CMakeFiles\barnesHut.dir\main.cpp.obj" \
-"CMakeFiles\barnesHut.dir\leapfrog.cpp.obj" \
-"CMakeFiles\barnesHut.dir\trees.cpp.obj" \
-"CMakeFiles\barnesHut.dir\vecMaths.cpp.obj"
+"CMakeFiles\barnesHut.dir\main.cpp.obj"
 
 # External object files for target barnesHut
 barnesHut_EXTERNAL_OBJECTS =
 
 barnesHut.exe: CMakeFiles\barnesHut.dir\main.cpp.obj
-barnesHut.exe: CMakeFiles\barnesHut.dir\leapfrog.cpp.obj
-barnesHut.exe: CMakeFiles\barnesHut.dir\trees.cpp.obj
-barnesHut.exe: CMakeFiles\barnesHut.dir\vecMaths.cpp.obj
 barnesHut.exe: CMakeFiles\barnesHut.dir\build.make
 barnesHut.exe: CMakeFiles\barnesHut.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable barnesHut.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable barnesHut.exe"
 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\barnesHut.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\barnesHut.dir\objects1.rsp @<<
- /out:barnesHut.exe /implib:barnesHut.lib /pdb:D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\barnesHut.pdb /version:0.0  /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
+ /out:barnesHut.exe /implib:barnesHut.lib /pdb:D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\barnesHut.pdb /version:0.0  /machine:x64 /debug /INCREMENTAL /subsystem:console trees.lib vecMaths.lib leapfrog.lib bodies.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
 # Rule to build all files generated by this target.
