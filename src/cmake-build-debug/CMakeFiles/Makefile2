@@ -72,7 +72,7 @@ CMAKE_BINARY_DIR = D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmak
 CMakeFiles\trees.dir\all:
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\depend
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=3,4 "Built target trees"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=5,6 "Built target trees"
 .PHONY : CMakeFiles\trees.dir\all
 
 # Include target in all.
@@ -109,7 +109,7 @@ clean: CMakeFiles\trees.dir\clean
 CMakeFiles\vecMaths.dir\all:
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\depend
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=5,6 "Built target vecMaths"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=7,8 "Built target vecMaths"
 .PHONY : CMakeFiles\vecMaths.dir\all
 
 # Include target in all.
@@ -140,11 +140,49 @@ clean: CMakeFiles\vecMaths.dir\clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/leapfrog.dir
+
+# All Build rule for target.
+CMakeFiles\leapfrog.dir\all:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\depend
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=3,4 "Built target leapfrog"
+.PHONY : CMakeFiles\leapfrog.dir\all
+
+# Include target in all.
+all: CMakeFiles\leapfrog.dir\all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles\leapfrog.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles\leapfrog.dir\rule
+
+# Convenience name for target.
+leapfrog: CMakeFiles\leapfrog.dir\rule
+
+.PHONY : leapfrog
+
+# clean rule for target.
+CMakeFiles\leapfrog.dir\clean:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\clean
+.PHONY : CMakeFiles\leapfrog.dir\clean
+
+# clean rule for target.
+clean: CMakeFiles\leapfrog.dir\clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/barnesHut.dir
 
 # All Build rule for target.
-CMakeFiles\barnesHut.dir\all: CMakeFiles\vecMaths.dir\all
 CMakeFiles\barnesHut.dir\all: CMakeFiles\trees.dir\all
+CMakeFiles\barnesHut.dir\all: CMakeFiles\vecMaths.dir\all
+CMakeFiles\barnesHut.dir\all: CMakeFiles\leapfrog.dir\all
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\depend
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target barnesHut"
@@ -157,7 +195,7 @@ all: CMakeFiles\barnesHut.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\barnesHut.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 8
 	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles\barnesHut.dir\rule

@@ -88,6 +88,7 @@ barnesHut.exe: CMakeFiles\barnesHut.dir\main.cpp.obj
 barnesHut.exe: CMakeFiles\barnesHut.dir\build.make
 barnesHut.exe: trees.lib
 barnesHut.exe: vecMaths.lib
+barnesHut.exe: leapfrog.lib
 barnesHut.exe: CMakeFiles\barnesHut.dir\objects1.rsp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable barnesHut.exe"
 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\barnesHut.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MIB055~1\2019\COMMUN~1\VC\Tools\MSVC\1422~1.279\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\barnesHut.dir\objects1.rsp @<<

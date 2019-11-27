@@ -36,6 +36,10 @@ void vecTest(){
 
 int main(){
     //vecTest();
-    vector<double> a(2);
-    cout << a[1] << endl;
+    double* a = new double;
+    *a = 6;
+    cout << *a << endl;
+    delete a;
+    if (*a) cout << "ok" << endl;
+    cout << *a << endl;
 }

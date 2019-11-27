@@ -8,7 +8,7 @@ SET(APP_EXE barnesHut)
 ADD_LIBRARY(trees STATIC trees.cpp)
 #ADD_LIBRARY(bodies STATIC bodies.cpp)
 ADD_LIBRARY(vecMaths STATIC vecMaths.cpp)
-#ADD_LIBRARY(leapfrog STATIC leapfrog.cpp)
+ADD_LIBRARY(leapfrog STATIC leapfrog.cpp)
 add_executable(barnesHut main.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR})

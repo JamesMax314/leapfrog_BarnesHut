@@ -57,17 +57,6 @@ CMAKE_BINARY_DIR = D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmak
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	echo >nul && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available."
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache\fast: edit_cache
-
-.PHONY : edit_cache\fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -78,6 +67,17 @@ rebuild_cache:
 rebuild_cache\fast: rebuild_cache
 
 .PHONY : rebuild_cache\fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	echo >nul && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache\fast: edit_cache
+
+.PHONY : edit_cache\fast
 
 # The main all target
 all: cmake_check_build_system
@@ -138,6 +138,19 @@ vecMaths\fast:
 .PHONY : vecMaths\fast
 
 #=============================================================================
+# Target rules for targets named leapfrog
+
+# Build rule for target.
+leapfrog: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) leapfrog
+.PHONY : leapfrog
+
+# fast build rule for target.
+leapfrog\fast:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\build
+.PHONY : leapfrog\fast
+
+#=============================================================================
 # Target rules for targets named barnesHut
 
 # Build rule for target.
@@ -149,6 +162,33 @@ barnesHut: cmake_check_build_system
 barnesHut\fast:
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\build
 .PHONY : barnesHut\fast
+
+leapfrog.obj: leapfrog.cpp.obj
+
+.PHONY : leapfrog.obj
+
+# target to build an object file
+leapfrog.cpp.obj:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\leapfrog.cpp.obj
+.PHONY : leapfrog.cpp.obj
+
+leapfrog.i: leapfrog.cpp.i
+
+.PHONY : leapfrog.i
+
+# target to preprocess a source file
+leapfrog.cpp.i:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\leapfrog.cpp.i
+.PHONY : leapfrog.cpp.i
+
+leapfrog.s: leapfrog.cpp.s
+
+.PHONY : leapfrog.s
+
+# target to generate assembly for a file
+leapfrog.cpp.s:
+	$(MAKE) -f CMakeFiles\leapfrog.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\leapfrog.dir\leapfrog.cpp.s
+.PHONY : leapfrog.cpp.s
 
 main.obj: main.cpp.obj
 
@@ -239,9 +279,13 @@ help:
 	@echo ... depend
 	@echo ... trees
 	@echo ... vecMaths
+	@echo ... rebuild_cache
+	@echo ... leapfrog
 	@echo ... barnesHut
 	@echo ... edit_cache
-	@echo ... rebuild_cache
+	@echo ... leapfrog.obj
+	@echo ... leapfrog.i
+	@echo ... leapfrog.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

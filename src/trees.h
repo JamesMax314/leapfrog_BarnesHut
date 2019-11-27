@@ -17,13 +17,16 @@ struct node{
 
 	int num{}; // number of particles in tree
 	int numChildren{};
-	node* children{};
+	int childIndx{};
+	vector<int> liveChildren;
+	vector<node*> children;
 	node* parent{};
 
 	int bodyindx{};
 
 	node(vector<double> width, vector<double>& centre);
-	explicit node(node*);
+	node(node* tree, int chldIndx);
+	explicit node(node* root);
 	node();
 };
 
@@ -38,7 +41,7 @@ class barnesHut{
     void treePrune(node*);
     void treeInsert(node*, int);
 public:
-    vector<body> bodies;
+    vector<body>* bodies;
     node* root;
     double theta = 0.9;
     double G = 1.6e-11;
