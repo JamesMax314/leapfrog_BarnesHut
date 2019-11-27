@@ -6,7 +6,7 @@ using namespace std;
 double dot(vector<double>& v1, vector<double>& v2, bool square){
 	double out = 0;
 	for(int i=0; i<3; i++){
-		out += v1[i]*v1[i] + v2[i]*v2[i];
+		out += v1[i]*v2[i];
 	}
 	if(!square){
 		return pow(out, 0.5);
@@ -21,7 +21,7 @@ double modulus(vector<double> vec, bool square){
 }
 
 vector<double> vecAdd(vector<double> v1, vector<double> v2){
-	vector<double> out;
+	vector<double> out(3);
 	for(int i=0; i<3; i++){
 		out[i] = v1[i] + v2[i];
 	}
@@ -29,7 +29,7 @@ vector<double> vecAdd(vector<double> v1, vector<double> v2){
 }
 
 vector<double> scalMult(double scal, vector<double> &v){
-	vector<double> out;
+	vector<double> out(30);
 	for(int i=0; i<3; i++){
 		out[i] = scal*v[i];
 	}

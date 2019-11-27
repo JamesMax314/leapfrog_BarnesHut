@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD 14)
 
 SET(APP_EXE barnesHut)
 
-#ADD_LIBRARY(trees STATIC trees.cpp)
+ADD_LIBRARY(trees STATIC trees.cpp)
 #ADD_LIBRARY(bodies STATIC bodies.cpp)
-#ADD_LIBRARY(vecMaths STATIC vecMaths.cpp)
+ADD_LIBRARY(vecMaths STATIC vecMaths.cpp)
 #ADD_LIBRARY(leapfrog STATIC leapfrog.cpp)
 add_executable(barnesHut main.cpp)
 

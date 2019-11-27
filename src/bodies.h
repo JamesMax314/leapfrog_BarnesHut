@@ -14,7 +14,7 @@ struct body{
 	double ep{};
 
     body();
-    body(double&, vector<double>&, vector<double>&, vector<double>&, double&, double&);
+    body(double& mass, vector<double>& pos, vector<double>& vel, vector<double>& acc, double& ek, double& ep);
 };
 
 // Macros to retrieve body data; x is a pointer

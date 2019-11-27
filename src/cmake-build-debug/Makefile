@@ -112,6 +112,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named trees
+
+# Build rule for target.
+trees: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) trees
+.PHONY : trees
+
+# fast build rule for target.
+trees\fast:
+	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\build
+.PHONY : trees\fast
+
+#=============================================================================
+# Target rules for targets named vecMaths
+
+# Build rule for target.
+vecMaths: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) vecMaths
+.PHONY : vecMaths
+
+# fast build rule for target.
+vecMaths\fast:
+	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\build
+.PHONY : vecMaths\fast
+
+#=============================================================================
 # Target rules for targets named barnesHut
 
 # Build rule for target.
@@ -151,18 +177,80 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\main.cpp.s
 .PHONY : main.cpp.s
 
+trees.obj: trees.cpp.obj
+
+.PHONY : trees.obj
+
+# target to build an object file
+trees.cpp.obj:
+	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\trees.cpp.obj
+.PHONY : trees.cpp.obj
+
+trees.i: trees.cpp.i
+
+.PHONY : trees.i
+
+# target to preprocess a source file
+trees.cpp.i:
+	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\trees.cpp.i
+.PHONY : trees.cpp.i
+
+trees.s: trees.cpp.s
+
+.PHONY : trees.s
+
+# target to generate assembly for a file
+trees.cpp.s:
+	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\trees.cpp.s
+.PHONY : trees.cpp.s
+
+vecMaths.obj: vecMaths.cpp.obj
+
+.PHONY : vecMaths.obj
+
+# target to build an object file
+vecMaths.cpp.obj:
+	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\vecMaths.cpp.obj
+.PHONY : vecMaths.cpp.obj
+
+vecMaths.i: vecMaths.cpp.i
+
+.PHONY : vecMaths.i
+
+# target to preprocess a source file
+vecMaths.cpp.i:
+	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\vecMaths.cpp.i
+.PHONY : vecMaths.cpp.i
+
+vecMaths.s: vecMaths.cpp.s
+
+.PHONY : vecMaths.s
+
+# target to generate assembly for a file
+vecMaths.cpp.s:
+	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\vecMaths.cpp.s
+.PHONY : vecMaths.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
+	@echo ... trees
+	@echo ... vecMaths
 	@echo ... barnesHut
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... trees.obj
+	@echo ... trees.i
+	@echo ... trees.s
+	@echo ... vecMaths.obj
+	@echo ... vecMaths.i
+	@echo ... vecMaths.s
 .PHONY : help
 
 

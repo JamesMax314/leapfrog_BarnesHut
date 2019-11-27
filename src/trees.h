@@ -12,7 +12,7 @@ struct node{
 	double mass{};
 	vector<double> pos;
 
-	double width{};
+	vector<double> width;
 	vector<double> centre;
 
 	int num{}; // number of particles in tree
@@ -22,7 +22,7 @@ struct node{
 
 	int bodyindx{};
 
-	node(double, vector<double>&);
+	node(vector<double> width, vector<double>& centre);
 	explicit node(node*);
 	node();
 };
@@ -32,8 +32,9 @@ struct node{
 #define pos(x) (((node*) (x))->pos)
 
 class barnesHut{
+    node* whichChild(node* tree, int i);
     void addChildren(node*);
-    bool inNode(vector<double>, node*);
+    bool inNode(const vector<double>&, node*);
     void treePrune(node*);
     void treeInsert(node*, int);
 public:
@@ -41,7 +42,7 @@ public:
     node* root;
     double theta = 0.9;
     double G = 1.6e-11;
-    double width;
+    vector<double> width;
     vector<double> centre;
 
     // Tree building functions
@@ -53,7 +54,8 @@ public:
     vector<double> treeAcc(node*, int);
     vector<double> ngl(vector<double>&, vector<double>&, double);
 
-    explicit barnesHut(vector<body>&, vector<double>);
+    explicit barnesHut(vector<body>& bods, vector<double> dim);
+    explicit barnesHut(vector<body>& bods, vector<double>& dim, vector<double>& cent);
 };
 
 // Function definitions

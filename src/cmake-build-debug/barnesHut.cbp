@@ -17,6 +17,102 @@
 					<DistClean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="trees">
+				<Option output="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/trees.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 trees"/>
+					<CompileFile command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trees/fast">
+				<Option output="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/trees.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 trees/fast"/>
+					<CompileFile command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths">
+				<Option output="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/vecMaths.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 vecMaths"/>
+					<CompileFile command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths/fast">
+				<Option output="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/vecMaths.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 vecMaths/fast"/>
+					<CompileFile command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.22.27905/bin/Hostx64/x64/nmake.exe /NOLOGO /f D:\MainDrive\University\Computing\leapfrog_BarnesHut\src\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="barnesHut">
 				<Option output="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/barnesHut.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug"/>
@@ -91,6 +187,18 @@
 		</Unit>
 		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/main.h">
 			<Option target="barnesHut"/>
+		</Unit>
+		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.cpp">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/trees.h">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.cpp">
+			<Option target="vecMaths"/>
+		</Unit>
+		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/vecMaths.h">
+			<Option target="vecMaths"/>
 		</Unit>
 		<Unit filename="D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

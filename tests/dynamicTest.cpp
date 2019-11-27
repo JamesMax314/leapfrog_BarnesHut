@@ -35,5 +35,7 @@ void vecTest(){
 }
 
 int main(){
-    vecTest();
+    //vecTest();
+    vector<double> a(2);
+    cout << a[1] << endl;
 }
