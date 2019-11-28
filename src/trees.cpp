@@ -38,7 +38,7 @@ node::node(node* tree, int chldIndx){
     childIndx = chldIndx;
     parent = tree;
     tree->liveChildren.push_back(childIndx);
-    cout << "length: " << tree->liveChildren.size() << endl;
+    //cout << "length: " << tree->liveChildren.size() << endl;
     pos = vector<double>(3);
     width = vector<double>(3);
     centre = {0, 0, 0};
@@ -64,16 +64,16 @@ barnesHut::barnesHut(vector<body> &bods, vector<double> &dim, vector<double> &ce
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// barnesHut functions
 bool barnesHut::inNode(const vector<double>& pos, node* nod){
-    cout << "position, node centre: " << pos[0] << " " << nod->centre[0] << endl;
-    cout << "width: " <<  nod->width[0] << endl;
+    //cout << "position, node centre: " << pos[0] << " " << nod->centre[0] << endl;
+    //cout << "width: " <<  nod->width[0] << endl;
     vector<double> displacement = vecAdd(pos, scalMult(-1, nod->centre));
-    cout << "displacement: ";
-    for(int k=0; k<3; k++){
-        cout << displacement[k] << ", ";
-    }
-    cout << endl;
+    //cout << "displacement: ";
+    //for(int k=0; k<3; k++){
+    //    cout << displacement[k] << ", ";
+    //}
+    //cout << endl;
     double distance = modulus(displacement, false);
-    cout << "distance: " << distance << endl;
+    //cout << "distance: " << distance << endl;
     for (int j=0; j<3; j++) {
         if (distance >= nod->width[j]) {
             return false;
@@ -84,12 +84,12 @@ bool barnesHut::inNode(const vector<double>& pos, node* nod){
 
 void barnesHut::addChildren(node* tree){
 	tree->children = vector<node*>(8);
-	cout << "Children initialized at: " << tree->children[0] << endl;
+    //cout << "Children initialized at: " << tree->children[0] << endl;
     tree->numChildren = 8;
     for(int i=0; i<8; i++){
-	    tree->children[i] = new node(tree, i);
-	    cout << "added: " << i << endl;
-	}
+        tree->children[i] = new node(tree, i);
+    //    cout << "added: " << i << endl;
+    }
 	int child = 0;
     vector<double> w = tree->width;
     for(int i=-1; i<=1; i=i+2){
@@ -105,37 +105,39 @@ void barnesHut::addChildren(node* tree){
 
 void barnesHut::treePrune(node* tree){
     //cout << "tree->children: " << tree->children << endl;
-	if (tree->numChildren != 0){
+    //cout << "tree parent: " << tree->parent << endl;
+    if (tree->numChildren != 0){
 		for(int i=0; i<8; i++){
 			treePrune(tree->children[i]);
 		}
-	} else if (tree->num == 0){
-        cout << "liveChildren: ";
-        for(int i : tree->parent->liveChildren){
-            cout << i << ", ";
-        }
-        cout << endl;
+	} else if (tree->num == 0 && tree->parent != nullptr){
+        //cout << "liveChildren: " << endl;
+        //cout << "not null tree parent: " << tree->parent << endl;
+        //for(int i : tree->parent->liveChildren){
+        //    cout << i << ", ";
+        //}
+        //cout << endl;
         tree->parent->numChildren -= 1;
-	    cout << "Erasing vector: " << tree->childIndx << endl;
+        //cout << "Erasing vector: " << tree->childIndx << endl;
         auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
-        cout << "index: " << *indx << endl;
+        //cout << "index: " << *indx << endl;
         tree->parent->liveChildren.erase(indx);
-        cout << "number of root children: " << root->numChildren << endl;
+        //cout << "number of root children: " << root->numChildren << endl;
 		delete tree;
-		cout << "ok" << endl;
+        //cout << "ok" << endl;
 	}
 }
 
 void barnesHut::treeChop(node* tree){
-    cout << "treeChop" << endl;
-    cout << "numChildren:" << tree->numChildren << endl;
+    //cout << "treeChop" << endl;
+    //cout << "numChildren:" << tree->numChildren << endl;
 	if (tree->numChildren != 0){
 	    vector<int> children = tree->liveChildren;
 		for(int i : children){
 			treeChop(tree->children[i]);
 		}
 		tree->num = 0;
-	} else if(tree->parent){
+	} else if(tree->parent != nullptr){
 	    tree->parent->numChildren -= 1;
         auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
         tree->parent->liveChildren.erase(indx);
@@ -147,18 +149,20 @@ void barnesHut::treeChop(node* tree){
 // Tree building functions
 void barnesHut::treeBuild(){ // double width, double centre){
     if(!root){
+        //cout << "initialising root" << endl;
         root = new node(width, centre);
-        cout << "root initialised at: " << root << endl;
+        //cout << "root initialised at: " << root << endl;
     }
 	//addChildren(root);
 	for(int i=0; i<int((*bodies).size()); i++){
 	    if(inNode((*bodies)[i].pos, root)){
             treeInsert(root, i);
         }
-		cout << "root num: " << root->num << endl;
-		cout << "body "<< i << " has been inserted" << endl;
+        //cout << i << endl;
+        //cout << "root num: " << root->num << endl;
+        //cout << "body "<< i << " has been inserted" << endl;
 	}
-	cout << "pruning..." << endl;
+    //cout << "pruning..." << endl;
 	treePrune(root);
 }
 
@@ -167,7 +171,7 @@ node* barnesHut::whichChild(node* tree, int i){
     for(int j=0; j<8; j++) {
         child = tree->children[j];
         if (inNode((*bodies)[i].pos, child)) {
-            cout << "in child " << j << endl;
+            //cout << "in child " << j << endl;
             break;
         }
     }
@@ -175,11 +179,11 @@ node* barnesHut::whichChild(node* tree, int i){
 }
 
 void barnesHut::treeInsert(node* tree, int i){
-    cout << "i: " << i << endl;
-    cout << "tree->num: " << tree->num << endl;
+    //cout << "i: " << i << endl;
+    //cout << "tree->num: " << tree->num << endl;
 	if (tree->num > 1){
 	    node* child = whichChild(tree, i);
-        cout << "child insertion of i: " << i << endl;
+        //cout << "child insertion of i: " << i << endl;
         treeInsert(child, i);
 
         // Update CM and mass of node
@@ -188,13 +192,13 @@ void barnesHut::treeInsert(node* tree, int i){
         tree->pos = scalMult(1 / tree->mass, tree->pos);
 
 	} else if (tree->num == 1){
-	    cout << "adding children" << endl;
+        //cout << "adding children" << endl;
 		addChildren(tree);
 		int primarybody = tree->bodyindx;
         tree->num += 1;
-        cout << "pushing primary" << endl;
+        //cout << "pushing primary" << endl;
         treeInsert(tree, primarybody);
-		cout << "pushing secondary" << endl;
+        //cout << "pushing secondary" << endl;
 		treeInsert(tree, i);
 
 		// Update CM and mass of node
@@ -202,7 +206,7 @@ void barnesHut::treeInsert(node* tree, int i){
 		tree->mass += (*bodies)[i].mass;
         tree->pos = scalMult(1 / tree->mass, tree->pos);
 	} else{
-	    cout << "adding first element" << endl;
+        //cout << "adding first element" << endl;
 		tree->bodyindx = i;
 		tree->num = 1;
 		tree->pos = (*bodies)[i].pos;
@@ -218,7 +222,7 @@ void barnesHut::acceleration(node* tree){
 }
 
 vector<double> barnesHut::treeAcc(node* tree, int i){
-    cout << "treeAcc" << endl;
+    //cout << "treeAcc" << endl;
 	vector<double> f(3, 0);
 	if (tree->num == 1 && tree->bodyindx != i){
 		f = ngl((*bodies)[i].pos, tree->pos, tree->mass);
@@ -230,20 +234,20 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 			f = ngl((*bodies)[i].pos, tree->pos, tree->mass);
 		} else{
 			for(int j=0; j<tree->numChildren; j++){
-			    cout << "tree->liveChildren[j]" << tree->liveChildren[j] << endl;
+                //cout << "tree->liveChildren[j]" << tree->liveChildren[j] << endl;
 				f = vecAdd(f, treeAcc(tree->children[tree->liveChildren[j]], i));
 			}
 		}
 	}
-	cout << "f: " << f[0] << endl;
+    //cout << "f: " << f[0] << endl;
     return f;
 }
 
 vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mass){
-    cout << "ngl" << endl;
+    //cout << "ngl" << endl;
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
 	out = scalMult(-mass*G/pow(modulus(delta, false), 3), delta);
-	cout << "ngl out: " << out[0] << endl;
+    //cout << "ngl out: " << out[0] << endl;
 	return out;
 }

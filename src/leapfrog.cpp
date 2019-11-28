@@ -31,11 +31,11 @@ void partialUpdate(node* tree, vector<body>* bodies, double dt){
             partialUpdate(tree->children[i], bodies, dt);
         }
     } else{
-        cout << "Updating leaf node" << endl;
+        //cout << "Updating leaf node" << endl;
         auto i = tree->bodyindx;
         (*bodies)[i].vel = vecAdd((*bodies)[i].vel, scalMult(dt, (*bodies)[i].acc));
-        cout << "new vx: " << (*bodies)[i].vel[0] << endl;
+        //cout << "new vx: " << (*bodies)[i].vel[0] << endl;
         (*bodies)[i].pos = vecAdd((*bodies)[i].pos, scalMult(dt, (*bodies)[i].vel));
-        cout << "new x: " << (*bodies)[i].pos[0] << endl;
+        //cout << "new x: " << (*bodies)[i].pos[0] << endl;
     }
 }
