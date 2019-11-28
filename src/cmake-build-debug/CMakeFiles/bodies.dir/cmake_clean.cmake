@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/bodies.dir/bodies.cpp.obj"
-  "bodies.pdb"
   "bodies.lib"
+  "bodies.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

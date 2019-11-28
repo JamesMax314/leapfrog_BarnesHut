@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/bodies.cpp" "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/bodies.dir/bodies.cpp.obj"
+  "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/bodies.cpp" "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/bodies.dir/bodies.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")
 

@@ -19,17 +19,35 @@ int main(){
     bodies.push_back(body(mass, pos1, vel, acc, ek, ep));
     vector<double> dim = {10e10, 10e10, 10e10};
     barnesHut bh = barnesHut(bodies, dim, centre);
-    treeMake(bh);
-    cout << "tree made" << endl;
-    interaction(bh);
-    cout << "acceleration: ";
-    for(int i=0; i<3; i++){
-        cout << (*bh.bodies)[1].acc[i] << ", ";
+
+    for(int j=0; j<3; j++) {
+        treeMake(bh);
+        cout << "tree made" << endl;
+        interaction(bh);
+        cout << "acceleration: ";
+        for (int i = 0; i < 3; i++) {
+            cout << (*bh.bodies)[1].acc[i] << ", ";
+        }
+        cout << endl;
+        cout << "acceleration: ";
+        for (int i = 0; i < 3; i++) {
+            cout << bodies[1].acc[i] << ", ";
+        }
+        cout << endl;
+
+        cout << "updating bodies..." << endl;
+        bodiesUpdate(bh, 1e10);
+        for (auto b : bodies) {
+            for (int i = 0; i < 3; i++) {
+                cout << b.pos[i] << ", ";
+            }
+            cout << endl;
+        }
+
+        cout << "breaking tree..." << endl;
+        treeBreak(bh);
+        for (int i = 0; i < 8; i++) {
+            cout << bh.root->num << endl;
+        }
     }
-    cout << endl;
-    cout << "acceleration: ";
-    for(int i=0; i<3; i++){
-        cout << bodies[1].acc[i] << ", ";
-    }
-    cout << endl;
 }

@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/barnesHut.dir/main.cpp.obj"
-  "barnesHut.pdb"
   "barnesHut.exe"
   "barnesHut.exe.manifest"
   "barnesHut.lib"
+  "barnesHut.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

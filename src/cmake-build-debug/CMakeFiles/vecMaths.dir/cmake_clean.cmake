@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/vecMaths.dir/vecMaths.cpp.obj"
-  "vecMaths.pdb"
   "vecMaths.lib"
+  "vecMaths.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

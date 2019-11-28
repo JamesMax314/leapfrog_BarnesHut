@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/leapfrog.dir/leapfrog.cpp.obj"
-  "leapfrog.pdb"
   "leapfrog.lib"
+  "leapfrog.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,8 +1,8 @@
-# Install script for directory: D:/MainDrive/University/Computing/leapfrog_BarnesHut/src
+# Install script for directory: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/dynamicTest")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/barnesHut")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/MainDrive/University/Computing/leapfrog_BarnesHut/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

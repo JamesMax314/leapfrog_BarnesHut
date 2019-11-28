@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <iostream>
 #include "bodies.h"
 #include "trees.h"
 #include "vecMaths.h"
@@ -25,13 +26,16 @@ void bodiesUpdate(barnesHut &hut, double dt){
 }
 
 void partialUpdate(node* tree, vector<body>* bodies, double dt){
-    if (tree->numChildren != 1){
-        for(int i=0; i<tree->numChildren; i++){
-            partialUpdate(tree->children[tree->liveChildren[i]], bodies, dt);
+    if (tree->numChildren != 0){
+        for(auto i: tree->liveChildren){
+            partialUpdate(tree->children[i], bodies, dt);
         }
     } else{
-        body b = (*bodies)[tree->bodyindx];
-        b.vel = vecAdd(b.vel, scalMult(dt, b.acc));
-        b.pos = vecAdd(b.pos, scalMult(dt, b.vel));
+        cout << "Updating leaf node" << endl;
+        auto i = tree->bodyindx;
+        (*bodies)[i].vel = vecAdd((*bodies)[i].vel, scalMult(dt, (*bodies)[i].acc));
+        cout << "new vx: " << (*bodies)[i].vel[0] << endl;
+        (*bodies)[i].pos = vecAdd((*bodies)[i].pos, scalMult(dt, (*bodies)[i].vel));
+        cout << "new x: " << (*bodies)[i].pos[0] << endl;
     }
 }

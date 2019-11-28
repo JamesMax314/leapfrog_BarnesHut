@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/trees.dir/trees.cpp.obj"
-  "trees.pdb"
   "trees.lib"
+  "trees.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -17,6 +17,7 @@ node::node(vector<double> w, vector<double> &c){
     numChildren = 0;
     width = w;
     centre = c;
+    parent = nullptr;
 }
 
 node::node(node* tree){
@@ -110,8 +111,8 @@ void barnesHut::treePrune(node* tree){
 		}
 	} else if (tree->num == 0){
         cout << "liveChildren: ";
-        for(int i=0; i<tree->parent->liveChildren.size(); i++){
-            cout << tree->parent->liveChildren[i] << ", ";
+        for(int i : tree->parent->liveChildren){
+            cout << i << ", ";
         }
         cout << endl;
         tree->parent->numChildren -= 1;
@@ -126,11 +127,15 @@ void barnesHut::treePrune(node* tree){
 }
 
 void barnesHut::treeChop(node* tree){
+    cout << "treeChop" << endl;
+    cout << "numChildren:" << tree->numChildren << endl;
 	if (tree->numChildren != 0){
-		for(int i=0; i<8; i++){
+	    vector<int> children = tree->liveChildren;
+		for(int i : children){
 			treeChop(tree->children[i]);
 		}
-	} else{
+		tree->num = 0;
+	} else if(tree->parent){
 	    tree->parent->numChildren -= 1;
         auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
         tree->parent->liveChildren.erase(indx);
@@ -146,8 +151,10 @@ void barnesHut::treeBuild(){ // double width, double centre){
         cout << "root initialised at: " << root << endl;
     }
 	//addChildren(root);
-	for(int i=0; i<(*bodies).size(); i++){
-		treeInsert(root, i);
+	for(int i=0; i<int((*bodies).size()); i++){
+	    if(inNode((*bodies)[i].pos, root)){
+            treeInsert(root, i);
+        }
 		cout << "root num: " << root->num << endl;
 		cout << "body "<< i << " has been inserted" << endl;
 	}
@@ -205,7 +212,7 @@ void barnesHut::treeInsert(node* tree, int i){
 
 // Kinematic functions
 void barnesHut::acceleration(node* tree){
-	for(int i=0; i<(*bodies).size(); i++){
+	for(int i=0; i<int((*bodies).size()); i++){
         (*bodies)[i].acc = treeAcc(tree, i);
 	}
 }
