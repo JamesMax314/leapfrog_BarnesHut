@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include "save.h"
 #include "bodies.h"
 #include "trees.h"
 #include "leapfrog.h"
@@ -15,6 +17,7 @@ int main(){
     double ek = 0;
     double ep = 0;
     vector<body> bodies;
+    vector<vector<body>> vecBodies;
     bodies.emplace_back(mass, pos, vel, acc, ek, ep);
     bodies.emplace_back(mass, pos1, vel, acc, ek, ep);
     vector<double> dim = {10e10, 10e10, 10e10};
@@ -50,6 +53,9 @@ int main(){
 //        for (int i = 0; i < 8; i++) {
 //            cout << bh.root->num << endl;
 //        }
+        vecBodies.emplace_back(bodies);
     }
     cout << "done" << endl;
+    cout << "saving data..." << endl;
+    ofstream file("data.txt");
 }

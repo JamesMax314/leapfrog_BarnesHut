@@ -207,6 +207,9 @@ barnesHut_BINARY_DIR:STATIC=C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leap
 //Value Computed by CMake
 barnesHut_SOURCE_DIR:STATIC=C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src
 
+//The directory containing a CMake configuration file for pybind11.
+pybind11_DIR:PATH=pybind11_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries
