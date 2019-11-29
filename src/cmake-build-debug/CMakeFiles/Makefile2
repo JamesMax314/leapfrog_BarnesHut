@@ -56,6 +56,7 @@ CMAKE_BINARY_DIR = C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_Barn
 # The main recursive "all" target.
 all: CMakeFiles\trees.dir\all
 all: CMakeFiles\barnesHut.dir\all
+all: CMakeFiles\pyInterface.dir\all
 all: CMakeFiles\bodies.dir\all
 all: CMakeFiles\vecMaths.dir\all
 all: CMakeFiles\leapfrog.dir\all
@@ -65,6 +66,7 @@ all: CMakeFiles\leapfrog.dir\all
 # The main recursive "clean" target.
 clean: CMakeFiles\trees.dir\clean
 clean: CMakeFiles\barnesHut.dir\clean
+clean: CMakeFiles\pyInterface.dir\clean
 clean: CMakeFiles\bodies.dir\clean
 clean: CMakeFiles\vecMaths.dir\clean
 clean: CMakeFiles\leapfrog.dir\clean
@@ -83,7 +85,7 @@ preinstall:
 CMakeFiles\trees.dir\all:
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\depend
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=7,8 "Built target trees"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=9,10 "Built target trees"
 .PHONY : CMakeFiles\trees.dir\all
 
 # Build rule for subdir invocation for target.
@@ -134,6 +136,33 @@ CMakeFiles\barnesHut.dir\clean:
 .PHONY : CMakeFiles\barnesHut.dir\clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/pyInterface.dir
+
+# All Build rule for target.
+CMakeFiles\pyInterface.dir\all:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\depend
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=7,8 "Built target pyInterface"
+.PHONY : CMakeFiles\pyInterface.dir\all
+
+# Build rule for subdir invocation for target.
+CMakeFiles\pyInterface.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles 0
+.PHONY : CMakeFiles\pyInterface.dir\rule
+
+# Convenience name for target.
+pyInterface: CMakeFiles\pyInterface.dir\rule
+
+.PHONY : pyInterface
+
+# clean rule for target.
+CMakeFiles\pyInterface.dir\clean:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\clean
+.PHONY : CMakeFiles\pyInterface.dir\clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/bodies.dir
 
 # All Build rule for target.
@@ -167,7 +196,7 @@ CMakeFiles\bodies.dir\clean:
 CMakeFiles\vecMaths.dir\all:
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\depend
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=9,10 "Built target vecMaths"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug\CMakeFiles --progress-num=11,12 "Built target vecMaths"
 .PHONY : CMakeFiles\vecMaths.dir\all
 
 # Build rule for subdir invocation for target.

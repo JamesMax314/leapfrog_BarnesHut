@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="treecode"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Include\;CMake Files\Include\pybind11\;CMake Files\Include\pybind11\tools\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trees">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/trees.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 trees"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trees/fast">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/trees.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 trees/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bodies">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/bodies.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 bodies"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bodies/fast">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/bodies.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 bodies/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treecode">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/treecode.cp37-win_amd64.pyd" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/Include/pybind11/include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 treecode"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treecode/fast">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/treecode.cp37-win_amd64.pyd" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/Include/pybind11/include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 treecode/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/vecMaths.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 vecMaths"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths/fast">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/vecMaths.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 vecMaths/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="leapfrog">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/leapfrog.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 leapfrog"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="leapfrog/fast">
+				<Option output="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/leapfrog.lib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
+					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="C:/ProgramData/Anaconda3/include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 leapfrog/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/bodies.cpp">
+			<Option target="bodies"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/bodies.h">
+			<Option target="bodies"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/leapfrog.cpp">
+			<Option target="leapfrog"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/leapfrog.h">
+			<Option target="leapfrog"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/pyInterface.cpp">
+			<Option target="treecode"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/pyInterface.h">
+			<Option target="treecode"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/trees.cpp">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/trees.h">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/vecMaths.cpp">
+			<Option target="vecMaths"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/vecMaths.h">
+			<Option target="vecMaths"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/Include/pybind11/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Include\pybind11\"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/Include/pybind11/tools/FindPythonLibsNew.cmake">
+			<Option virtualFolder="CMake Files\Include\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/Include/pybind11/tools/pybind11Tools.cmake">
+			<Option virtualFolder="CMake Files\Include\pybind11\tools\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

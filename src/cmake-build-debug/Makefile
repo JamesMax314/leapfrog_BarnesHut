@@ -138,6 +138,19 @@ barnesHut\fast:
 .PHONY : barnesHut\fast
 
 #=============================================================================
+# Target rules for targets named pyInterface
+
+# Build rule for target.
+pyInterface: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) pyInterface
+.PHONY : pyInterface
+
+# fast build rule for target.
+pyInterface\fast:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\build
+.PHONY : pyInterface\fast
+
+#=============================================================================
 # Target rules for targets named bodies
 
 # Build rule for target.
@@ -257,6 +270,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\barnesHut.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\barnesHut.dir\main.cpp.s
 .PHONY : main.cpp.s
 
+pyInterface.obj: pyInterface.cpp.obj
+
+.PHONY : pyInterface.obj
+
+# target to build an object file
+pyInterface.cpp.obj:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\pyInterface.cpp.obj
+.PHONY : pyInterface.cpp.obj
+
+pyInterface.i: pyInterface.cpp.i
+
+.PHONY : pyInterface.i
+
+# target to preprocess a source file
+pyInterface.cpp.i:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\pyInterface.cpp.i
+.PHONY : pyInterface.cpp.i
+
+pyInterface.s: pyInterface.cpp.s
+
+.PHONY : pyInterface.s
+
+# target to generate assembly for a file
+pyInterface.cpp.s:
+	$(MAKE) -f CMakeFiles\pyInterface.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\pyInterface.dir\pyInterface.cpp.s
+.PHONY : pyInterface.cpp.s
+
 trees.obj: trees.cpp.obj
 
 .PHONY : trees.obj
@@ -319,6 +359,7 @@ help:
 	@echo ... depend
 	@echo ... trees
 	@echo ... barnesHut
+	@echo ... pyInterface
 	@echo ... bodies
 	@echo ... vecMaths
 	@echo ... rebuild_cache
@@ -333,6 +374,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... pyInterface.obj
+	@echo ... pyInterface.i
+	@echo ... pyInterface.s
 	@echo ... trees.obj
 	@echo ... trees.i
 	@echo ... trees.s

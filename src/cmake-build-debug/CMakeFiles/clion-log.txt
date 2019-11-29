@@ -1,4 +1,10 @@
 "C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug nmake -G "CodeBlocks - NMake Makefiles" C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src
--- Configuring done
--- Generating done
--- Build files have been written to: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug
+CMake Error at Include/pybind11/tools/FindPythonLibsNew.cmake:127 (message):
+  Python config failure: Python is 64-bit, chosen compiler is 32-bit
+Call Stack (most recent call first):
+  Include/pybind11/tools/pybind11Tools.cmake:16 (find_package)
+  Include/pybind11/CMakeLists.txt:33 (include)
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/CMakeOutput.log".

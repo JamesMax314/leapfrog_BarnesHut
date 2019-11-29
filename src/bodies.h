@@ -13,6 +13,15 @@ struct body{
 	double ek{};
 	double ep{};
 
+	void setPos(vector<double>);
+    void setAcc(vector<double>);
+    void setVel(vector<double>);
+    void setMass(double);
+    vector<double> getPos();
+    vector<double> getAcc();
+    vector<double> getVel();
+    double getMass();
+
     body();
     body(double& mass, vector<double>& pos, vector<double>& vel, vector<double>& acc, double& ek, double& ep);
 };

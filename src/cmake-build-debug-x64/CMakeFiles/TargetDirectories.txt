@@ -1,0 +1,9 @@
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/trees.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/bodies.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/treecode.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/vecMaths.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/rebuild_cache.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/leapfrog.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/edit_cache.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/Include/pybind11/CMakeFiles/rebuild_cache.dir
+C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/Include/pybind11/CMakeFiles/edit_cache.dir

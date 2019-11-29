@@ -1,0 +1,4 @@
+#ifndef PYINTERFACE
+#define PYINTERFACE
+
+#endif //PYINTERFACE

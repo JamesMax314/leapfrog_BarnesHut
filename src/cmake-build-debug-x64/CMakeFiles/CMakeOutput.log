@@ -1,0 +1,116 @@
+The system is: Windows - 10.0.18362 - AMD64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.23.28107 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCCompilerId.c
+Microsoft (R) Incremental Linker Version 14.23.28107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCCompilerId.exe 
+CMakeCCompilerId.obj 
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+
+The C compiler identification is MSVC, found in "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/3.15.3/CompilerIdC/CMakeCCompilerId.exe"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64/cl.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+Microsoft (R) C/C++ Optimizing Compiler Version 19.23.28107 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+CMakeCXXCompilerId.cpp
+Microsoft (R) Incremental Linker Version 14.23.28107.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:CMakeCXXCompilerId.exe 
+CMakeCXXCompilerId.obj 
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+
+The CXX compiler identification is MSVC, found in "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/3.15.3/CompilerIdCXX/CMakeCXXCompilerId.exe"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_42891\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_42891.dir\build.make /nologo -L                  CMakeFiles\cmTC_42891.dir\build
+Building C object CMakeFiles/cmTC_42891.dir/testCCompiler.c.obj
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\10jam\AppData\Local\Temp\nm570C.tmp
+testCCompiler.c
+Linking C executable cmTC_42891.exe
+	"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_42891.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_42891.dir\objects1.rsp @C:\Users\10jam\AppData\Local\Temp\nm57F7.tmp
+
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_4d143\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_4d143.dir\build.make /nologo -L                  CMakeFiles\cmTC_4d143.dir\build
+Building C object CMakeFiles/cmTC_4d143.dir/CMakeCCompilerABI.c.obj
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\10jam\AppData\Local\Temp\nm5BCF.tmp
+CMakeCCompilerABI.c
+Linking C executable cmTC_4d143.exe
+	"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_4d143.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_4d143.dir\objects1.rsp @C:\Users\10jam\AppData\Local\Temp\nm5CCA.tmp
+
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_bbbb0\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_bbbb0.dir\build.make /nologo -L                  CMakeFiles\cmTC_bbbb0.dir\build
+Building CXX object CMakeFiles/cmTC_bbbb0.dir/testCXXCompiler.cxx.obj
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\10jam\AppData\Local\Temp\nm6063.tmp
+testCXXCompiler.cxx
+Linking CXX executable cmTC_bbbb0.exe
+	"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_bbbb0.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_bbbb0.dir\objects1.rsp @C:\Users\10jam\AppData\Local\Temp\nm615E.tmp
+
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_00e07\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_00e07.dir\build.make /nologo -L                  CMakeFiles\cmTC_00e07.dir\build
+Building CXX object CMakeFiles/cmTC_00e07.dir/CMakeCXXCompilerABI.cpp.obj
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\10jam\AppData\Local\Temp\nm6489.tmp
+CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_00e07.exe
+	"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_00e07.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_00e07.dir\objects1.rsp @C:\Users\10jam\AppData\Local\Temp\nm6594.tmp
+
+
+
+Performing C++ SOURCE FILE Test HAS_MSVC_GL_LTCG succeeded with the following output:
+Change Dir: C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake /nologo cmTC_39840\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\nmake.exe" -f CMakeFiles\cmTC_39840.dir\build.make /nologo -L                  CMakeFiles\cmTC_39840.dir\build
+Building CXX object CMakeFiles/cmTC_39840.dir/src.cxx.obj
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\cl.exe @C:\Users\10jam\AppData\Local\Temp\nm6B11.tmp
+src.cxx
+Linking CXX executable cmTC_39840.exe
+	"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_39840.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx64\x64\link.exe /nologo @CMakeFiles\cmTC_39840.dir\objects1.rsp @C:\Users\10jam\AppData\Local\Temp\nm6BED.tmp
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+Generating code
+Finished generating code
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+Generating code
+Finished generating code
+
+
+Source file was:
+int main() { return 0; }

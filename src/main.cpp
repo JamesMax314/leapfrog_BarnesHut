@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include "save.h"
 #include "bodies.h"
 #include "trees.h"
 #include "leapfrog.h"
@@ -23,7 +22,7 @@ int main(){
     vector<double> dim = {10e10, 10e10, 10e10};
     barnesHut bh = barnesHut(bodies, dim, centre);
 
-    for(int j=0; j<10000; j++) {
+    for(int j=0; j<36500; j++) {
         //cout << "making tree..." << endl;
         treeMake(bh);
         //cout << "tree made" << endl;
