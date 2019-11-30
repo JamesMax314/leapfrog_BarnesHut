@@ -1,5 +1,6 @@
 #include <cmath>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -28,10 +29,19 @@ vector<double> vecAdd(vector<double> v1, vector<double> v2){
 	return out;
 }
 
-vector<double> scalMult(double scal, vector<double> &v){
+vector<double> scalMult(double scal, vector<double> v){
 	vector<double> out(30);
 	for(int i=0; i<3; i++){
 		out[i] = scal*v[i];
 	}
 	return out;
+}
+
+void printVec(vector<double> vec){
+    cout << "{";
+    for(int i=0; i<3; i++){
+        cout << vec[i];
+        if(i != 2) {cout << ", ";}
+    }
+    cout << "}";
 }

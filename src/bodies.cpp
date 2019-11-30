@@ -7,37 +7,35 @@ using namespace std;
 /// Body constructors
 body::body() = default;
 
-body::body(double &m, vector<double> &p, vector<double> &v,
-           vector<double> &a, double &k, double &pe){
-    mass = m;
-    pos = p;
-    vel = v;
-    acc = a;
-    ek = k;
-    ep = pe;
+body::body(double &m, vector<double> &p, vector<double> &v, vector<double> &a){
+    mass.emplace_back(m);
+    pos.emplace_back(p);
+    vel.emplace_back(v);
+    acc.emplace_back(a);
+    active.emplace_back(true);
 }
 
-void body::setPos(vector<double> p){
-    pos = std::move(p);
+void body::setPos(const vector<double>& p){
+    pos.emplace_back(p);
 }
-void body::setAcc(vector<double> a){
-    acc = std::move(a);
+void body::setAcc(const vector<double>& a){
+    acc.emplace_back(a);
 }
-void body::setVel(vector<double> v){
-    acc = std::move(v);
+void body::setVel(const vector<double>& v){
+    vel.emplace_back(v);
 }
 void body::setMass(double m){
-    mass = m;
+    mass.emplace_back(m);
 }
-vector<double> body::getPos(){
+vector<vector<double>> body::getPos(){
     return pos;
 }
-vector<double> body::getAcc(){
+vector<vector<double>> body::getAcc(){
     return acc;
 }
-vector<double> body::getVel(){
+vector<vector<double>> body::getVel(){
     return vel;
 }
-double body::getMass(){
+vector<double> body::getMass(){
     return mass;
 }

@@ -6,24 +6,25 @@
 using namespace std;
 
 struct body{
-	double mass{};
-	vector<double> pos;
-	vector<double> vel;
-	vector<double> acc;
-	double ek{};
-	double ep{};
+	vector<double> mass;
+	vector<vector<double>> pos;
+	vector<vector<double>> vel;
+	vector<vector<double>> acc;
+	vector<double> ek;
+	vector<double> ep;
+	vector<bool> active;
 
-	void setPos(vector<double>);
-    void setAcc(vector<double>);
-    void setVel(vector<double>);
+	void setPos(const vector<double>&);
+    void setAcc(const vector<double>&);
+    void setVel(const vector<double>&);
     void setMass(double);
-    vector<double> getPos();
-    vector<double> getAcc();
-    vector<double> getVel();
-    double getMass();
+    vector<vector<double>> getPos();
+    vector<vector<double>> getAcc();
+    vector<vector<double>> getVel();
+    vector<double> getMass();
 
     body();
-    body(double& mass, vector<double>& pos, vector<double>& vel, vector<double>& acc, double& ek, double& ep);
+    body(double& mass, vector<double>& pos, vector<double>& vel, vector<double>& acc);
 };
 
 // Macros to retrieve body data; x is a pointer

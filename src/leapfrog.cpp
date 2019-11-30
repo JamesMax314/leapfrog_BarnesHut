@@ -12,20 +12,24 @@ void treeMake(barnesHut &hut){
 }
 
 void treeBreak(barnesHut &hut){
+//    cout << "breaking..." << endl;
 	hut.treeChop(hut.root);
 }
 
 void interaction(barnesHut &hut){
+//    cout << "interacting..." << endl;
     hut.acceleration(hut.root);
 }
 
 void bodiesUpdate(barnesHut &hut, double dt){
+//    cout << "updating..." << endl;
     node* tree = hut.root;
     vector<body>* bodies = hut.bodies;
     partialUpdate(tree, bodies, dt);
 }
 
 void partialUpdate(node* tree, vector<body>* bodies, double dt){
+//    cout << "num Children: " << tree->numChildren << endl;
     if (tree->numChildren != 0){
         for(auto i: tree->liveChildren){
             partialUpdate(tree->children[i], bodies, dt);
@@ -33,9 +37,12 @@ void partialUpdate(node* tree, vector<body>* bodies, double dt){
     } else{
         //cout << "Updating leaf node" << endl;
         auto i = tree->bodyindx;
-        (*bodies)[i].vel = vecAdd((*bodies)[i].vel, scalMult(dt, (*bodies)[i].acc));
+//        cout << "Body num: " << i;
+//        cout << "vel length: " << (*bodies)[i].vel.size() << endl;
+//        cout << "pos length: " << (*bodies)[i].pos.size() << endl;
+        (*bodies)[i].vel.emplace_back(vecAdd((*bodies)[i].vel.back(), scalMult(dt, (*bodies)[i].acc.back())));
         //cout << "new vx: " << (*bodies)[i].vel[0] << endl;
-        (*bodies)[i].pos = vecAdd((*bodies)[i].pos, scalMult(dt, (*bodies)[i].vel));
+        (*bodies)[i].pos.emplace_back(vecAdd((*bodies)[i].pos.back(), scalMult(dt, (*bodies)[i].vel.back())));
         //cout << "new x: " << (*bodies)[i].pos[0] << endl;
     }
 }
