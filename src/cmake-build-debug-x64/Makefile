@@ -151,6 +151,19 @@ treecode\fast:
 .PHONY : treecode\fast
 
 #=============================================================================
+# Target rules for targets named treeShow
+
+# Build rule for target.
+treeShow: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) treeShow
+.PHONY : treeShow
+
+# fast build rule for target.
+treeShow\fast:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\build
+.PHONY : treeShow\fast
+
+#=============================================================================
 # Target rules for targets named vecMaths
 
 # Build rule for target.
@@ -257,6 +270,33 @@ pyInterface.cpp.s:
 	$(MAKE) -f CMakeFiles\treecode.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\pyInterface.cpp.s
 .PHONY : pyInterface.cpp.s
 
+treeShow.obj: treeShow.cpp.obj
+
+.PHONY : treeShow.obj
+
+# target to build an object file
+treeShow.cpp.obj:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\treeShow.cpp.obj
+.PHONY : treeShow.cpp.obj
+
+treeShow.i: treeShow.cpp.i
+
+.PHONY : treeShow.i
+
+# target to preprocess a source file
+treeShow.cpp.i:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\treeShow.cpp.i
+.PHONY : treeShow.cpp.i
+
+treeShow.s: treeShow.cpp.s
+
+.PHONY : treeShow.s
+
+# target to generate assembly for a file
+treeShow.cpp.s:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\treeShow.cpp.s
+.PHONY : treeShow.cpp.s
+
 trees.obj: trees.cpp.obj
 
 .PHONY : trees.obj
@@ -320,6 +360,7 @@ help:
 	@echo ... trees
 	@echo ... bodies
 	@echo ... treecode
+	@echo ... treeShow
 	@echo ... vecMaths
 	@echo ... rebuild_cache
 	@echo ... leapfrog
@@ -333,6 +374,9 @@ help:
 	@echo ... pyInterface.obj
 	@echo ... pyInterface.i
 	@echo ... pyInterface.s
+	@echo ... treeShow.obj
+	@echo ... treeShow.i
+	@echo ... treeShow.s
 	@echo ... trees.obj
 	@echo ... trees.i
 	@echo ... trees.s

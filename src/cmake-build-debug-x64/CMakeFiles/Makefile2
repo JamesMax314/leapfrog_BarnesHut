@@ -57,6 +57,7 @@ CMAKE_BINARY_DIR = C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_Barn
 all: CMakeFiles\trees.dir\all
 all: CMakeFiles\bodies.dir\all
 all: CMakeFiles\treecode.dir\all
+all: CMakeFiles\treeShow.dir\all
 all: CMakeFiles\vecMaths.dir\all
 all: CMakeFiles\leapfrog.dir\all
 all: Include\pybind11\all
@@ -67,6 +68,7 @@ all: Include\pybind11\all
 clean: CMakeFiles\trees.dir\clean
 clean: CMakeFiles\bodies.dir\clean
 clean: CMakeFiles\treecode.dir\clean
+clean: CMakeFiles\treeShow.dir\clean
 clean: CMakeFiles\vecMaths.dir\clean
 clean: CMakeFiles\leapfrog.dir\clean
 clean: Include\pybind11\clean
@@ -85,7 +87,7 @@ preinstall: Include\pybind11\preinstall
 CMakeFiles\trees.dir\all:
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\depend
 	$(MAKE) -f CMakeFiles\trees.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\trees.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=7,8 "Built target trees"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=9,10 "Built target trees"
 .PHONY : CMakeFiles\trees.dir\all
 
 # Build rule for subdir invocation for target.
@@ -136,18 +138,19 @@ CMakeFiles\bodies.dir\clean:
 # Target rules for target CMakeFiles/treecode.dir
 
 # All Build rule for target.
-CMakeFiles\treecode.dir\all: CMakeFiles\bodies.dir\all
 CMakeFiles\treecode.dir\all: CMakeFiles\vecMaths.dir\all
-CMakeFiles\treecode.dir\all: CMakeFiles\trees.dir\all
 CMakeFiles\treecode.dir\all: CMakeFiles\leapfrog.dir\all
+CMakeFiles\treecode.dir\all: CMakeFiles\treeShow.dir\all
+CMakeFiles\treecode.dir\all: CMakeFiles\trees.dir\all
+CMakeFiles\treecode.dir\all: CMakeFiles\bodies.dir\all
 	$(MAKE) -f CMakeFiles\treecode.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\depend
 	$(MAKE) -f CMakeFiles\treecode.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=5,6 "Built target treecode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=7,8 "Built target treecode"
 .PHONY : CMakeFiles\treecode.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\treecode.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles 12
 	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles 0
 .PHONY : CMakeFiles\treecode.dir\rule
@@ -163,13 +166,40 @@ CMakeFiles\treecode.dir\clean:
 .PHONY : CMakeFiles\treecode.dir\clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/treeShow.dir
+
+# All Build rule for target.
+CMakeFiles\treeShow.dir\all:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\depend
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=5,6 "Built target treeShow"
+.PHONY : CMakeFiles\treeShow.dir\all
+
+# Build rule for subdir invocation for target.
+CMakeFiles\treeShow.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles 0
+.PHONY : CMakeFiles\treeShow.dir\rule
+
+# Convenience name for target.
+treeShow: CMakeFiles\treeShow.dir\rule
+
+.PHONY : treeShow
+
+# clean rule for target.
+CMakeFiles\treeShow.dir\clean:
+	$(MAKE) -f CMakeFiles\treeShow.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treeShow.dir\clean
+.PHONY : CMakeFiles\treeShow.dir\clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/vecMaths.dir
 
 # All Build rule for target.
 CMakeFiles\vecMaths.dir\all:
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\depend
 	$(MAKE) -f CMakeFiles\vecMaths.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\vecMaths.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=9,10 "Built target vecMaths"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\cmake-build-debug-x64\CMakeFiles --progress-num=11,12 "Built target vecMaths"
 .PHONY : CMakeFiles\vecMaths.dir\all
 
 # Build rule for subdir invocation for target.

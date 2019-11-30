@@ -275,7 +275,7 @@ pybind11_SOURCE_DIR:STATIC=C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapf
 treecode_BINARY_DIR:STATIC=C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug-x64
 
 //Dependencies for the target
-treecode_LIB_DEPENDS:STATIC=general;C:/ProgramData/Anaconda3/libs/Python37.lib;general;trees;general;vecMaths;general;leapfrog;general;bodies;
+treecode_LIB_DEPENDS:STATIC=general;C:/ProgramData/Anaconda3/libs/Python37.lib;general;trees;general;vecMaths;general;leapfrog;general;bodies;general;treeShow;
 
 //Value Computed by CMake
 treecode_SOURCE_DIR:STATIC=C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src

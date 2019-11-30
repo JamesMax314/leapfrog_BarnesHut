@@ -92,5 +92,6 @@ CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\bodies.h
 CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\leapfrog.h
 CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\pyInterface.cpp
 CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\pyInterface.h
+CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\treeShow.h
 CMakeFiles\treecode.dir\pyInterface.cpp.obj: ..\trees.h
 
