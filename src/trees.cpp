@@ -3,7 +3,7 @@
 #include <iostream>
 #include "vecMaths.h"
 #include "trees.h"
-#include "treeShow.h"
+//#include "treeShow.h"
 
 /// node constructors
 node::node(){
@@ -120,7 +120,7 @@ void barnesHut::treePrune(node* tree){
 			treePrune(tree->children[i]);
 		}
 	} else if (tree->num == 0 && tree->parent != nullptr){
-        //cout << "liveChildren: " << endl;
+//        cout << "liveChildren: " << endl;
         //cout << "not null tree parent: " << tree->parent << endl;
         //for(int i : tree->parent->liveChildren){
         //    cout << i << ", ";
@@ -131,7 +131,7 @@ void barnesHut::treePrune(node* tree){
         auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
         //cout << "index: " << *indx << endl;
         tree->parent->liveChildren.erase(indx);
-        //cout << "number of root children: " << root->numChildren << endl;
+//        cout << "number of root children: " << root->numChildren << endl;
 		delete tree;
         //cout << "ok" << endl;
 	}
@@ -167,16 +167,17 @@ void barnesHut::treeBuild(){ // double width, double centre){
         //cout << "root initialised at: " << root << endl;
     }
 	//addChildren(root);
+//	cout << "size: " << ((*bodies).size()) << endl;
 	for(int i=0; i<int((*bodies).size()); i++){
-//	    cout << i << " in root: " << inNode((*bodies)[i].pos.back(), root) << endl;
+	    cout << i << " in root: " << inNode((*bodies)[i].pos.back(), root) << endl;
 	    if(inNode((*bodies)[i].pos.back(), root) && (*bodies)[i].active[0]){
             treeInsert(root, i);
-//            cout << "body "<< i << " has been inserted" << endl;
+            cout << "body "<< i << " has been inserted" << endl;
         }
         //cout << i << endl;
         //cout << "root num: " << root->num << endl;
 	}
-//    cout << "pruning..." << endl;
+    cout << "pruning..." << endl;
 	treePrune(root);
 }
 
@@ -188,41 +189,47 @@ node* barnesHut::whichChild(node* tree, int i){
             //cout << "in child " << j << endl;
             break;
         }
+        if (!inNode((*bodies)[i].pos.back(), child) && j == 8)
+            cout << "not in child" << endl;
     }
     return child;
 }
 
 void barnesHut::treeInsert(node* tree, int i){
-    //cout << "i: " << i << endl;
-    //cout << "tree->num: " << tree->num << endl;
+    cout << "i: " << i << endl;
+    cout << "tree->num: " << tree->num << endl;
 	if (tree->num > 1){
 	    node* child = whichChild(tree, i);
-//        cout << "child insertion of i: " << i << endl;
+//        cout << "insertion of i: " << i << endl;
         treeInsert(child, i);
+        cout << "inserted" << endl;
 
         // Update CM and mass of node
         tree->pos = vecAdd(scalMult(tree->mass, tree->pos),
                 scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
         tree->mass += (*bodies)[i].mass.back();
         tree->pos = scalMult(1 / tree->mass, tree->pos);
+        tree->num += 1;
 
 	} else if (tree->num == 1){
-//        cout << "adding children" << endl;
+        cout << "adding children" << endl;
 		addChildren(tree);
 		int primarybody = tree->bodyindx;
         tree->num += 1;
-        //cout << "pushing primary" << endl;
+        cout << "pushing primary" << primarybody << endl;
+        cout << "tree num" << tree->num << endl;
         treeInsert(tree, primarybody);
-        //cout << "pushing secondary" << endl;
+        cout << "pushing secondary" << endl;
 		treeInsert(tree, i);
+        tree->num -= 2;
 
-		// Update CM and mass of node
+        // Update CM and mass of node
         tree->pos = vecAdd(scalMult(tree->mass, tree->pos),
                 scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
 		tree->mass += (*bodies)[i].mass.back();
         tree->pos = scalMult(1 / tree->mass, tree->pos);
 	} else{
-//        cout << "adding first element" << endl;
+        cout << "adding first element" << endl;
 		tree->bodyindx = i;
 		tree->num = 1;
 		tree->pos = (*bodies)[i].pos.back();

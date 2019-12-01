@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <windows.h>
 
 #include "treeShow.h"
 #include "trees.h"
@@ -18,15 +19,23 @@ void printTree(node* nod, int space){
     space += COUNT;
 
     if (nod->parent == nullptr){
-        cout << INDENT << "root:" << endl;
-        cout << INDENTCLEAR << "~ num: " << nod->num << endl;
-        cout << INDENTCLEAR << "~ numChildren: " << nod->liveChildren.size() << endl;
-        cout << INDENTCLEAR << "~ width: "; printVec(nod->width); cout << endl;
-        cout << INDENTCLEAR << "~ centre: "; printVec(nod->centre); cout << endl;
-        cout << INDENTCLEAR << "~ COM: "; printVec(nod->pos); cout << endl;
+        if (nod->num==1)
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+        if (nod->num!=1)
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+        addSpace(0); cout << INDENT << "root:" << endl;
+        addSpace(0); cout << INDENTCLEAR << "~ num: " << nod->num << endl;
+        addSpace(0); cout << INDENTCLEAR << "~ numChildren: " << nod->liveChildren.size() << endl;
+        addSpace(0); cout << INDENTCLEAR << "~ width: "; printVec(nod->width); cout << endl;
+        addSpace(0); cout << INDENTCLEAR << "~ centre: "; printVec(nod->centre); cout << endl;
+        addSpace(0); cout << INDENTCLEAR << "~ COM: "; printVec(nod->pos); cout << endl;
     } else{
         vector<int> v = nod->parent->liveChildren;
         if (find(v.begin(), v.end(), nod->childIndx) != v.end()) {
+            if (nod->num==1)
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            if (nod->num!=1)
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
             addSpace(space); cout << INDENT << nod->childIndx << ": " << nod->num << endl;
             addSpace(space); cout << INDENTCLEAR << "~ width: "; printVec(nod->width); cout << endl;
             addSpace(space); cout << INDENTCLEAR << "~ centre: "; printVec(nod->centre); cout << endl;
@@ -40,6 +49,7 @@ void printTree(node* nod, int space){
         if (find(v.begin(), v.end(), i) != v.end()) {
             printTree(nod->children[i], space);
         } else{
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
             addSpace(space+COUNT); cout << endl;
             addSpace(space+COUNT); cout << INDENT << i << ": #" << endl;
         }

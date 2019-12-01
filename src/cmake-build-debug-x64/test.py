@@ -4,7 +4,7 @@ import treecode as tree
 import time
 
 if __name__ == "__main__":
-    n = 100
+    n = 10
     uniDim = np.array([100, 100, 100])
     velRan = np.array([100, 100, 100])
     arrCent = np.array([0, 0, 0])
@@ -18,11 +18,11 @@ if __name__ == "__main__":
     np.random.seed(0)
     randMas = np.random.random(n)*masDim
     np.random.seed(1)
-    randPos = np.random.random([n, 3])*uniDim
+    randPos = np.random.random([n, 3])*uniDim/2
     np.random.seed(2)
-    randVel = np.random.random([n, 3])*uniDim
+    randVel = np.random.random([n, 3])*uniDim/2
     for i in range(n):
-        arrBods = np.append(arrBods, tree.body(randMas[i], randPos[i], randVel[i], [0, 0, 0]))
+        arrBods = np.append(arrBods, tree.body(10, randPos[i], randVel[i], [0, 0, 0]))
 
     # arrBods = [tree.body(100, arrCent, [0, 0, 0], [0, 0, 0]),
     #            tree.body(100, [10, 0, 0], [0, 0, 0], [0, 0, 0])]
