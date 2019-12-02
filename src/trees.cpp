@@ -79,7 +79,7 @@ bool barnesHut::inNode(const vector<double>& pos, node* nod){
     //double distance = modulus(displacement, false);
     //cout << "distance: " << distance << endl;
     for (int j=0; j<3; j++) {
-        if (abs(displacement[j]) > nod->width[j]) {
+        if (abs(displacement[j]) > nod->width[j]/2) {
 //            cout << "false" << endl;
             return false;
         } else if (abs(displacement[j]) == nod->width[j]){
