@@ -4,7 +4,7 @@ import treecode as tree
 import time
 
 if __name__ == "__main__":
-    n = 10
+    n = 5
     uniDim = np.array([100, 100, 100])
     velRan = np.array([100, 100, 100])
     arrCent = np.array([0, 0, 0])

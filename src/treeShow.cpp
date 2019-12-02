@@ -36,14 +36,13 @@ void printTree(node* nod, int space){
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
             if (nod->num!=1)
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
-            addSpace(space); cout << INDENT << nod->childIndx << ": " << nod->num << endl;
+            addSpace(space); cout << INDENT << nod->childIndx << ": Body: " << nod->bodyindx << endl;
             addSpace(space); cout << INDENTCLEAR << "~ width: "; printVec(nod->width); cout << endl;
             addSpace(space); cout << INDENTCLEAR << "~ centre: "; printVec(nod->centre); cout << endl;
             addSpace(space); cout << INDENTCLEAR << "~ COM: "; printVec(nod->pos); cout << endl;
         }
     }
 
-    // Process right child first
     for(int i=0; i<nod->children.size(); i++) {
         vector<int> v = nod->liveChildren;
         if (find(v.begin(), v.end(), i) != v.end()) {
@@ -54,4 +53,5 @@ void printTree(node* nod, int space){
             addSpace(space+COUNT); cout << INDENT << i << ": #" << endl;
         }
     }
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 }
