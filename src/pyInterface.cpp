@@ -17,7 +17,7 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
     for(int j=0; j<numIter; j++) {
 //        cout << "Making tree" << endl;
         treeMake(bh);
-        cout << "tree made" << endl;
+//        cout << "tree made" << endl;
         if (j == 0)
             printTree(bh.root, 0);
 //        cout << "computing interactions" << endl;
@@ -26,6 +26,8 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
         bodiesUpdate(bh, dt);
 //        cout << "breaking tree" << endl;
         treeBreak(bh);
+//        printTree(bh.root, 0);
+
     }
     return *bh.bodies;
 }

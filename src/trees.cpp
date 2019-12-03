@@ -94,7 +94,7 @@ bool barnesHut::inNode(const vector<double>& pos, node* nod){
 void barnesHut::addChildren(node* tree){
 	tree->children = vector<node*>(8);
     //cout << "Children initialized at: " << tree->children[0] << endl;
-    tree->numChildren = 8;
+    tree->numChildren = 0;
     for(int i=0; i<8; i++){
         tree->children[i] = new node(tree, i);
     //    cout << "added: " << i << endl;
@@ -142,18 +142,23 @@ void barnesHut::treeChop(node* tree){
     //cout << "numChildren:" << tree->numChildren << endl;
 	if (tree->numChildren != 0){
 	    vector<int> children = tree->liveChildren;
+	    /// Deallocate memory
 		for(int i : children){
 			treeChop(tree->children[i]);
+//			cout << tree->children[i]->num << endl;
 		}
-		tree->num = 0;
-	} else if(tree->parent != nullptr){
-	    tree->parent->numChildren -= 1;
-        auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
-        tree->parent->liveChildren.erase(indx);
+	}
+	if(tree->parent != nullptr){
+//	    tree->parent->numChildren -= 1;
+//        auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
+//        tree->parent->liveChildren.erase(indx);
 		delete tree;
 	} else{
-	    tree->num = 0;
+        tree->numChildren = 0;
+        tree->liveChildren = {};
+        tree->num = 0;
 	}
+
 }
 
 
@@ -169,16 +174,18 @@ void barnesHut::treeBuild(){ // double width, double centre){
 	//addChildren(root);
 //	cout << "size: " << ((*bodies).size()) << endl;
 	for(int i=0; i<int((*bodies).size()); i++){
-	    cout << i << " in root: " << inNode((*bodies)[i].pos.back(), root) << endl;
+//	    cout << i << " in root: " << inNode((*bodies)[i].pos.back(), root) << endl;
 	    if(inNode((*bodies)[i].pos.back(), root) && (*bodies)[i].active[0]){
             treeInsert(root, i);
-            cout << "body "<< i << " has been inserted" << endl;
+//            cout << "body "<< i << " has been inserted" << endl;
         }
         //cout << i << endl;
         //cout << "root num: " << root->num << endl;
 	}
-    cout << "pruning..." << endl;
-	treePrune(root);
+//	printTree(root, 0);
+//    cout << "pruning..." << endl;
+//	treePrune(root);
+//	cout << "done" << endl;
 }
 
 node* barnesHut::whichChild(node* tree, int i){
@@ -198,34 +205,46 @@ node* barnesHut::whichChild(node* tree, int i){
 void barnesHut::treeInsert(node* tree, int i){
     node* current = tree;
     while (current->num !=0){
-        cout << "current: " << current << endl;
-        if (current->num == 1){
-            cout << "if" << endl;
+        /// Update current pos and COM
+        current->num += 1;
+        current->pos = vecAdd(scalMult(current->mass, current->pos),
+                              scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
+        current->mass += (*bodies)[i].mass.back();
+        current->pos = scalMult(1 / current->mass, current->pos);
+        if (current->num == 2){
+            /// Add children to saturated node
             addChildren(current);
+
+            /// Move original body
             node* child = whichChild(current, current->bodyindx);
-            current->num += 1;
             current->liveChildren.emplace_back(child->childIndx);
+            current->numChildren += 1;
             child->num += 1;
             child->bodyindx = current->bodyindx;
             child->pos = (*bodies)[current->bodyindx].pos.back();
     		child->mass = (*bodies)[current->bodyindx].mass.back();
-        } else{
-            cout << "else" << endl;
+
+    		/// Update current
             current = whichChild(current, i);
-            cout << "current->num: " << current->num << endl;
-            cout << "current index: " << current->childIndx << endl;
-            cout << "body centre: "; printVec((*bodies)[i].pos.back()); cout << endl;
+        } else if (current->num > 2) {
+            /// Children already exist so update current
+            current = whichChild(current, i);
         }
-        printTree(root, 0);
     }
-    current->parent->liveChildren.emplace_back(i);
+
+    /// Fill in leaf data
     current->num += 1;
     current->bodyindx = i;
     current->pos = (*bodies)[i].pos.back();
     current->mass = (*bodies)[i].mass.back();
-    printTree(root, 0);
+    if (current->parent) {
+        current->parent->liveChildren.emplace_back(current->childIndx);
+        current->numChildren += 1;
+    }
+
+//    printTree(root, 0);
 }
-//
+
 //void barnesHut::treeInsert(node* tree, int i){
 //    cout << "i: " << i << endl;
 //    cout << "tree->num: " << tree->num << endl;
