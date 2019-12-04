@@ -138,10 +138,10 @@ CMakeFiles\bodies.dir\clean:
 # Target rules for target CMakeFiles/treecode.dir
 
 # All Build rule for target.
-CMakeFiles\treecode.dir\all: CMakeFiles\treeShow.dir\all
-CMakeFiles\treecode.dir\all: CMakeFiles\vecMaths.dir\all
 CMakeFiles\treecode.dir\all: CMakeFiles\trees.dir\all
 CMakeFiles\treecode.dir\all: CMakeFiles\bodies.dir\all
+CMakeFiles\treecode.dir\all: CMakeFiles\treeShow.dir\all
+CMakeFiles\treecode.dir\all: CMakeFiles\vecMaths.dir\all
 CMakeFiles\treecode.dir\all: CMakeFiles\leapfrog.dir\all
 	$(MAKE) -f CMakeFiles\treecode.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\depend
 	$(MAKE) -f CMakeFiles\treecode.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\treecode.dir\build

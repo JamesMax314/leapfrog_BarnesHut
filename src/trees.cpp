@@ -309,7 +309,7 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 		vector<double> w = tree->width;
 		double minWidth = *min_element(w.begin(), w.end());
 //		cout << "checking approx..." << endl;
-		if (minWidth/distance < theta){
+		if (minWidth/distance > theta){
 //		    cout << "computing force on " << i << " from bulk node" << endl;
 //		    cout << "tree->pos: ";
 //		    printVec(tree->pos);
