@@ -304,7 +304,7 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 	} else{
 //	    cout << "else" << endl;
 //	    cout << "pos size: " << (*bodies)[i].pos.size() << endl;
-		double distance = modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
+		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
 //		cout << "distance: " << distance << endl;
 		vector<double> w = tree->width;
 		double minWidth = *min_element(w.begin(), w.end());
@@ -330,7 +330,7 @@ vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mas
 //    cout << "ngl" << endl;
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
-	out = scalMult(mass*G/pow(modulus(delta, false), 3), delta);
+	out = scalMult(mass*G/pow(m_modulus(delta, false), 3), delta);
 //    cout << "ngl out: " << out[0] << endl;
 	return out;
 }

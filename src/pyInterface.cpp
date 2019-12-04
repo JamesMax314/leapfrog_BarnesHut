@@ -12,9 +12,9 @@
 
 namespace py = pybind11;
 
-vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double> width, __int64 numIter, double dt){
+vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
-    for(__int64 j=0; j<numIter; j++) {
+    for(int j=0; j<numIter; j++) {
 //        cout << "Making tree" << endl;
         treeMake(bh);
 //        cout << "tree made" << endl;

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="treecode"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\Include\;CMake Files\Include\pybind11\;CMake Files\Include\pybind11\tools\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bodies">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libbodies.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 bodies"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bodies/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libbodies.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 bodies/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libvecMaths.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 vecMaths"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="vecMaths/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libvecMaths.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 vecMaths/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="leapfrog">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libleapfrog.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 leapfrog"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="leapfrog/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libleapfrog.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 leapfrog/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trees">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libtrees.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 trees"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="trees/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libtrees.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 trees/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treeShow">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libtreeShow.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 treeShow"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treeShow/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/libtreeShow.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 treeShow/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treecode">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/treecode.cpython-36m-x86_64-linux-gnu.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/Include/pybind11/include"/>
+					<Add directory="/usr/include/python3.6m"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 treecode"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="treecode/fast">
+				<Option output="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/treecode.cpython-36m-x86_64-linux-gnu.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/Include/pybind11/include"/>
+					<Add directory="/usr/include/python3.6m"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src"/>
+					<Add directory="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/./Include"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 treecode/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-debug-linux/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/bodies.cpp">
+			<Option target="bodies"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/bodies.h">
+			<Option target="bodies"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/leapfrog.cpp">
+			<Option target="leapfrog"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/leapfrog.h">
+			<Option target="leapfrog"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/pyInterface.cpp">
+			<Option target="treecode"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/pyInterface.h">
+			<Option target="treecode"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/treeShow.cpp">
+			<Option target="treeShow"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/treeShow.h">
+			<Option target="treeShow"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/trees.cpp">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/trees.h">
+			<Option target="trees"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/vecMaths.cpp">
+			<Option target="vecMaths"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/vecMaths.h">
+			<Option target="vecMaths"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/Include/pybind11/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\Include\pybind11\"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/Include/pybind11/tools/FindPythonLibsNew.cmake">
+			<Option virtualFolder="CMake Files\Include\pybind11\tools\"/>
+		</Unit>
+		<Unit filename="/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/Include/pybind11/tools/pybind11Tools.cmake">
+			<Option virtualFolder="CMake Files\Include\pybind11\tools\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

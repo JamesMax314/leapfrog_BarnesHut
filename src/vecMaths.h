@@ -5,7 +5,7 @@
 
 using namespace std;
 
-double modulus(vector<double>, bool);
+double m_modulus(vector<double>, bool);
 double dot(vector<double>&, vector<double>&, bool);
 vector<double> vecAdd(vector<double>, vector<double>);
 vector<double> scalMult(double, vector<double>);

@@ -16,7 +16,7 @@ double dot(vector<double>& v1, vector<double>& v2, bool square){
 	}
 }
 
-double modulus(vector<double> vec, bool square){
+double m_modulus(vector<double> vec, bool square){
     double out = dot(vec, vec, square);
     return out;
 }

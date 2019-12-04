@@ -1,0 +1,2 @@
+/usr/bin/ar qc libleapfrog.a  CMakeFiles/leapfrog.dir/leapfrog.cpp.o
+/usr/bin/ranlib libleapfrog.a

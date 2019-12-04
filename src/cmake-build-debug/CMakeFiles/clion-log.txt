@@ -1,10 +1,6 @@
-"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug nmake -G "CodeBlocks - NMake Makefiles" C:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src
-CMake Error at Include/pybind11/tools/FindPythonLibsNew.cmake:127 (message):
-  Python config failure: Python is 64-bit, chosen compiler is 32-bit
-Call Stack (most recent call first):
-  Include/pybind11/tools/pybind11Tools.cmake:16 (find_package)
-  Include/pybind11/CMakeLists.txt:33 (include)
-
-
+/home/james/Downloads/clion-2019.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src
+CMake Error: CMake was unable to find a build program corresponding to "Unix Makefiles".  CMAKE_MAKE_PROGRAM is not set.  You probably need to select a different build tool.
+CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
+CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
 -- Configuring incomplete, errors occurred!
-See also "C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/CMakeOutput.log".

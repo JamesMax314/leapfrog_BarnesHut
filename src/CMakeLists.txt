@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 #project(barnesHut)
+add_definitions( "-fpic" ) # Linux only
 project(treecode)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -17,8 +18,9 @@ pybind11_add_module(treecode pyInterface.cpp)
 #add_executable(APP_EXE main.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR})
-include_directories(.\\Include)
-include_directories(C:\\ProgramData\\Anaconda3\\include) # Needs changing for each machine
+include_directories(.//Include)
+#include_directories(C://ProgramData//Anaconda3//include) # Needs changing for each machine
+#include_directories(/home/james/anaconda3/include/.) # Needs changing for each machine
 #TARGET_LINK_LIBRARIES(${APP_EXE} trees vecMaths leapfrog bodies)
 TARGET_LINK_LIBRARIES(treecode PRIVATE trees vecMaths leapfrog bodies treeShow)
 #include_directories(include)

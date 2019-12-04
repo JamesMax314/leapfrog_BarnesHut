@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared  -o treecode.cpython-36m-x86_64-linux-gnu.so CMakeFiles/treecode.dir/pyInterface.cpp.o libtrees.a libvecMaths.a libleapfrog.a libbodies.a libtreeShow.a 
