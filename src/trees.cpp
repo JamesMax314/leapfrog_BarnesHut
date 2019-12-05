@@ -1,6 +1,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <omp.h>
 #include "vecMaths.h"
 #include "trees.h"
 #include "treeShow.h"
@@ -158,34 +159,53 @@ void barnesHut::treeChop(node* tree){
         tree->liveChildren = {};
         tree->num = 0;
 	}
-
 }
 
+vector<vector<int>> barnesHut::segment(node* nod, vector<body> bods){
+    vector<vector<int>> out = {{}, {}, {}, {}, {}, {}, {}, {}};
+    if (!bods.empty()) {
+        if (nod->children.empty())
+            addChildren(nod);
+        for (int i = 0; i < bods.size(); i++) {
+            for (int j=0; j<nod->children.size(); j++){
+                if (inNode(bods[i].pos.back(), nod->children[j]) && bods[i].active[0])
+                    out[j].emplace_back(i);
+            }
+        }
+    }
+    return out;
+}
+
+void barnesHut::updateRoot(){
+    vector<double> cm = {0.,0.,0.};
+    for (auto i : root->liveChildren){
+        root->num += root->children[i]->num;
+        root->mass += root->children[i]->mass;
+        cm = vecAdd(cm, scalMult(root->children[i]->mass, root->children[i]->pos));
+    }
+    root->pos = scalMult(1/root->mass, cm);
+}
 
 // Tree building functions
 void barnesHut::treeBuild(){ // double width, double centre){
 //    cout << "building..." << endl;
 
     if(!root){
-//        cout << "initialising root" << endl;
         root = new node(width, centre);
-        //cout << "root initialised at: " << root << endl;
     }
-	//addChildren(root);
-//	cout << "size: " << ((*bodies).size()) << endl;
-	for(int i=0; i<int((*bodies).size()); i++){
-//	    cout << i << " in root: " << inNode((*bodies)[i].pos.back(), root) << endl;
-	    if(inNode((*bodies)[i].pos.back(), root) && (*bodies)[i].active[0]){
-            treeInsert(root, i);
-//            cout << "body "<< i << " has been inserted" << endl;
+    vector<vector<int>> segments = segment(root, (*bodies));
+    cout << "segmented" << endl;
+#pragma omp parallel for
+    for (int i=0; i<segments.size(); i++) {
+        for (int j = 0; j < segments[i].size(); j++) {
+            if (inNode((*bodies)[j].pos.back(), root->children[i])) {
+                cout << "ok" << endl;
+                treeInsert(root->children[i], j);
+                cout << "inserted..." << endl;
+            }
         }
-        //cout << i << endl;
-        //cout << "root num: " << root->num << endl;
-	}
-//	printTree(root, 0);
-//    cout << "pruning..." << endl;
-//	treePrune(root);
-//	cout << "done" << endl;
+    }
+    updateRoot();
 }
 
 node* barnesHut::whichChild(node* tree, int i){
@@ -289,7 +309,8 @@ void barnesHut::treeInsert(node* tree, int i){
 
 // Kinematic functions
 void barnesHut::acceleration(node* tree){
-	for(int i=0; i<int((*bodies).size()); i++){
+#pragma omp parallel for
+    for(int i=0; i<int((*bodies).size()); i++){
 //	    cout << "acc: " << i << endl;
         (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
 	}
@@ -315,7 +336,8 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 //		    printVec(tree->pos);
 			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
 		} else{
-			for(int j=0; j<tree->numChildren; j++){
+#pragma omp parallel for
+            for(int j=0; j<tree->numChildren; j++){
 //			    cout << "j: " << j << endl;
 //                cout << "tree->liveChildren[j]" << tree->liveChildren[j] << endl;
 				f = vecAdd(f, treeAcc(tree->children[tree->liveChildren[j]], i));

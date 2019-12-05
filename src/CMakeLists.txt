@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.14)
 #project(barnesHut)
-add_definitions( "-fpic" ) # Linux only
+#add_definitions( "-fpic" ) # Linux only
 project(treecode)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -openmp")
 
 #SET(APP_EXE barnesHut)
 SET(APP_PY treecode)

@@ -51,6 +51,8 @@ public:
     // Tree building functions
     void treeBuild();
     void treeChop(node*);
+    vector<vector<int>> segment(node* root, vector<body> bodies);
+    void updateRoot();
 
     // Kinematic functions
     void acceleration(node*);
