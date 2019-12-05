@@ -12,7 +12,7 @@ if __name__ == "__main__":
     arrBods = np.array([])
 
     dt = 1e2
-    numSteps = 10000
+    numSteps = 1000
 
     # Generate n bodies
     np.random.seed(0)

@@ -6,5 +6,5 @@ CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   -std:c++1
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -IC:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src -IC:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\.\Include -IC:\ProgramData\Anaconda3\include 
+CXX_INCLUDES = -IC:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src -IC:\Users\10jam\Documents\ComputingL3\Barnes-Hut\leapfrog_BarnesHut\src\.\Include 
 

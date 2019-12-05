@@ -26,7 +26,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -51,7 +50,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -76,7 +74,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -101,7 +98,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -178,7 +174,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -203,7 +198,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -228,7 +222,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -253,7 +246,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -288,7 +280,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
@@ -313,7 +304,6 @@
 				<Compiler>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src"/>
 					<Add directory="C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/./Include"/>
-					<Add directory="C:/ProgramData/Anaconda3/include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\ATLMFC\include"/>
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.23.28105\include"/>
 					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
