@@ -15,18 +15,18 @@ namespace py = pybind11;
 vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
     for(int j=0; j<numIter; j++) {
-        cout << "Making tree" << endl;
+//        cout << "Making tree" << endl;
         treeMake(bh);
-        cout << "tree made" << endl;
-        if (j == 0)
+//        cout << "tree made" << endl;
+        if (j == 1)
             printTree(bh.root, 0);
-        cout << "computing interactions" << endl;
+//        cout << "computing interactions" << endl;
         interaction(bh);
-        cout << "updating bodies" << endl;
+//        cout << "updating bodies" << endl;
         bodiesUpdate(bh, dt);
-        cout << "breaking tree" << endl;
+//        cout << "breaking tree" << endl;
         treeBreak(bh);
-        printTree(bh.root, 0);
+//        printTree(bh.root, 0);
 
     }
     return *bh.bodies;

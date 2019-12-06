@@ -28,6 +28,7 @@ struct node{
 	node(node* tree, int chldIndx);
 	explicit node(node* root);
 	node();
+//	~node();
 };
 
 // Macros to retrieve node data; x is a pointer

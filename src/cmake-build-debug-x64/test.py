@@ -12,13 +12,13 @@ if __name__ == "__main__":
     arrBods = np.array([])
 
     dt = 1e2
-    numSteps = 2
+    numSteps = 100
 
     # Generate n bodies
     np.random.seed(0)
     randMas = np.ones(n)*masDim # np.random.random(n)*masDim
     np.random.seed(1)
-    randPos = np.random.random([n, 3])*uniDim/2
+    randPos = np.random.random([n, 3])*uniDim-uniDim/2
     np.random.seed(2)
     randVel = np.random.random([n, 3])*velRan*0
     for i in range(n):
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # arrBods = [tree.body(100, arrCent, [0, 0, 0], [0, 0, 0]),
     #            tree.body(100, [10, 0, 0], [0, 0, 0], [0, 0, 0])]
     start = time.time()
-    b = tree.basicRun(arrBods, arrCent, uniDim*2, numSteps, dt)
+    b = tree.basicRun(arrBods, arrCent, uniDim, numSteps, dt)
     end = time.time()
     # print(end - start)
     pos = np.array(b[0].getPos())

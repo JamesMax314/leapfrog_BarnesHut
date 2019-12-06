@@ -49,6 +49,12 @@ node::node(node* tree, int chldIndx){
     }
 }
 
+//node::~node(){
+//    cout << "deconstructing" << endl;
+//    for (node* child : children)
+//        delete child;
+//}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// barnesHut constructor
 barnesHut::barnesHut(vector<body> &bods, vector<double> dim): bodies(&bods) {
@@ -66,26 +72,12 @@ barnesHut::barnesHut(vector<body> &bods, vector<double> &dim, vector<double> &ce
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// barnesHut functions
 bool barnesHut::inNode(const vector<double>& pos, node* nod){
-    //cout << "position, node centre: " << pos[0] << " " << nod->centre[0] << endl;
-    //cout << "width: " <<  nod->width[0] << endl;
-//    cout << "nod->centre: "; printVec(nod->centre);
     vector<double> displacement = vecAdd(pos, scalMult(-1, nod->centre));
-//    cout << "pos: "; printVec(pos);
-//    cout << "displacement: "; printVec(displacement);
-//    cout << "width: "; printVec(nod->width);
-//    for(int k=0; k<3; k++){
-//        cout << displacement[k] << ", ";
-//    }
-    //cout << endl;
-    //double distance = modulus(displacement, false);
-    //cout << "distance: " << distance << endl;
     for (int j=0; j<3; j++) {
         if (abs(displacement[j]) > nod->width[j]/2) {
-//            cout << "false" << endl;
             return false;
         } else if (abs(displacement[j]) == nod->width[j]){
             vector<double> nPos = vecAdd(pos, scalMult(nod->width[j]/10, pos));
-//            cout << "node: " << nod;
             return inNode(nPos, nod);
         }
     }
@@ -113,46 +105,40 @@ void barnesHut::addChildren(node* tree){
 	}
 }
 
-void barnesHut::treePrune(node* tree){
-    //cout << "tree->children: " << tree->children << endl;
-    //cout << "tree parent: " << tree->parent << endl;
-    if (tree->numChildren != 0){
-		for(int i=0; i<8; i++){
-			treePrune(tree->children[i]);
-		}
-	} else if (tree->num == 0 && tree->parent != nullptr){
-//        cout << "liveChildren: " << endl;
-        //cout << "not null tree parent: " << tree->parent << endl;
-        //for(int i : tree->parent->liveChildren){
-        //    cout << i << ", ";
-        //}
-        //cout << endl;
-        tree->parent->numChildren -= 1;
-        //cout << "Erasing vector: " << tree->childIndx << endl;
-        auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
-        //cout << "index: " << *indx << endl;
-        tree->parent->liveChildren.erase(indx);
-//        cout << "number of root children: " << root->numChildren << endl;
-		delete tree;
-        //cout << "ok" << endl;
-	}
-}
+//void barnesHut::treePrune(node* tree){
+//    //cout << "tree->children: " << tree->children << endl;
+//    //cout << "tree parent: " << tree->parent << endl;
+//    if (tree->numChildren != 0){
+//		for(int i=0; i<8; i++){
+//			treePrune(tree->children[i]);
+//		}
+//	} else if (tree->num == 0 && tree->parent != nullptr){
+////        cout << "liveChildren: " << endl;
+//        //cout << "not null tree parent: " << tree->parent << endl;
+//        //for(int i : tree->parent->liveChildren){
+//        //    cout << i << ", ";
+//        //}
+//        //cout << endl;
+//        tree->parent->numChildren -= 1;
+//        //cout << "Erasing vector: " << tree->childIndx << endl;
+//        auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
+//        //cout << "index: " << *indx << endl;
+//        tree->parent->liveChildren.erase(indx);
+////        cout << "number of root children: " << root->numChildren << endl;
+//		delete tree;
+//        //cout << "ok" << endl;
+//	}
+//}
 
 void barnesHut::treeChop(node* tree){
-    //cout << "treeChop" << endl;
-    //cout << "numChildren:" << tree->numChildren << endl;
 	if (tree->numChildren != 0){
 	    vector<int> children = tree->liveChildren;
 	    /// Deallocate memory
 		for(int i : children){
 			treeChop(tree->children[i]);
-//			cout << tree->children[i]->num << endl;
 		}
 	}
 	if(tree->parent != nullptr){
-//	    tree->parent->numChildren -= 1;
-//        auto indx = find(tree->parent->liveChildren.begin(), tree->parent->liveChildren.end(), tree->childIndx);
-//        tree->parent->liveChildren.erase(indx);
 		delete tree;
 	} else{
         tree->numChildren = 0;
@@ -164,8 +150,9 @@ void barnesHut::treeChop(node* tree){
 vector<vector<int>> barnesHut::segment(node* nod, vector<body> bods){
     vector<vector<int>> out = {{}, {}, {}, {}, {}, {}, {}, {}};
     if (!bods.empty()) {
-        if (nod->children.empty())
+        if (nod->liveChildren.empty()) {
             addChildren(nod);
+        }
         for (int i = 0; i < bods.size(); i++) {
             for (int j=0; j<nod->children.size(); j++){
                 if (inNode(bods[i].pos.back(), nod->children[j]) && bods[i].active[0])
@@ -173,6 +160,19 @@ vector<vector<int>> barnesHut::segment(node* nod, vector<body> bods){
             }
         }
     }
+//    cout << "segments: {";
+//    for (int i=0; i<nod->children.size(); i++){
+//        cout << "{";
+//        for (int j=0; j<out[i].size(); j++){
+//            cout << out[i][j];
+//            if (j<out[i].size()-1)
+//                cout << ", ";
+//        }
+//        cout << "}";
+//        if (i<nod->children.size()-1)
+//            cout << ", ";
+//    }
+//    cout << "}" << endl;
     return out;
 }
 
@@ -184,6 +184,7 @@ void barnesHut::updateRoot(){
         cm = vecAdd(cm, scalMult(root->children[i]->mass, root->children[i]->pos));
     }
     root->pos = scalMult(1/root->mass, cm);
+    root->numChildren = int(root->liveChildren.size());
 }
 
 // Tree building functions
@@ -194,16 +195,14 @@ void barnesHut::treeBuild(){ // double width, double centre){
         root = new node(width, centre);
     }
     vector<vector<int>> segments = segment(root, (*bodies));
-    cout << "segmented" << endl;
 #pragma omp parallel for
     for (int i=0; i<segments.size(); i++) {
-        for (int j = 0; j < segments[i].size(); j++) {
+        for (int j : segments[i]) {
             if (inNode((*bodies)[j].pos.back(), root->children[i])) {
-                cout << "ok" << endl;
                 treeInsert(root->children[i], j);
-                cout << "inserted..." << endl;
             }
         }
+        //printTree(root->children[i], 0);
     }
     updateRoot();
 }
@@ -232,6 +231,7 @@ void barnesHut::treeInsert(node* tree, int i){
         current->mass += (*bodies)[i].mass.back();
         current->pos = scalMult(1 / current->mass, current->pos);
         if (current->num == 2){
+//            cout << "Add children to saturated node" << endl;
             /// Add children to saturated node
             addChildren(current);
 
@@ -243,11 +243,14 @@ void barnesHut::treeInsert(node* tree, int i){
             child->bodyindx = current->bodyindx;
             child->pos = (*bodies)[current->bodyindx].pos.back();
     		child->mass = (*bodies)[current->bodyindx].mass.back();
+//    		cout << "preliminary body: " << current->bodyindx << endl;
+//    		cout << "new body: " << i << endl;
 
     		/// Update current
             current = whichChild(current, i);
         } else if (current->num > 2) {
             /// Children already exist so update current
+//            cout << "Children already exist so update current" << endl;
             current = whichChild(current, i);
         }
     }
@@ -257,7 +260,7 @@ void barnesHut::treeInsert(node* tree, int i){
     current->bodyindx = i;
     current->pos = (*bodies)[i].pos.back();
     current->mass = (*bodies)[i].mass.back();
-    if (current->parent) {
+    if (current->parent != nullptr) {
         current->parent->liveChildren.emplace_back(current->childIndx);
         current->numChildren += 1;
     }
@@ -309,7 +312,7 @@ void barnesHut::treeInsert(node* tree, int i){
 
 // Kinematic functions
 void barnesHut::acceleration(node* tree){
-#pragma omp parallel for
+//#pragma omp parallel for
     for(int i=0; i<int((*bodies).size()); i++){
 //	    cout << "acc: " << i << endl;
         (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
@@ -336,7 +339,7 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 //		    printVec(tree->pos);
 			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
 		} else{
-#pragma omp parallel for
+//#pragma omp parallel for
             for(int j=0; j<tree->numChildren; j++){
 //			    cout << "j: " << j << endl;
 //                cout << "tree->liveChildren[j]" << tree->liveChildren[j] << endl;
