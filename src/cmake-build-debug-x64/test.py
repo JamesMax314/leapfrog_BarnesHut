@@ -4,7 +4,7 @@ import treecode as tree
 import time
 
 if __name__ == "__main__":
-    n = 20
+    n = 5
     uniDim = np.array([10, 10, 10])
     velRan = np.array([1, 1, 1])
     arrCent = np.array([0, 0, 0])
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     arrBods = np.array([])
 
     dt = 1e2
-    numSteps = 100
+    numSteps = 1000
 
     # Generate n bodies
     np.random.seed(0)

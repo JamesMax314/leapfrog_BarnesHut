@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <omp.h>
+#include <thread>
 #include "vecMaths.h"
 #include "trees.h"
 #include "treeShow.h"
@@ -195,14 +196,22 @@ void barnesHut::treeBuild(){ // double width, double centre){
         root = new node(width, centre);
     }
     vector<vector<int>> segments = segment(root, (*bodies));
-#pragma omp parallel for
+//#pragma omp parallel for
+    vector<thread> threads(segments.size());
     for (int i=0; i<segments.size(); i++) {
-        for (int j : segments[i]) {
-            if (inNode((*bodies)[j].pos.back(), root->children[i])) {
-                treeInsert(root->children[i], j);
+        threads[i] = thread([&, i]() {
+//            cout << "i: " << i << endl;
+            for (int j : segments[i]) {
+//                cout << "j: " << j << endl;
+                if (inNode((*bodies)[j].pos.back(), root->children[i])) {
+                    treeInsert(root->children[i], j);
+                }
             }
-        }
+        });
         //printTree(root->children[i], 0);
+    }
+    for (auto&& thrd : threads) {
+        thrd.join();
     }
     updateRoot();
 }
@@ -326,8 +335,6 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 //	    cout << "if" << endl;
 		f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
 	} else{
-//	    cout << "else" << endl;
-//	    cout << "pos size: " << (*bodies)[i].pos.size() << endl;
 		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
 //		cout << "distance: " << distance << endl;
 		vector<double> w = tree->width;

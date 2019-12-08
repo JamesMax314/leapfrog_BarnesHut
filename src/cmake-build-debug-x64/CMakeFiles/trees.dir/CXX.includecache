@@ -23,6 +23,8 @@ iostream
 -
 omp.h
 -
+thread
+-
 vecMaths.h
 C:/Users/10jam/Documents/ComputingL3/Barnes-Hut/leapfrog_BarnesHut/src/vecMaths.h
 trees.h
