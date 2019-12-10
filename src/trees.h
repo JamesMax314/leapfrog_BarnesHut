@@ -16,7 +16,6 @@ struct node{
 	vector<double> centre;
 
 	int num{}; // number of particles in tree
-	int numChildren{};
 	int childIndx{};
 	vector<int> liveChildren;
 	vector<node*> children;

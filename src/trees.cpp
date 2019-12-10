@@ -17,7 +17,6 @@ node::node(){
 // node constructors
 node::node(vector<double> w, vector<double> &c){
     num = 0;
-    numChildren = 0;
     width = w;
     centre = c;
     parent = nullptr;
@@ -25,7 +24,6 @@ node::node(vector<double> w, vector<double> &c){
 
 node::node(node* tree){
     num = 0;
-    numChildren = 0;
     parent = tree;
     pos = vector<double>(3);
     width = vector<double>(3);
@@ -37,7 +35,6 @@ node::node(node* tree){
 
 node::node(node* tree, int chldIndx){
     num = 0;
-    numChildren = 0;
     childIndx = chldIndx;
     parent = tree;
     //tree->liveChildren.push_back(childIndx);
@@ -88,7 +85,6 @@ bool barnesHut::inNode(const vector<double>& pos, node* nod){
 void barnesHut::addChildren(node* tree){
 	tree->children = vector<node*>(8);
     //cout << "Children initialized at: " << tree->children[0] << endl;
-    tree->numChildren = 0;
     for(int i=0; i<8; i++){
         tree->children[i] = new node(tree, i);
     //    cout << "added: " << i << endl;
@@ -132,7 +128,7 @@ void barnesHut::addChildren(node* tree){
 //}
 
 void barnesHut::treeChop(node* tree){
-	if (tree->numChildren != 0){
+	if (tree->liveChildren.size() != 0){
 	    vector<int> children = tree->liveChildren;
 	    /// Deallocate memory
 		for(int i : children){
@@ -142,7 +138,6 @@ void barnesHut::treeChop(node* tree){
 	if(tree->parent != nullptr){
 		delete tree;
 	} else{
-        tree->numChildren = 0;
         tree->liveChildren = {};
         tree->num = 0;
 	}
@@ -185,7 +180,6 @@ void barnesHut::updateRoot(){
         cm = vecAdd(cm, scalMult(root->children[i]->mass, root->children[i]->pos));
     }
     root->pos = scalMult(1/root->mass, cm);
-    root->numChildren = int(root->liveChildren.size());
 }
 
 // Tree building functions
@@ -247,7 +241,6 @@ void barnesHut::treeInsert(node* tree, int i){
             /// Move original body
             node* child = whichChild(current, current->bodyindx);
             current->liveChildren.emplace_back(child->childIndx);
-            current->numChildren += 1;
             child->num += 1;
             child->bodyindx = current->bodyindx;
             child->pos = (*bodies)[current->bodyindx].pos.back();
@@ -271,7 +264,6 @@ void barnesHut::treeInsert(node* tree, int i){
     current->mass = (*bodies)[i].mass.back();
     if (current->parent != nullptr) {
         current->parent->liveChildren.emplace_back(current->childIndx);
-        current->numChildren += 1;
     }
 
 //    printTree(root, 0);
@@ -323,38 +315,31 @@ void barnesHut::treeInsert(node* tree, int i){
 void barnesHut::acceleration(node* tree){
 //#pragma omp parallel for
     for(int i=0; i<int((*bodies).size()); i++){
-//	    cout << "acc: " << i << endl;
         (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
 	}
 }
 
 vector<double> barnesHut::treeAcc(node* tree, int i){
-//    cout << "treeAcc" << endl;
 	vector<double> f(3, 0);
 	if (tree->num == 1 && tree->bodyindx != i){
-//	    cout << "if" << endl;
+	    /// Particle-particle interaction
 		f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
 	} else{
 		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
-//		cout << "distance: " << distance << endl;
 		vector<double> w = tree->width;
 		double minWidth = *min_element(w.begin(), w.end());
-//		cout << "checking approx..." << endl;
-		if (minWidth/distance > theta){
-//		    cout << "computing force on " << i << " from bulk node" << endl;
-//		    cout << "tree->pos: ";
-//		    printVec(tree->pos);
+        /// Checking approximation...
+		if (minWidth/distance < theta){
+		    /// Bulk node computation
 			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
 		} else{
 //#pragma omp parallel for
-            for(int j=0; j<tree->numChildren; j++){
-//			    cout << "j: " << j << endl;
-//                cout << "tree->liveChildren[j]" << tree->liveChildren[j] << endl;
+            for(int j=0; j<tree->liveChildren.size(); j++){
+                /// For each sub node
 				f = vecAdd(f, treeAcc(tree->children[tree->liveChildren[j]], i));
 			}
 		}
 	}
-//    cout << "f: " << f[0] << endl;
     return f;
 }
 
@@ -362,6 +347,8 @@ vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mas
 //    cout << "ngl" << endl;
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
+//	cout << "mass: " << mass << endl;
+//	cout << "modulus: " << m_modulus(delta, false) << endl;
 	out = scalMult(mass*G/pow(m_modulus(delta, false), 3), delta);
 //    cout << "ngl out: " << out[0] << endl;
 	return out;

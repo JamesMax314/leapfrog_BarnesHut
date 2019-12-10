@@ -39,6 +39,8 @@ void printTree(node* nod, int space){
 //            if (nod->num!=1)
 //                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
             addSpace(space); cout << INDENT << nod->childIndx << ": num: " << nod->num << endl;
+            addSpace(space); cout << INDENTCLEAR << "~ body: " << nod->bodyindx << endl;
+            addSpace(space); cout << INDENTCLEAR << "~ numChildren: " << nod->liveChildren.size() << endl;
             addSpace(space); cout << INDENTCLEAR << "~ width: "; printVec(nod->width); cout << endl;
             addSpace(space); cout << INDENTCLEAR << "~ centre: "; printVec(nod->centre); cout << endl;
             addSpace(space); cout << INDENTCLEAR << "~ COM: "; printVec(nod->pos); cout << endl;

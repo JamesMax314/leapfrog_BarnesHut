@@ -29,20 +29,21 @@ void bodiesUpdate(barnesHut &hut, double dt){
 }
 
 void partialUpdate(node* tree, vector<body>* bodies, double dt){
-//    cout << "num Children: " << tree->numChildren << endl;
-    if (tree->numChildren != 0){
+//    cout << "num Children: " << tree->liveChildren.size() << endl;
+    if (tree->liveChildren.size() != 0){
         for(auto i: tree->liveChildren){
+//            cout << "i: " << i << endl;
             partialUpdate(tree->children[i], bodies, dt);
         }
     } else{
         //cout << "Updating leaf node" << endl;
         auto i = tree->bodyindx;
-//        cout << "Body num: " << i;
+//        cout << "Body num: " << i << endl;
 //        cout << "vel length: " << (*bodies)[i].vel.size() << endl;
 //        cout << "pos length: " << (*bodies)[i].pos.size() << endl;
         (*bodies)[i].vel.emplace_back(vecAdd((*bodies)[i].vel.back(), scalMult(dt, (*bodies)[i].acc.back())));
-        //cout << "new vx: " << (*bodies)[i].vel[0] << endl;
+//        cout << "new vx: " << (*bodies)[i].vel[0][0] << endl;
         (*bodies)[i].pos.emplace_back(vecAdd((*bodies)[i].pos.back(), scalMult(dt, (*bodies)[i].vel.back())));
-        //cout << "new x: " << (*bodies)[i].pos[0] << endl;
+//        cout << "new x: " << (*bodies)[i].pos[0][0] << endl;
     }
 }

@@ -4,14 +4,14 @@ import treecode as tree
 import time
 
 if __name__ == "__main__":
-    n = 5
+    n = 20
     uniDim = np.array([10, 10, 10])
-    velRan = np.array([1, 1, 1])
+    velRan = np.array([1, 1, 1])*1e-3
     arrCent = np.array([0, 0, 0])
     masDim = 1e2
     arrBods = np.array([])
 
-    dt = 1e2
+    dt = 1e3
     numSteps = 1000
 
     # Generate n bodies
@@ -20,19 +20,20 @@ if __name__ == "__main__":
     np.random.seed(1)
     randPos = np.random.random([n, 3])*uniDim-uniDim/2
     np.random.seed(2)
-    randVel = np.random.random([n, 3])*velRan*0
-    for i in range(n):
-        arrBods = np.append(arrBods, tree.body(10, randPos[i], randVel[i], [0, 0, 0]))
+    randVel = np.random.random([n, 3])*velRan-velRan/2
 
-    # arrBods = [tree.body(100, arrCent, [0, 0, 0], [0, 0, 0]),
-    #            tree.body(100, [10, 0, 0], [0, 0, 0], [0, 0, 0])]
-    start = time.time()
+    for i in range(n):
+        arrBods = np.append(arrBods, tree.body(randMas[i], randPos[i], randVel[i]*0, [0, 0, 0]))
+
+
+    # start = time.time()
     b = tree.basicRun(arrBods, arrCent, uniDim, numSteps, dt)
-    end = time.time()
+    # end = time.time()
     # print(end - start)
-    pos = np.array(b[0].getPos())
-    print(pos[:, 0])
-    times = np.array(range(0, int(numSteps*dt), int(dt)))
+    # pos = np.array(b[0].getPos())
+    # print(pos[:, 0])
+    # times = np.array(range(0, int(numSteps*dt), int(dt)))
+    # colour = ["red", "blue", "green", "purple", "orange"]
     for i in range(0, n):
         plt.plot(np.array(b[i].getPos())[:, 0], np.array(b[i].getPos())[:, 1])
         plt.scatter(np.array(b[i].getPos())[-1, 0], np.array(b[i].getPos())[-1, 1])
