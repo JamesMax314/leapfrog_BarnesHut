@@ -26,10 +26,10 @@ if __name__ == "__main__":
         arrBods = np.append(arrBods, tree.body(randMas[i], randPos[i], randVel[i]*0, [0, 0, 0]))
 
 
-    # start = time.time()
+    start = time.time()
     b = tree.basicRun(arrBods, arrCent, uniDim, numSteps, dt)
-    # end = time.time()
-    # print(end - start)
+    end = time.time()
+    print("time to run:", end - start)
     # pos = np.array(b[0].getPos())
     # print(pos[:, 0])
     # times = np.array(range(0, int(numSteps*dt), int(dt)))
