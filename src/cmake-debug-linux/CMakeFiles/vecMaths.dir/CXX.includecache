@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/vecMaths.cpp
+cmath
+-
+vector
+-
+iostream
+-
+

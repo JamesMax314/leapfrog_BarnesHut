@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+vector
+-
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/leapfrog.cpp
+vector
+-
+algorithm
+-
+iostream
+-
+bodies.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+trees.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+vecMaths.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/vecMaths.h
+leapfrog.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/leapfrog.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/leapfrog.h
+bodies.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+trees.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+vector
+-
+tuple
+-
+bodies.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/vecMaths.h
+vector
+-
+

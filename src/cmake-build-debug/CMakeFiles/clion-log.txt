@@ -1,6 +1,29 @@
-/home/james/Downloads/clion-2019.3/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src
-CMake Error: CMake was unable to find a build program corresponding to "Unix Makefiles".  CMAKE_MAKE_PROGRAM is not set.  You probably need to select a different build tool.
-CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
-CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
+/snap/clion/98/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src
+-- The C compiler identification is GNU 7.4.0
+-- The CXX compiler identification is GNU 7.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error at CMakeLists.txt:11 (add_subdirectory):
+  The source directory
+
+    /home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/Include/pybind11
+
+  does not contain a CMakeLists.txt file.
+
+
+CMake Error at CMakeLists.txt:18 (pybind11_add_module):
+  Unknown CMake command "pybind11_add_module".
+
+
 -- Configuring incomplete, errors occurred!
-See also "/home/james/Documents/University/Computing/UniSim/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-build-debug/CMakeFiles/CMakeOutput.log".

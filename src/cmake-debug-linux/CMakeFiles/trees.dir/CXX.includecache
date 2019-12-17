@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+vector
+-
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/treeShow.h
+trees.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.cpp
+cmath
+-
+algorithm
+-
+iostream
+-
+omp.h
+-
+thread
+-
+vecMaths.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/vecMaths.h
+trees.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+treeShow.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/treeShow.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/trees.h
+vector
+-
+tuple
+-
+bodies.h
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/bodies.h
+
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/vecMaths.h
+vector
+-
+

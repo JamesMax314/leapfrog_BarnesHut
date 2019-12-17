@@ -1,0 +1,2 @@
+/usr/bin/ar qc libvecMaths.a  CMakeFiles/vecMaths.dir/vecMaths.cpp.o
+/usr/bin/ranlib libvecMaths.a

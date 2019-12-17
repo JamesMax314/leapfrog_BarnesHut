@@ -1,0 +1,10 @@
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/edit_cache.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/bodies.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/vecMaths.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/leapfrog.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/trees.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/treeShow.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/rebuild_cache.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/treecode.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/Include/pybind11/CMakeFiles/rebuild_cache.dir
+/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/Include/pybind11/CMakeFiles/edit_cache.dir
