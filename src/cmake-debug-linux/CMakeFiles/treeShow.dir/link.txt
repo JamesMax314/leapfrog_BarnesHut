@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtreeShow.a  CMakeFiles/treeShow.dir/treeShow.cpp.o
-/usr/bin/ranlib libtreeShow.a
