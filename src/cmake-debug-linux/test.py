@@ -11,7 +11,7 @@ if __name__ == "__main__":
     masDim = 1e2
     arrBods = np.array([])
 
-    dt = 10
+    dt = 100
     numSteps = 10000
 
     # Generate n bodies

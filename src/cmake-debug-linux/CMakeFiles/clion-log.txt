@@ -1,14 +1,5 @@
 /snap/clion/98/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug make -G "CodeBlocks - Unix Makefiles" /home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src
-CMake Error at /snap/clion/98/bin/cmake/linux/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake:137 (message):
-  Could NOT find PythonInterp: Found unsuitable version "3.6.9", but required
-  is at least "3.7" (found /usr/bin/python3.6)
-Call Stack (most recent call first):
-  /snap/clion/98/bin/cmake/linux/share/cmake-3.15/Modules/FindPackageHandleStandardArgs.cmake:376 (_FPHSA_FAILURE_MESSAGE)
-  /snap/clion/98/bin/cmake/linux/share/cmake-3.15/Modules/FindPythonInterp.cmake:160 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
-  Include/pybind11/tools/FindPythonLibsNew.cmake:60 (find_package)
-  Include/pybind11/tools/pybind11Tools.cmake:16 (find_package)
-  Include/pybind11/CMakeLists.txt:33 (include)
-
-
--- Configuring incomplete, errors occurred!
-See also "/home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux/CMakeFiles/CMakeOutput.log".
+-- pybind11 v2.4.dev4
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/james/Documents/University/ComputingProject/leapfrog_BarnesHut/src/cmake-debug-linux
