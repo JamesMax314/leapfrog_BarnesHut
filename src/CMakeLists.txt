@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -openmp")
 
 #SET(APP_EXE barnesHut)
 SET(APP_PY treecode)
-set(PYBIND11_PYTHON_VERSION 3.7)
+set(PYBIND11_PYTHON_VERSION 3.6)
 add_subdirectory(.//Include//pybind11)
 
 ADD_LIBRARY(trees STATIC trees.cpp)

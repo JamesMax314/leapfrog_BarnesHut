@@ -99,24 +99,14 @@ void barnesHut::treeBuild(){
     if(!root){
         root = new node(width, centre);
     }
-    vector<vector<int>> segments = segment(root, (*bodies));
+//    vector<vector<int>> segments = segment(root, (*bodies));
 //#pragma omp parallel for
-    vector<thread> threads(segments.size());
-    for (int i=0; i<segments.size(); i++) {
-        /// For each segment of bodies
-        threads[i] = thread([&, i]() {
-            /// Macro runs on individual thread
-            for (int j : segments[i]) {
-                if (inNode((*bodies)[j].pos.back(), root->children[i])) {
-                    treeInsert(root->children[i], j);
-                }
-            }
-        });
+    for(int i=0; i<int((*bodies).size()); i++){
+        if(inNode((*bodies)[i].pos.back(), root) && (*bodies)[i].active[0]){
+            treeInsert(root, i);
+        }
     }
-    for (auto&& thrd : threads) {
-        thrd.join();
-    }
-    updateRoot();
+//    updateRoot();
 }
 
 /// Initialise children for parent node
@@ -294,29 +284,33 @@ void barnesHut::treeChop(node* tree){
 //	}
 //}
 
-void barnesHut::acceleration(node* tree) {
-    int i;
-    int numThreads = 4;
-    vector<thread> threads(numThreads);
-    for (i=0; i<numThreads; i++){
-        threads[i] = thread([&, i]() {
-            for (int j = int(i*int((*bodies).size())/numThreads);
-            j < int((i+1)*int((*bodies).size())/numThreads); j++) {
-                (*bodies)[j].acc.emplace_back(treeAcc(tree, j));
-            }
-        });
-    }
-    for (auto&& thrd : threads) {
-        thrd.join();
+void barnesHut::acceleration(node* tree){
+    for(int i=0; i<int((*bodies).size()); i++){
+        (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
     }
 }
+
+//void barnesHut::acceleration(node* tree) {
+//    int i;
+//    int numThreads = 4;
+//    vector<thread> threads(numThreads);
+//    for (i=0; i<numThreads; i++){
+//        threads[i] = thread([&, i]() {
+//            for (int j = int(i*int((*bodies).size())/numThreads);
+//            j < int((i+1)*int((*bodies).size())/numThreads); j++) {
+//                (*bodies)[j].acc.emplace_back(treeAcc(tree, j));
+//            }
+//        });
+//    }
+//}
 
 /// Tree traversal for acceleration
 vector<double> barnesHut::treeAcc(node* tree, int i){
 	vector<double> f(3, 0);
 	if (tree->num == 1 && tree->bodyindx != i){
 	    /// Particle-particle interaction
-		f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
+		f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass,
+		        (*bodies)[i].softening + (*bodies)[tree->bodyindx].softening);
 	} else{
 		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
 		vector<double> w = tree->width;
@@ -324,7 +318,8 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
         /// Checking approximation...
 		if (minWidth/distance < theta){
 		    /// Bulk node computation
-			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass);
+			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass,
+			        (*bodies)[i].softening + (*bodies)[tree->bodyindx].softening);
 		} else{
 		    vector<double> fs = {0, 0, 0};
 //#pragma omp parallel for private(j)
@@ -338,9 +333,9 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 }
 
 /// Newtons Gravitational Law
-vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mass){
+vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mass, double softening){
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
-	out = scalMult(mass*G/pow(m_modulus(delta, false), 3), delta);
+	out = scalMult(mass*G/pow(m_modulus(delta, false) + softening, 3), delta);
 	return out;
 }

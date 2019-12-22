@@ -6,6 +6,7 @@
 using namespace std;
 
 struct body{
+    double softening = 0;
 	vector<double> mass;
 	vector<vector<double>> pos;
 	vector<vector<double>> vel;
@@ -18,10 +19,12 @@ struct body{
     void setAcc(const vector<double>&);
     void setVel(const vector<double>&);
     void setMass(double);
+    void setSoftening(double);
     vector<vector<double>> getPos();
     vector<vector<double>> getAcc();
     vector<vector<double>> getVel();
     vector<double> getMass();
+    double getSoftening();
 
     body();
     body(double& mass, vector<double>& pos, vector<double>& vel, vector<double>& acc);

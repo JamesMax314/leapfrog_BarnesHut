@@ -27,6 +27,11 @@ void body::setVel(const vector<double>& v){
 void body::setMass(double m){
     mass.emplace_back(m);
 }
+void body::setSoftening(double s){
+    softening = s;
+}
+
+
 vector<vector<double>> body::getPos(){
     return pos;
 }
@@ -38,4 +43,7 @@ vector<vector<double>> body::getVel(){
 }
 vector<double> body::getMass(){
     return mass;
+}
+double body::getSoftening(){
+    return softening;
 }

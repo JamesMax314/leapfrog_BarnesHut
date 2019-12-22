@@ -12,14 +12,33 @@
 
 namespace py = pybind11;
 
+progbar::progbar(double maximum, double barLength): max(maximum), length(barLength){}
+
+void progbar::update(int current){
+//    cout << "\r";
+//    for (int i=0; i<length+20; i++)
+//        cout << " ";
+    cout << "\rProgress: ";
+    int bars = int(length*((current+1) / max));
+    for (int i=0; i<bars; i++)
+        cout << "#";
+    for (int i=0; i<length-bars; i++)
+        cout << "_";
+    cout << " | (" << int(100*((current+1) / max)) << "%)" << "\r";
+}
+
 vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
+//    bh.theta = 0;
+//    bh.G = bh.G*5;
+    progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
 //        cout << "Making tree" << endl;
         treeMake(bh);
 //        cout << "tree made" << endl;
-        if (j == 1)
-            printTree(bh.root, 0);
+//        if (j == 1)
+//            printTree(bh.root, 0);
+//            cout << endl;
 //        cout << "computing interactions" << endl;
         interaction(bh);
 //        cout << "updating bodies" << endl;
@@ -27,8 +46,9 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
 //        cout << "breaking tree" << endl;
         treeBreak(bh);
 //        printTree(bh.root, 0);
-
+        prog.update(j);
     }
+    cout << endl;
     return *bh.bodies;
 }
 
@@ -46,12 +66,10 @@ PYBIND11_MODULE(treecode, m) {
             .def(py::init<>())
             .def(py::init<double&, vector<double>&,
                     vector<double>&, vector<double>&>())
-            .def("setPos", &body::setPos)
-            .def("setAcc", &body::setAcc)
-            .def("setVel", &body::setVel)
-            .def("setMass", &body::setMass)
-            .def("getPos", &body::getPos)
-            .def("getAcc", &body::getAcc)
-            .def("getVel", &body::getVel)
-            .def("getMass", &body::getMass);
+
+            .def_property("pos", &body::getAcc, &body::setAcc)
+            .def_property("pos", &body::getVel, &body::setVel)
+            .def_property("pos", &body::getMass, &body::setMass)
+            .def_property("pos", &body::getSoftening, &body::setSoftening)
+            .def_property("pos", &body::getPos, &body::setPos);
 }

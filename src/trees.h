@@ -38,13 +38,12 @@ class barnesHut{
     node* whichChild(node* tree, int i);
     void addChildren(node*);
     bool inNode(const vector<double>&, node*);
-    void treePrune(node*);
     void treeInsert(node*, int);
 public:
     vector<body>* bodies;
     node* root;
     double theta = 0.9;
-    double G = 1.6e-11;
+    double G = 6.674e-11;
     vector<double> width;
     vector<double> centre;
 
@@ -57,7 +56,7 @@ public:
     // Kinematic functions
     void acceleration(node*);
     vector<double> treeAcc(node*, int);
-    vector<double> ngl(vector<double>&, vector<double>&, double);
+    vector<double> ngl(vector<double>& r1, vector<double>& r2, double mass, double softening);
 
     explicit barnesHut(vector<body>& bods, vector<double> dim);
     explicit barnesHut(vector<body>& bods, vector<double>& dim, vector<double>& cent);
