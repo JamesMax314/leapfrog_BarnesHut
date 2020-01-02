@@ -52,14 +52,26 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
     return *bh.bodies;
 }
 
-//void test(body& b){
-//    body* d = &b;
-//    cout << (*d).mass[0] << endl;
-//}
+vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<double> centre, vector<double> width, int numIter, double dt){
+    barnesHut bh = barnesHut(bodies, width, centre);
+    cout << "bodLen: " << boundary.size() << endl;
+    progbar prog = progbar(numIter, 20);
+    for(int j=0; j<numIter; j++) {
+        treeMake(bh);
+        interaction(bh);
+        boundaryInteract(bh, boundary);
+        bodiesUpdate(bh, dt);
+        treeBreak(bh);
+        prog.update(j);
+    }
+    cout << endl;
+    return *bh.bodies;
+}
 
 PYBIND11_MODULE(treecode, m) {
     //m.def("test", &test);
     m.def("basicRun", &basicRun);
+    m.def("fixedBoundary", &fixedBoundary);
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
     py::class_<body>(m, "body")

@@ -230,79 +230,14 @@ void barnesHut::treeChop(node* tree){
     }
 }
 
-//void barnesHut::treeInsert(node* tree, int i){
-//    cout << "i: " << i << endl;
-//    cout << "tree->num: " << tree->num << endl;
-//	if (tree->num > 1){
-//	    node* child = whichChild(tree, i);
-//        cout << "insertion of i: " << i << endl;
-//        treeInsert(child, i);
-//        cout << "inserted" << endl;
-//
-//        // Update CM and mass of node
-//        tree->pos = vecAdd(scalMult(tree->mass, tree->pos),
-//                scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
-//        tree->mass += (*bodies)[i].mass.back();
-//        tree->pos = scalMult(1 / tree->mass, tree->pos);
-//        tree->num += 1;
-//
-//	} else if (tree->num == 1){
-//        cout << "adding children" << endl;
-//		addChildren(tree);
-//		int primarybody = tree->bodyindx;
-//        tree->num += 1;
-//        cout << "pushing primary" << primarybody << endl;
-//        cout << "tree num" << tree->num << endl;
-//        treeInsert(tree, primarybody);
-//        cout << "pushing secondary" << endl;
-//		treeInsert(tree, i);
-//        tree->num -= 2;
-//
-//        // Update CM and mass of node
-//        tree->pos = vecAdd(scalMult(tree->mass, tree->pos),
-//                scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
-//		tree->mass += (*bodies)[i].mass.back();
-//        tree->pos = scalMult(1 / tree->mass, tree->pos);
-//	} else{
-//        cout << "adding first element" << endl;
-//		tree->bodyindx = i;
-//		tree->num = 1;
-//		tree->pos = (*bodies)[i].pos.back();
-//		tree->mass = (*bodies)[i].mass.back();
-//	}
-//}
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// Kinematic functions
-
-//void barnesHut::acceleration(node* tree){
-//    int i;
-//#pragma omp parallel for num_threads(1)
-//    for(i=0; i<int((*bodies).size()); i++){
-////        cout << "i: " << i << endl;
-//        (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
-//	}
-//}
 
 void barnesHut::acceleration(node* tree){
     for(int i=0; i<int((*bodies).size()); i++){
         (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
     }
 }
-
-//void barnesHut::acceleration(node* tree) {
-//    int i;
-//    int numThreads = 4;
-//    vector<thread> threads(numThreads);
-//    for (i=0; i<numThreads; i++){
-//        threads[i] = thread([&, i]() {
-//            for (int j = int(i*int((*bodies).size())/numThreads);
-//            j < int((i+1)*int((*bodies).size())/numThreads); j++) {
-//                (*bodies)[j].acc.emplace_back(treeAcc(tree, j));
-//            }
-//        });
-//    }
-//}
 
 /// Tree traversal for acceleration
 vector<double> barnesHut::treeAcc(node* tree, int i){
@@ -322,7 +257,6 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 			        (*bodies)[i].softening + (*bodies)[tree->bodyindx].softening);
 		} else{
 		    vector<double> fs = {0, 0, 0};
-//#pragma omp parallel for private(j)
             for(int j=0; j<tree->liveChildren.size(); j++){
                 /// For each sub node
 				f = vecAdd(f, treeAcc(tree->children[tree->liveChildren[j]], i));
