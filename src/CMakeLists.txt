@@ -16,7 +16,8 @@ ADD_LIBRARY(bodies STATIC bodies.cpp)
 ADD_LIBRARY(vecMaths STATIC vecMaths.cpp)
 ADD_LIBRARY(leapfrog STATIC leapfrog.cpp)
 ADD_LIBRARY(treeShow STATIC treeShow.cpp)
-pybind11_add_module(treecode pyInterface.cpp)
+ADD_LIBRARY(poisson STATIC poisson.cpp)
+pybind11_add_module(treecode STATIC pyInterface.cpp)
 #add_executable(APP_EXE main.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR})
@@ -24,5 +25,6 @@ include_directories(.//Include)
 #include_directories(C://ProgramData//Anaconda3//include) # Needs changing for each machine
 #include_directories(/home/james/anaconda3/include/.) # Needs changing for each machine
 #TARGET_LINK_LIBRARIES(${APP_EXE} trees vecMaths leapfrog bodies)
-TARGET_LINK_LIBRARIES(treecode PRIVATE trees vecMaths leapfrog bodies treeShow)
+TARGET_LINK_LIBRARIES(treecode PRIVATE trees vecMaths leapfrog bodies treeShow poisson)
+TARGET_LINK_LIBRARIES(poisson fftw3)
 #include_directories(include)

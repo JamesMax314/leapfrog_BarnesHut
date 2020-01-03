@@ -1,9 +1,9 @@
+#ifndef TREES
+#define TREES
+
 #include <vector>
 #include <tuple>
 #include "bodies.h"
-
-#ifndef TREES
-#define TREES
 
 using namespace std;
 
