@@ -9,6 +9,7 @@
 #include "leapfrog.h"
 #include "pyInterface.h"
 #include "treeShow.h"
+#include "poisson.h"
 
 namespace py = pybind11;
 
@@ -42,7 +43,7 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
 //        cout << "computing interactions" << endl;
         interaction(bh);
 //        cout << "updating bodies" << endl;
-        bodiesUpdate(bh, dt);
+        bodiesUpdate(bh.bodies, dt);
 //        cout << "breaking tree" << endl;
         treeBreak(bh);
 //        printTree(bh.root, 0);
@@ -52,7 +53,8 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
     return *bh.bodies;
 }
 
-vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<double> centre, vector<double> width, int numIter, double dt){
+vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<double> centre,
+        vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
     cout << "bodLen: " << boundary.size() << endl;
     progbar prog = progbar(numIter, 20);
@@ -60,7 +62,7 @@ vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<
         treeMake(bh);
         interaction(bh);
         boundaryInteract(bh, boundary);
-        bodiesUpdate(bh, dt);
+        bodiesUpdate(bh.bodies, dt);
         treeBreak(bh);
         prog.update(j);
     }
@@ -68,10 +70,30 @@ vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<
     return *bh.bodies;
 }
 
+vector<body> particleMesh(vector<body>& bodies, double spacing, double width, int numIter, double dt){
+    vector<body>* bods = &bodies;
+    grid g = grid(spacing, width);
+    progbar prog = progbar(numIter, 20);
+    for(int j=0; j<numIter; j++) {
+        g.updateGrid(bods);
+//        cout << "ok2" << endl;
+        g.solveField();
+//        cout << "ok3" << endl;
+        g.interp(bods);
+//        cout << "ok4" << endl;
+        bodiesUpdate(bods, dt);
+//        cout << "ok5" << endl;
+        prog.update(j);
+    }
+    cout << endl;
+    return bodies;
+}
+
 PYBIND11_MODULE(treecode, m) {
     //m.def("test", &test);
     m.def("basicRun", &basicRun);
     m.def("fixedBoundary", &fixedBoundary);
+    m.def("particleMesh", &particleMesh);
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
     py::class_<body>(m, "body")

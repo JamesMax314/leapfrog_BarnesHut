@@ -21,29 +21,34 @@ void interaction(barnesHut &hut){
     hut.acceleration(hut.root);
 }
 
-void bodiesUpdate(barnesHut &hut, double dt){
-    node* tree = hut.root;
-    vector<body>* bodies = hut.bodies;
-    partialUpdate(tree, bodies, dt);
-}
+//void bodiesUpdate(barnesHut &hut, double dt){
+//    node* tree = hut.root;
+//    vector<body>* bodies = hut.bodies;
+//    partialUpdate(tree, bodies, dt);
+//}
 
-void partialUpdate(node* tree, vector<body>* bodies, double dt){
-    if (tree->liveChildren.size() != 0){
-        for(auto i: tree->liveChildren){
-            partialUpdate(tree->children[i], bodies, dt);
-        }
-    } else{
-        auto i = tree->bodyindx;
-        (*bodies)[i].vel.emplace_back(vecAdd((*bodies)[i].vel.back(), scalMult(dt, (*bodies)[i].acc.back())));
-        (*bodies)[i].pos.emplace_back(vecAdd((*bodies)[i].pos.back(), scalMult(dt, (*bodies)[i].vel.back())));
+void bodiesUpdate(vector<body>* bodies, double dt){
+    for (auto & body : (*bodies)) {
+        body.vel.emplace_back(vecAdd(body.vel.back(), scalMult(dt, body.acc.back())));
+        body.pos.emplace_back(vecAdd(body.pos.back(), scalMult(dt, body.vel.back())));
     }
 }
 
+//void partialUpdate(node* tree, vector<body>* bodies, double dt){
+//    if (tree->liveChildren.size() != 0){
+//        for(auto i: tree->liveChildren){
+//            partialUpdate(tree->children[i], bodies, dt);
+//        }
+//    } else{
+//        auto i = tree->bodyindx;
+//        (*bodies)[i].vel.emplace_back(vecAdd((*bodies)[i].vel.back(), scalMult(dt, (*bodies)[i].acc.back())));
+//        (*bodies)[i].pos.emplace_back(vecAdd((*bodies)[i].pos.back(), scalMult(dt, (*bodies)[i].vel.back())));
+//    }
+//}
+
 void boundaryInteract(barnesHut& bh, vector<body>& boundary){
     vector<body>* bodies = bh.bodies;
-#pragma omp parallel for
     for(auto body : *bodies){
-#pragma omp parallel for
         for(auto boundBod : boundary){
             vector<double> dist = vecAdd(body.pos.back(), scalMult(-1, boundBod.pos.back()));
             if (abs(dist[0]) > bh.width[0] && abs(dist[1]) > bh.width[1] && abs(dist[2]) > bh.width[2]) {

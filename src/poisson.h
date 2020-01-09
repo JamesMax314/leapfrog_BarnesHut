@@ -9,22 +9,24 @@ using namespace std;
 
 class grid{
     double spacing;
+    double dim;
     int numPts;
-    fftw_plan fwrd;
-    fftw_plan bwrd;
+    fftw_plan fwrd[3];
+    fftw_plan bwrd[3];
 public:
     double G = 6.674e-11;
     double pi = 3.14159;
-    double* real;
-    fftw_complex* comp;
+    double* realPot;
+    double* realField[3];
+    fftw_complex* comp[3];
 
-    grid(double gridSpacing, double dim, vector<body>& bodies);
+    grid(double gridSpacing, double dim);
 
-    void updateGrid(vector<body>& bods);
-    void solveFiled();
+    void updateGrid(vector<body>* bods);
+    void solveField();
     vector<double> vecPos(int i, int j, int k);
     double w(vector<int> vec, body& bod);
-    void interp(vector<body>& bods);
+    void interp(vector<body>* bods);
 };
 
 
