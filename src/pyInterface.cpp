@@ -101,9 +101,9 @@ PYBIND11_MODULE(treecode, m) {
             .def(py::init<double&, vector<double>&,
                     vector<double>&, vector<double>&>())
 
-            .def_property("pos", &body::getAcc, &body::setAcc)
-            .def_property("pos", &body::getVel, &body::setVel)
-            .def_property("pos", &body::getMass, &body::setMass)
-            .def_property("pos", &body::getSoftening, &body::setSoftening)
+            .def_property("acc", &body::getAcc, &body::setAcc)
+            .def_property("vel", &body::getVel, &body::setVel)
+            .def_property("mass", &body::getMass, &body::setMass)
+            .def_property("soft", &body::getSoftening, &body::setSoftening)
             .def_property("pos", &body::getPos, &body::setPos);
 }

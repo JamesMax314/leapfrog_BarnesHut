@@ -21,7 +21,7 @@ grid::grid(double gridSpacing, double dim): dim(dim), spacing(gridSpacing) {
 
 void grid::updateGrid(vector<body>* bods){
     /// Row major format
-#pragma omp parallel for //default(none) shared(bods)
+//#pragma omp parallel for //default(none) shared(bods)
     for (int i=0; i<numPts; i++){
         for (int j=0; j<numPts; j++){
             for (int k=0; k<numPts; k++){
@@ -53,7 +53,7 @@ void grid::updateGrid(vector<body>* bods){
 void grid::solveField(){
     for (int axis=0; axis<3; axis++) {
         fftw_execute(fwrd[axis]);
-#pragma omp parallel for // default(none) shared(axis)
+//#pragma omp parallel for // default(none) shared(axis)
         for (int i = 0; i < numPts; i++) {
             for (int j = 0; j < numPts; j++) {
                 for (int k = 0; k < numPts; k++) {
@@ -104,7 +104,7 @@ void grid::interp(vector<body>* bods){
     for (auto & body : (*bods)){
         int count = 0;
         vector<double> f(3, 0);
-#pragma omp parallel for
+//#pragma omp parallel for
         for (int i=0; i<numPts; i++){
             for (int j=0; j<numPts; j++){
                 for (int k=0; k<numPts; k++){
@@ -112,16 +112,16 @@ void grid::interp(vector<body>* bods){
                     for (int axis=0; axis<3; axis++){
                         if (abs(body.pos.back()[axis] - vecPos(i, j, k)[axis]) > spacing) {
                             inCube = false;
-                            cout << body.pos.back()[axis] << endl;
+//                            cout << body.pos.back()[axis] << endl;
                         }
                     }
                     if (inCube){
-                        cout << "in cube" << endl;
+//                        cout << "in cube" << endl;
                         count += 1;
                         for (int axis=0; axis<3; axis++) {
                             double scaling = abs(body.pos.back()[axis] - vecPos(i, j, k)[axis])/spacing;
                             f[axis] += scaling * realField[axis][int(i * pow(numPts, 2) + j * numPts + k)] * 1e20;
-                            cout << abs(body.pos.back()[axis] - vecPos(i, j, k)[axis])  << ", " << realField[axis][int(i * pow(numPts, 2) + j * numPts + k)] << endl;
+//                            cout << abs(body.pos.back()[axis] - vecPos(i, j, k)[axis])  << ", " << realField[axis][int(i * pow(numPts, 2) + j * numPts + k)] << endl;
                         }
                     }
                     if (count == 8)
@@ -141,6 +141,7 @@ vector<double> grid::vecPos(int i, int j, int k){
 }
 
 
+
 double grid::w(vector<int> vec, body& bod){
     double out = 0;
 //    cout << "bodPos, vecPos: "; printVec(bod.pos.back()) ;cout << " "; printVec(vecPos(vec[0], vec[1], vec[2])); cout << endl;
@@ -156,3 +157,4 @@ double grid::w(vector<int> vec, body& bod){
 
     return out;
 }
+
