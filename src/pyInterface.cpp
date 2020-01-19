@@ -75,6 +75,7 @@ vector<body> particleMesh(vector<body>& bodies, double spacing, double width, in
     grid g = grid(spacing, width);
     progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
+//        cout << "ok1" << endl;
         g.updateGrid(bods);
 //        cout << "ok2" << endl;
         g.solveField();
