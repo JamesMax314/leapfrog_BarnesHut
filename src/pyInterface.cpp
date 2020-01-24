@@ -90,11 +90,24 @@ vector<body> particleMesh(vector<body>& bodies, double spacing, double width, in
     return bodies;
 }
 
+grid PMTest(vector<body>& bodies, double spacing, double width, double dt){
+    vector<body>* bods = &bodies;
+    grid g = grid(spacing, width);
+    g.updateGrid(bods);
+    g.solveField();
+    g.ctor();
+//    g.interp(bods);
+//    bodiesUpdate(bods, dt);
+    return g;
+}
+
 PYBIND11_MODULE(treecode, m) {
     //m.def("test", &test);
     m.def("basicRun", &basicRun);
     m.def("fixedBoundary", &fixedBoundary);
     m.def("particleMesh", &particleMesh);
+    m.def("PMTest", &PMTest);
+
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
     py::class_<body>(m, "body")
@@ -107,4 +120,16 @@ PYBIND11_MODULE(treecode, m) {
             .def_property("mass", &body::getMass, &body::setMass)
             .def_property("soft", &body::getSoftening, &body::setSoftening)
             .def_property("pos", &body::getPos, &body::setPos);
+
+    py::class_<grid>(m, "grid", py::buffer_protocol())
+            .def_buffer([](grid &m) -> py::buffer_info {
+                return py::buffer_info(
+                        m.data(),                               /* Pointer to buffer */
+                        sizeof(double),                          /* Size of one scalar */
+                        py::format_descriptor<double>::format(), /* Python struct-style format descriptor */
+                        3,                                      /* Number of dimensions */
+                        { m.size(), m.size(), m.size() },                 /* Buffer dimensions */
+                        { sizeof(double) * m.size()*m.size(), sizeof(double) * m.size(),             /* Strides (in bytes) for each index */
+                          sizeof(double) });
+            });
 }
