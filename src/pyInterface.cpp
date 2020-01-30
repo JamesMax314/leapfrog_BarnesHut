@@ -75,15 +75,10 @@ vector<body> particleMesh(vector<body>& bodies, double spacing, double width, in
     grid g = grid(spacing, width);
     progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
-//        cout << "ok1" << endl;
         g.updateGrid(bods);
-//        cout << "ok2" << endl;
         g.solveField();
-//        cout << "ok3" << endl;
         g.interp(bods);
-//        cout << "ok4" << endl;
-        bodiesUpdate(bods, dt);
-//        cout << "ok5" << endl;
+        bodiesUpdate(bods, dt, g.dim);
         prog.update(j);
     }
     cout << endl;
@@ -95,10 +90,23 @@ grid PMTest(vector<body>& bodies, double spacing, double width, double dt){
     grid g = grid(spacing, width);
     g.updateGrid(bods);
     g.solveField();
-    g.ctor();
+//    g.ctor(g.realPot);
+    g.magF();
 //    g.interp(bods);
 //    bodiesUpdate(bods, dt);
     return g;
+}
+
+vector<body> PMTest1(vector<body>& bodies, double spacing, double width, double dt){
+    vector<body>* bods = &bodies;
+    grid g = grid(spacing, width);
+    g.updateGrid(bods);
+    g.solveField();
+//    g.ctor(g.realPot);
+//    g.magF();
+    g.interp(bods);
+    bodiesUpdate(bods, dt);
+    return bodies;
 }
 
 PYBIND11_MODULE(treecode, m) {
@@ -107,6 +115,7 @@ PYBIND11_MODULE(treecode, m) {
     m.def("fixedBoundary", &fixedBoundary);
     m.def("particleMesh", &particleMesh);
     m.def("PMTest", &PMTest);
+    m.def("PMTest1", &PMTest1);
 
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
@@ -122,6 +131,7 @@ PYBIND11_MODULE(treecode, m) {
             .def_property("pos", &body::getPos, &body::setPos);
 
     py::class_<grid>(m, "grid", py::buffer_protocol())
+            .def("getF", &grid::getF)
             .def_buffer([](grid &m) -> py::buffer_info {
                 return py::buffer_info(
                         m.data(),                               /* Pointer to buffer */

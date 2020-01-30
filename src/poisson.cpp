@@ -9,16 +9,15 @@
 grid::grid(double gridSpacing, double dim): dim(dim), spacing(gridSpacing) {
     numPts = (int) (dim / gridSpacing);
     cout << "numPts: " << numPts << endl;
-    realPot = (double*) fftw_malloc(sizeof(double) * pow(numPts, 3));
-    realField1 = (double*) fftw_malloc(sizeof(double) * pow(numPts, 3));
+    realPot = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
+    realField1 = (double *) fftw_malloc(sizeof(double) * pow(numPts, 3));
     compFFTRho = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
     compFFTRho1 = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
-    for (int i=0; i<3; i++) {
-//        comp[i] = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
-        realField[i] = (double *) fftw_malloc(sizeof(double) * pow(numPts, 3));
+    for (auto & i : realField) {
+        i = new double[int(pow(numPts, 3))];
     }
-    fwrd = fftw_plan_dft_r2c_3d(numPts, numPts, numPts, realPot, compFFTRho, FFTW_MEASURE);
-    bwrd = fftw_plan_dft_c2r_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_MEASURE);
+    fwrd = fftw_plan_dft_3d(numPts, numPts, numPts, realPot, compFFTRho, FFTW_FORWARD, FFTW_MEASURE);
+    bwrd = fftw_plan_dft_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_BACKWARD, FFTW_MEASURE);
 //    for (int i = 0; i < 3; i++) {
 //        bwrd[i] = fftw_plan_dft_c2r_3d(numPts, numPts, numPts, comp[i], realField[i], FFTW_MEASURE);
 //    }
@@ -31,7 +30,7 @@ void grid::updateGrid(vector<body>* bods){
     for (int i = 0; i < numPts; i++) {
         for (int j = 0; j < numPts; j++) {
             for (int k = 0; k < numPts; k++) {
-                realPot[int(i*pow(numPts, 2) + j*numPts + k)] = 0;
+                realPot[int(i*pow(numPts, 2) + j*numPts + k)][0] = 0;
             }
         }
     }
@@ -39,34 +38,16 @@ void grid::updateGrid(vector<body>* bods){
     for (auto & body : (*bods)){
         vector<vector<int>> mPos = meshPos(body.pos.back());
         for (auto vec : mPos) {
-//            cout << "vec: " << vec[0] << ", " << vec[1] << ", " << vec[2] << endl;
-//            cout << "realPos: " << realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])] << endl;
-            realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])] +=
+            realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])][0] +=
                     w({vec[0], vec[1], vec[2]}, body) * body.mass.back()/pow(spacing, 3);
         }
-//                    cout << realPot[int(i*pow(numPts, 2) + j*numPts + k)] << endl;
     }
-//    cout << endl;
-//    cout << "[ ";
-//    for (int i=0; i<numPts; i++){
-//        cout << "[ ";
-//        for (int j=0; j<numPts; j++){
-//            cout << "[ ";
-//            for (int k=0; k<numPts; k++){
-//                cout << realPot[int(i*pow(numPts, 2) + j*numPts + k)] << ", ";
-//            }
-//            cout << " ], ";
-//        }
-//        cout << " ], ";
-//    }
-//    cout << " ]";
-//    cout << endl;
 }
 
 void grid::solveField(){
     fftw_execute(fwrd);
 //#pragma omp parallel for // default(none) shared(axis)
-    for (int i = 0; i < floor(numPts/2) + 1; i++) {
+    for (int i = 0; i < numPts; i++) { //floor(numPts/2) + 1
         for (int j = 0; j < numPts; j++) {
             for (int k = 0; k < numPts; k++) {
                 /// Accounting for weird fft structure
@@ -80,7 +61,7 @@ void grid::solveField(){
                 one[0] = 1;
                 one[1] = 1;
 
-                scale[0] = (i==0 && j==0 && k==0) ? 4*pi*G/numPts : 4*pi*G/(numPts*(kx*kx + ky*ky + kz*kz)); //dim*4*pi*G
+                scale[0] = (i==0 && j==0 && k==0) ? 0 : 4*pi*G/(numPts*(kx*kx + ky*ky + kz*kz)); //dim*4*pi*G
                 scale[1] = 0;
 
 //                compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
@@ -91,61 +72,7 @@ void grid::solveField(){
         }
     }
     fftw_execute(bwrd);
-//    diff(-1);
-
-//    fftw_execute(fwrd);
-//    for (int axis=0; axis<3; axis++) {
-////#pragma omp parallel for // default(none) shared(axis)
-//        for (int i = 0; i < numPts; i++) {
-//            for (int j = 0; j < numPts; j++) {
-//                for (int k = 0; k < numPts; k++) {
-//                    vector<double> indxVec = {double(i), double(j), double(k)};
-//                    fftw_complex scale;
-//                    if (i==0 && j==0 && k==0) {
-//                        scale[0] = 0;
-//                        scale[1] = 0;
-//                    } else {
-//                        scale[0] = 0;
-//                        scale[1] = indxVec[axis]/(2*pi*dim*(i*i + j*j + k*k));
-//                    }
-//                    compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
-//                            comp[axis][int(i * pow(numPts, 2) + j * numPts + k)]);
-//                }
-//            }
-//        }
-//        fftw_execute(bwrd[axis]);
-//    }
-//    cout << endl;
-//    cout << "[ ";
-//    for (int i=0; i<numPts; i++){
-//        cout << "[ ";
-//        for (int j=0; j<numPts; j++){
-//            cout << "[ ";
-//            for (int k=0; k<numPts; k++){
-//                cout << comp[0][int(i*pow(numPts, 2) + j*numPts + k)][0] << " + i" << comp[0][int(i*pow(numPts, 2) + j*numPts + k)][1] << ", ";
-//            }
-//            cout << " ], ";
-//        }
-//        cout << " ], ";
-//    }
-//    cout << " ]";
-//    cout << endl;
-//
-//    cout << endl;
-//    cout << "[ ";
-//    for (int i=0; i<numPts; i++){
-//        cout << "[ ";
-//        for (int j=0; j<numPts; j++){
-//            cout << "[ ";
-//            for (int k=0; k<numPts; k++){
-//                cout << realField[0][int(i*pow(numPts, 2) + j*numPts + k)] << ", ";
-//            }
-//            cout << " ], ";
-//        }
-//        cout << " ], ";
-//    }
-//    cout << " ]";
-//    cout << endl;
+    diff(-1);
 }
 
 void grid::interp(vector<body>* bods){
@@ -154,45 +81,30 @@ void grid::interp(vector<body>* bods){
         vector<vector<int>> mPos = meshPos(body.pos.back());
 //#pragma omp parallel for
         if (mPos.size() == 8) { /// Check inside mesh
-            double xd = (body.pos.back()[0] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[0]) /
-                    (vecPos(mPos[4][0], mPos[4][1], mPos[4][2])[0] -
-                    vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[0]);
-            double yd = (body.pos.back()[1] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[1]) /
-                    (vecPos(mPos[2][0], mPos[2][1], mPos[2][2])[1] -
-                    vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[1]);
-            double zd = (body.pos.back()[2] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[2]) /
-                        (vecPos(mPos[1][0], mPos[1][1], mPos[1][2])[2] -
-                         vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[2]);
+            double xd = (body.pos.back()[0] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[0]) / spacing;
+            double yd = (body.pos.back()[1] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[1]) / spacing;
+            double zd = (body.pos.back()[2] - vecPos(mPos[0][0], mPos[0][1], mPos[0][2])[2]) / spacing;
             for (int axis = 0; axis < 3; axis++) {
                 double C00 = realField[axis][int(mPos[0][0] * pow(numPts, 2) + mPos[0][1] * numPts + mPos[0][2])] *
-                        (1 - xd) + realField[axis][int(mPos[4][0] * pow(numPts, 2) + mPos[4][1] * numPts + mPos[4][2])];
+                        (1 - xd) + xd*realField[axis][int(mPos[4][0] * pow(numPts, 2) + mPos[4][1] * numPts + mPos[4][2])];
                 double C01 = realField[axis][int(mPos[1][0] * pow(numPts, 2) + mPos[1][1] * numPts + mPos[1][2])] *
-                             (1 - xd) + realField[axis][int(mPos[5][0] * pow(numPts, 2) + mPos[5][1] * numPts + mPos[5][2])];
+                        (1 - xd) + xd*realField[axis][int(mPos[5][0] * pow(numPts, 2) + mPos[5][1] * numPts + mPos[5][2])];
                 double C10 = realField[axis][int(mPos[2][0] * pow(numPts, 2) + mPos[2][1] * numPts + mPos[2][2])] *
-                             (1 - xd) + realField[axis][int(mPos[6][0] * pow(numPts, 2) + mPos[6][1] * numPts + mPos[6][2])];
+                        (1 - xd) + xd*realField[axis][int(mPos[6][0] * pow(numPts, 2) + mPos[6][1] * numPts + mPos[6][2])];
                 double C11 = realField[axis][int(mPos[3][0] * pow(numPts, 2) + mPos[3][1] * numPts + mPos[3][2])] *
-                             (1 - xd) + realField[axis][int(mPos[7][0] * pow(numPts, 2) + mPos[7][1] * numPts + mPos[7][2])];
+                        (1 - xd) + xd*realField[axis][int(mPos[7][0] * pow(numPts, 2) + mPos[7][1] * numPts + mPos[7][2])];
 
                 double C0 = C00 * (1-yd) + C10*yd;
                 double C1 = C01 * (1-yd) + C11*yd;
 
                 double C = C0 * (1-zd) + C1*zd;
 
-                f[axis] = C;
+                f[axis] = C; // / body.mass.back();
 
             }
-
-//            for (auto vec : mPos) {
-//                for (int axis = 0; axis < 3; axis++) {
-//                    double scaling =
-//                            abs(body.pos.back()[axis] - vecPos(vec[0], vec[1], vec[2])[axis]) / (spacing * spacing);
-//                    f[axis] += scaling * realField[axis][int(vec[0] * pow(numPts, 2) + vec[1] * numPts + vec[2])];
-////              cout << abs(body.pos.back()[axis] - vecPos(i, j, k)[axis])  << ", " << realField[axis][int(i * pow(numPts, 2) + j * numPts + k)] << endl;
-//                }
-//            }
         }
         body.acc.emplace_back(f);
-//      printVec(body.acc.back());
+//        printVec(body.acc.back());
     }
 }
 
@@ -203,14 +115,14 @@ void grid::diff(double scale) {
             for (int k=0; k<numPts; k++){
                 if (i != 0 && i != numPts-1 && j != 0 && j != numPts-1 && k != 0 && k != numPts-1) {
                     realField[0][int(i * pow(numPts, 2) + j * numPts + k)] =
-                            scale*(realPot[int((i - 1) * pow(numPts, 2) + j * numPts + k)] -
-                                    realPot[int((i + 1) * pow(numPts, 2) + j * numPts + k)]) / (2 * spacing);
+                            scale*(realPot[int((i - 1) * pow(numPts, 2) + j * numPts + k)][0] -
+                                    realPot[int((i + 1) * pow(numPts, 2) + j * numPts + k)][0]) / (2 * spacing);
                     realField[1][int(i * pow(numPts, 2) + j * numPts + k)] =
-                            scale*(realPot[int(i * pow(numPts, 2) + (j - 1) * numPts + k)] -
-                                    realPot[int(i * pow(numPts, 2) + (j + 1) * numPts + k)]) / (2 * spacing);
+                            scale*(realPot[int(i * pow(numPts, 2) + (j - 1) * numPts + k)][0] -
+                                    realPot[int(i * pow(numPts, 2) + (j + 1) * numPts + k)][0]) / (2 * spacing);
                     realField[2][int(i * pow(numPts, 2) + j * numPts + k)] =
-                            scale*(realPot[int(i * pow(numPts, 2) + j * numPts + k - 1)] -
-                                    realPot[int(i * pow(numPts, 2) + j * numPts + k + 1)]) / (2 * spacing);
+                            scale*(realPot[int(i * pow(numPts, 2) + j * numPts + k - 1)][0] -
+                                    realPot[int(i * pow(numPts, 2) + j * numPts + k + 1)][0]) / (2 * spacing);
                 } else {
                     for (auto & axis : realField){
                         axis[int(i * pow(numPts, 2) + j * numPts + k)] = 0;
@@ -226,6 +138,7 @@ vector<double> grid::vecPos(int i, int j, int k){
 }
 
 vector<vector<int>> grid::meshPos(vector<double> pos) {
+//    pos = {dim/2, dim/2, dim/2};
     vector<vector<int>> meshPoints;
     vector<int> pt(3, 0);
     for (int i = 0; i < 3; i++) {
@@ -235,7 +148,7 @@ vector<vector<int>> grid::meshPos(vector<double> pos) {
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 2; j++) {
             for (int k = 0; k < 2; k++) {
-                if (pt[0]+i<numPts && pt[1]+j<numPts && pt[2]+k<numPts && pt[0]+i>0 && pt[1]+j>0 && pt[2]+k>0)
+                if (pt[0]+i<numPts && pt[1]+j<numPts && pt[2]+k<numPts && pt[0]+i>=0 && pt[1]+j>=0 && pt[2]+k>=0)
                     meshPoints.emplace_back(vecAdd(pt, {i, j, k}));
             }
         }
@@ -259,15 +172,45 @@ double grid::w(vector<int> vec, body& bod){
     return out;
 }
 
-void grid::ctor(){
+void grid::ctor(fftw_complex* arr){
     for (int i=0; i<numPts; i++) {
         for (int j = 0; j < numPts; j++) {
             for (int k = 0; k < numPts; k++) {
                 realField1[int(i * pow(numPts, 2) + j * numPts + k)] =
-                        compFFTRho1[int(i * pow(numPts, 2) + j * numPts + k)][0];
+                        arr[int(i * pow(numPts, 2) + j * numPts + k)][0];
             }
         }
     }
+}
+
+void grid::magF(){
+    for (int i=0; i<numPts; i++) {
+        for (int j = 0; j < numPts; j++) {
+            for (int k = 0; k < numPts; k++) {
+//                cout << realField1[int(i * pow(numPts, 2) + j * numPts + k)] << endl;
+                realField1[int(i * pow(numPts, 2) + j * numPts + k)] =
+                        pow(realField[0][int(i * pow(numPts, 2) + j * numPts + k)], 2) +
+                        pow(realField[1][int(i * pow(numPts, 2) + j * numPts + k)], 2) +
+                        pow(realField[2][int(i * pow(numPts, 2) + j * numPts + k)], 2);
+            }
+        }
+    }
+}
+
+vector<vector<vector<double>>> grid::getF(int indx){
+    vector<vector<vector<double>>> out;
+    for (int i=0; i<numPts; i++) {
+        vector<vector<double>> tmp;
+        for (int j = 0; j < numPts; j++) {
+            vector<double> tmp1;
+            for (int k = 0; k < numPts; k++) {
+                tmp1.emplace_back(realField[indx][int(i * pow(numPts, 2) + j * numPts + k)] + 1e-9);
+            }
+            tmp.emplace_back(tmp1);
+        }
+        out.emplace_back(tmp);
+    }
+    return out;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -27,6 +27,26 @@ void interaction(barnesHut &hut){
 //    partialUpdate(tree, bodies, dt);
 //}
 
+void bodiesUpdate(vector<body>* bodies, double dt, double dim){
+    for (auto & body : (*bodies)) {
+        auto v = vecAdd(body.vel.back(), scalMult(dt, body.acc.back()));
+        auto p = vecAdd(body.pos.back(), scalMult(dt, body.vel.back()));
+        for (int axis=0; axis<3; axis++){
+            if (p[axis] < -dim/2) {
+                p[axis] += dim;
+//                v[axis] *= -1;
+            }
+            if (p[axis] > dim/2) {
+                p[axis] -= dim;
+//                v[axis] *= -1;
+            }
+        }
+        body.vel.emplace_back(v);
+        body.pos.emplace_back(p);
+//        cout << body.vel.back()[0] << endl;
+    }
+}
+
 void bodiesUpdate(vector<body>* bodies, double dt){
     for (auto & body : (*bodies)) {
         body.vel.emplace_back(vecAdd(body.vel.back(), scalMult(dt, body.acc.back())));

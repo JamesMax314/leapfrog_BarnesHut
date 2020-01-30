@@ -9,14 +9,14 @@ using namespace std;
 
 class grid{
     double spacing;
-    double dim;
     fftw_plan fwrd;
     fftw_plan bwrd; //[3];
 public:
+    double dim;
     int numPts;
     double G = 6.674e-11;
     double pi = 3.14159;
-    double* realPot;
+    fftw_complex* realPot;
     double* realField[3];
     double* realField1;
     fftw_complex* comp[3];
@@ -33,10 +33,12 @@ public:
     void diff(double scale);
     void interp(vector<body>* bods);
 
-    void ctor();
+    void ctor(fftw_complex* arr);
+    void magF();
+    vector<vector<vector<double>>> getF(int indx);
 
     /// Pybinding getters ///
-    double *data() { return realPot; }
+    double *data() { return realField1; }
     size_t size()  { return numPts; }
 };
 
