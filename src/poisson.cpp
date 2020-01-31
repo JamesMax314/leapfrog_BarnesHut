@@ -16,11 +16,16 @@ grid::grid(double gridSpacing, double dim): dim(dim), spacing(gridSpacing) {
     for (auto & i : realField) {
         i = new double[int(pow(numPts, 3))];
     }
+    for (int i=0; i<3; i++) {
+        comp[i] = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
+        cField[i] = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * pow(numPts, 3));
+//        realField[i] = (double *) fftw_malloc(sizeof(double) * pow(numPts, 3));
+    }
     fwrd = fftw_plan_dft_3d(numPts, numPts, numPts, realPot, compFFTRho, FFTW_FORWARD, FFTW_MEASURE);
-    bwrd = fftw_plan_dft_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_BACKWARD, FFTW_MEASURE);
-//    for (int i = 0; i < 3; i++) {
-//        bwrd[i] = fftw_plan_dft_c2r_3d(numPts, numPts, numPts, comp[i], realField[i], FFTW_MEASURE);
-//    }
+//    bwrd = fftw_plan_dft_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_BACKWARD, FFTW_MEASURE);
+    for (int i = 0; i < 3; i++) {
+        bwrd[i] = fftw_plan_dft_3d(numPts, numPts, numPts, comp[i], cField[i], FFTW_BACKWARD,FFTW_MEASURE);
+    }
 }
 
 void grid::updateGrid(vector<body>* bods){
@@ -39,7 +44,7 @@ void grid::updateGrid(vector<body>* bods){
         vector<vector<int>> mPos = meshPos(body.pos.back());
         for (auto vec : mPos) {
             realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])][0] +=
-                    w({vec[0], vec[1], vec[2]}, body) * body.mass.back()/pow(spacing, 3);
+                    w({vec[0], vec[1], vec[2]}, body) * body.mass.back(); // /pow(spacing, 3);
         }
     }
 }
@@ -47,32 +52,37 @@ void grid::updateGrid(vector<body>* bods){
 void grid::solveField(){
     fftw_execute(fwrd);
 //#pragma omp parallel for // default(none) shared(axis)
-    for (int i = 0; i < numPts; i++) { //floor(numPts/2) + 1
-        for (int j = 0; j < numPts; j++) {
-            for (int k = 0; k < numPts; k++) {
-                /// Accounting for weird fft structure
-                int kx = (i <= numPts/2) ? i : i - numPts;
-                int ky = (j <= numPts/2) ? j : j - numPts;
-                int kz = (k <= numPts/2) ? k : k - numPts;
+    for (int axis=0; axis<3; axis++) {
+        for (int i = 0; i < numPts; i++) { //floor(numPts/2) + 1
+            for (int j = 0; j < numPts; j++) {
+                for (int k = 0; k < numPts; k++) {
+                    /// Accounting for weird fft structure
+                    int kx = (i <= numPts / 2) ? i : i - numPts;
+                    int ky = (j <= numPts / 2) ? j : j - numPts;
+                    int kz = (k <= numPts / 2) ? k : k - numPts;
+                    vector<int> ks = {kx, ky, kz};
 
-                fftw_complex scale;
-                fftw_complex one;
+                    fftw_complex scale;
+                    fftw_complex one;
 
-                one[0] = 1;
-                one[1] = 1;
+                    one[0] = 1;
+                    one[1] = 1;
 
-                scale[0] = (i==0 && j==0 && k==0) ? 0 : 4*pi*G/(numPts*(kx*kx + ky*ky + kz*kz)); //dim*4*pi*G
-                scale[1] = 0;
+                    scale[1] = (i == 0 && j == 0 && k == 0) ? 0 : dim * ks[axis] * 4 * pi * G /
+                            (pow(numPts, 3) * (kx * kx + ky * ky + kz * kz)); //dim*4*pi*G
+                    scale[0] = 0;
 
-//                compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
-//                            compFFTRho1[int(i * pow(numPts, 2) + j * numPts + k)]);
-                compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
-                            compFFTRho1[int(i * pow(numPts, 2) + j * numPts + k)]);
+    //                compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
+    //                            compFFTRho1[int(i * pow(numPts, 2) + j * numPts + k)]);
+                    compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
+                                comp[axis][int(i * pow(numPts, 2) + j * numPts + k)]);
+                }
             }
         }
+        fftw_execute(bwrd[axis]);
+        ctor(cField[axis], realField[axis]);
     }
-    fftw_execute(bwrd);
-    diff(-1);
+//    diff(-1);
 }
 
 void grid::interp(vector<body>* bods){
@@ -99,7 +109,7 @@ void grid::interp(vector<body>* bods){
 
                 double C = C0 * (1-zd) + C1*zd;
 
-                f[axis] = C; // / body.mass.back();
+                f[axis] = C / body.mass.back();
 
             }
         }
@@ -163,7 +173,7 @@ double grid::w(vector<int> vec, body& bod){
         double dist = abs(bod.pos.back()[i] - vecPos(vec[0], vec[1], vec[2])[i]);
 //        cout << "dist" << dist << endl;
         if (dist < spacing) {
-            out *= spacing - dist/spacing;
+            out *= abs((spacing - dist)/spacing);
         } else
             return 0;
     }
@@ -172,11 +182,11 @@ double grid::w(vector<int> vec, body& bod){
     return out;
 }
 
-void grid::ctor(fftw_complex* arr){
+void grid::ctor(fftw_complex* arr, double* out){
     for (int i=0; i<numPts; i++) {
         for (int j = 0; j < numPts; j++) {
             for (int k = 0; k < numPts; k++) {
-                realField1[int(i * pow(numPts, 2) + j * numPts + k)] =
+                out[int(i * pow(numPts, 2) + j * numPts + k)] =
                         arr[int(i * pow(numPts, 2) + j * numPts + k)][0];
             }
         }

@@ -10,7 +10,7 @@ using namespace std;
 class grid{
     double spacing;
     fftw_plan fwrd;
-    fftw_plan bwrd; //[3];
+    fftw_plan bwrd[3];
 public:
     double dim;
     int numPts;
@@ -20,6 +20,7 @@ public:
     double* realField[3];
     double* realField1;
     fftw_complex* comp[3];
+    fftw_complex* cField[3];
     fftw_complex* compFFTRho;
     fftw_complex* compFFTRho1;
 
@@ -33,7 +34,7 @@ public:
     void diff(double scale);
     void interp(vector<body>* bods);
 
-    void ctor(fftw_complex* arr);
+    void ctor(fftw_complex* arr, double* out);
     void magF();
     vector<vector<vector<double>>> getF(int indx);
 
