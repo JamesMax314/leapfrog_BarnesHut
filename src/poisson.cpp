@@ -44,7 +44,7 @@ void grid::updateGrid(vector<body>* bods){
         vector<vector<int>> mPos = meshPos(body.pos.back());
         for (auto vec : mPos) {
             realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])][0] +=
-                    w({vec[0], vec[1], vec[2]}, body) * body.mass.back(); // /pow(spacing, 3);
+                    w({vec[0], vec[1], vec[2]}, body) * body.mass.back() / pow(spacing, 3);
         }
     }
 }
@@ -63,13 +63,13 @@ void grid::solveField(){
                     vector<int> ks = {kx, ky, kz};
 
                     fftw_complex scale;
-                    fftw_complex one;
 
-                    one[0] = 1;
-                    one[1] = 1;
-
-                    scale[1] = (i == 0 && j == 0 && k == 0) ? 0 : dim * ks[axis] * 4 * pi * G /
-                            (pow(numPts, 3) * (kx * kx + ky * ky + kz * kz)); //dim*4*pi*G
+                    /// Normalize FFT with 1/N^3 the inde must be scaled to give k;
+                    /// The k vectors are given by index /(spacing * N);
+                    /// The Greens function for force is -ik-> / k^2;
+                    /// The overall scaling is given by: spacing * N / N^3 = spacing / N^2.
+                    scale[1] = (i == 0 && j == 0 && k == 0) ? 0 : spacing * ks[axis] * 4 * pi * G /
+                            (pow(numPts, 2) * (kx * kx + ky * ky + kz * kz)); //dim*4*pi*G
                     scale[0] = 0;
 
     //                compMultFFT(compFFTRho[int(i * pow(numPts, 2) + j * numPts + k)], scale,
@@ -178,7 +178,6 @@ double grid::w(vector<int> vec, body& bod){
             return 0;
     }
 //    cout << "ok" << endl;
-
     return out;
 }
 

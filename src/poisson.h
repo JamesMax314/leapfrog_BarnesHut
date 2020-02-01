@@ -3,6 +3,7 @@
 
 #include <bodies.h>
 #include <fftw3.h>
+#include <cmath>
 #include "bodies.h"
 
 using namespace std;
@@ -15,7 +16,7 @@ public:
     double dim;
     int numPts;
     double G = 6.674e-11;
-    double pi = 3.14159;
+    double pi = M_PI;
     fftw_complex* realPot;
     double* realField[3];
     double* realField1;
