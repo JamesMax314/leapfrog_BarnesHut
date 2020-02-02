@@ -24,7 +24,7 @@ grid::grid(double gridSpacing, double dim): dim(dim), spacing(gridSpacing) {
     fwrd = fftw_plan_dft_3d(numPts, numPts, numPts, realPot, compFFTRho, FFTW_FORWARD, FFTW_MEASURE);
 //    bwrd = fftw_plan_dft_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_BACKWARD, FFTW_MEASURE);
     for (int i = 0; i < 3; i++) {
-        bwrd[i] = fftw_plan_dft_3d(numPts, numPts, numPts, comp[i], cField[i], FFTW_BACKWARD,FFTW_MEASURE);
+        bwrd[i] = fftw_plan_dft_3d(numPts, numPts, numPts, comp[i], cField[i], FFTW_BACKWARD, FFTW_MEASURE);
     }
 }
 
@@ -44,7 +44,7 @@ void grid::updateGrid(vector<body>* bods){
         vector<vector<int>> mPos = meshPos(body.pos.back());
         for (auto vec : mPos) {
             realPot[int(vec[0]*pow(numPts, 2) + vec[1]*numPts + vec[2])][0] +=
-                    w({vec[0], vec[1], vec[2]}, body) * body.mass.back() / pow(spacing, 3);
+                   w({vec[0], vec[1], vec[2]}, body) * body.mass.back() / spacing;
         }
     }
 }
@@ -83,6 +83,23 @@ void grid::solveField(){
         ctor(cField[axis], realField[axis]);
     }
 //    diff(-1);
+}
+
+void grid::interpW(vector<body>* bods){
+    for (auto & body : (*bods)){
+        vector<double> f(3, 0);
+        vector<vector<int>> mPos = meshPos(body.pos.back());
+//#pragma omp parallel for
+        for (auto vec : mPos) {
+            for (int axis = 0; axis < 3; axis++) {
+                f[axis] += w({vec[0], vec[1], vec[2]}, body) *
+                        realField[axis][int(vec[0] * pow(numPts, 2) + vec[1] * numPts + vec[2])] /
+                        body.mass.back();
+            }
+        }
+        body.acc.emplace_back(f);
+//        printVec(body.acc.back());
+    }
 }
 
 void grid::interp(vector<body>* bods){

@@ -77,7 +77,7 @@ vector<body> particleMesh(vector<body>& bodies, double spacing, double width, in
     for(int j=0; j<numIter; j++) {
         g.updateGrid(bods);
         g.solveField();
-        g.interp(bods);
+        g.interpW(bods);
         bodiesUpdate(bods, dt, g.dim);
         prog.update(j);
     }

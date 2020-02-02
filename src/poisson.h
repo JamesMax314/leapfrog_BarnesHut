@@ -9,10 +9,10 @@
 using namespace std;
 
 class grid{
-    double spacing;
     fftw_plan fwrd;
     fftw_plan bwrd[3];
 public:
+    double spacing;
     double dim;
     int numPts;
     double G = 6.674e-11;
@@ -33,6 +33,7 @@ public:
     vector<vector<int>> meshPos(vector<double> pos);
     double w(vector<int> vec, body& bod);
     void diff(double scale);
+    void interpW(vector<body>* bods);
     void interp(vector<body>* bods);
 
     void ctor(fftw_complex* arr, double* out);
