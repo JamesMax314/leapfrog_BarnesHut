@@ -27,17 +27,17 @@ void interaction(barnesHut &hut){
 //    partialUpdate(tree, bodies, dt);
 //}
 
-void bodiesUpdate(vector<body>* bodies, double dt, double dim){
+void bodiesUpdate(vector<body>* bodies, double dt, vector<double> dim){
     for (auto & body : (*bodies)) {
         auto v = vecAdd(body.vel.back(), scalMult(dt, body.acc.back()));
         auto p = vecAdd(body.pos.back(), scalMult(dt, body.vel.back()));
         for (int axis=0; axis<3; axis++){
-            if (p[axis] < -dim/2) {
-                p[axis] += dim;
+            if (p[axis] < -dim[axis]/2) {
+                p[axis] += dim[axis];
 //                v[axis] *= -1;
             }
-            if (p[axis] > dim/2) {
-                p[axis] -= dim;
+            if (p[axis] > dim[axis]/2) {
+                p[axis] -= dim[axis];
 //                v[axis] *= -1;
             }
         }

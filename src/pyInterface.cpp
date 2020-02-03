@@ -138,8 +138,8 @@ PYBIND11_MODULE(treecode, m) {
                         sizeof(double),                          /* Size of one scalar */
                         py::format_descriptor<double>::format(), /* Python struct-style format descriptor */
                         3,                                      /* Number of dimensions */
-                        { m.size(), m.size(), m.size() },                 /* Buffer dimensions */
-                        { sizeof(double) * m.size()*m.size(), sizeof(double) * m.size(),             /* Strides (in bytes) for each index */
+                        { m.size()[0], m.size()[1], m.size()[2] },                 /* Buffer dimensions */
+                        { sizeof(double) * m.size()[2]*m.size()[1], sizeof(double) * m.size()[2],             /* Strides (in bytes) for each index */
                           sizeof(double) });
             });
 }

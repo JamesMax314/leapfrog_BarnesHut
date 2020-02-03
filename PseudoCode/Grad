@@ -1,0 +1,26 @@
+##### Code for 3d numerical differentiation #####
+# Notes:
+# function will act on a array "pot" inherited from overlying class
+# The number of elements per axis is numPts
+# indexing is row major: pot[int(i * pow(numPts, 2) + j * numPts + k)]
+#
+# Plan:
+# For a single axis use finite difference to find the approx gradient:
+# ~	grad[i, j, k] = (pot[int(i * pow(numPts, 2) + j * numPts + k-1)] - pot[int(i * pow(numPts, 2) + j * numPts + k+1)]) / spacing
+# Repeate for each axis.
+# Assign each gradient to its corresponding axis in the force matrix.
+#
+# Handeling edge points:
+# 
+
+void Process diff(){
+for i in range(numPts){
+		if (not edge){
+			grad[0][i, j, k] = (pot[i-1, j, k] - pot[i+1, j, k]) / (2*spacing)
+			grad[1][i, j, k] = (pot[i, j-1, k] - pot[i, j+1, k]) / (2*spacing)
+			grad[2][i, j, k] = (pot[i, j, k-1] - pot[i, j, k+1]) / (2*spacing)
+		} else{
+			grad[...][...] = 0;
+		}
+	}	
+}

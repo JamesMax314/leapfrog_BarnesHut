@@ -13,8 +13,8 @@ class grid{
     fftw_plan bwrd[3];
 public:
     double spacing;
-    double dim;
-    int numPts;
+    vector<double> dim;
+    vector<int> numPts;
     double G = 6.674e-11;
     double pi = M_PI;
     fftw_complex* realPot;
@@ -26,6 +26,7 @@ public:
     fftw_complex* compFFTRho1;
 
     grid(double gridSpacing, double dim);
+    grid(double gridSpacing, vector<int> numPs);
 
     void updateGrid(vector<body>* bods);
     void solveField();
@@ -42,7 +43,7 @@ public:
 
     /// Pybinding getters ///
     double *data() { return realField1; }
-    size_t size()  { return numPts; }
+    vector<int> size()  { return numPts; }
 };
 
 void compMultFFT(fftw_complex v1, fftw_complex v2, fftw_complex out);
