@@ -58,6 +58,7 @@ public:
     void acceleration(node*);
     vector<double> treeAcc(node*, int);
     vector<double> ngl(vector<double>& r1, vector<double>& r2, double mass, double softening);
+    void initActiveBods();
 
     explicit barnesHut(vector<body>& bods, vector<double> dim);
     explicit barnesHut(vector<body>& bods, vector<double>& dim, vector<double>& cent);

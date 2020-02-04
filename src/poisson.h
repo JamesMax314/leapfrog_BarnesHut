@@ -9,27 +9,28 @@
 using namespace std;
 
 class grid{
-    fftw_plan fwrd;
-    fftw_plan bwrd[3];
+    fftw_plan fwrd{};
+    fftw_plan bwrd[3]{};
 public:
-    double spacing;
+    double spacing{};
     vector<double> dim;
     vector<int> numPts;
     double G = 6.674e-11;
     double pi = M_PI;
-    fftw_complex* realPot;
-    double* realField[3];
-    double* realField1;
-    int* keys;
-    fftw_complex* comp[3];
-    fftw_complex* cField[3];
-    fftw_complex* compFFTRho;
-    fftw_complex* compFFTRho1;
+    fftw_complex* realPot{};
+    double* realField[3]{};
+    double* realField1{};
+    int* keys{};
+    fftw_complex* comp[3]{};
+    fftw_complex* cField[3]{};
+    fftw_complex* compFFTRho{};
+    fftw_complex* compFFTRho1{};
     vector<int> activeBods;
 
     grid(double gridSpacing, double dim);
     grid(double gridSpacing, vector<int> numPs);
     grid(grid const &g);
+    grid();
 
     void updateGrid(vector<body>* bods);
     void solveField();
@@ -37,8 +38,9 @@ public:
     vector<vector<int>> meshPos(vector<double> pos);
     double w(vector<int> vec, body& bod);
     void diff(double scale);
-    void interpW(vector<body>* bods);
+    void interpW(vector<body>* bods, bool resetForce);
     void interp(vector<body>* bods);
+    void initActiveBods(vector<body>* bods);
 
     void ctor(fftw_complex* arr, double* out);
     void magF();

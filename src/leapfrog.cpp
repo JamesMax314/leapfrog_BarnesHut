@@ -47,6 +47,24 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
     }
 }
 
+void PBC(vector<body>* bodies, const vector<int>& activeBods, vector<double> dim){
+    for (auto & bIndx : activeBods) {
+        auto p = (*bodies)[bIndx].pos.back();
+        for (int axis=0; axis<3; axis++){
+            if (p[axis] < -dim[axis]/2) {
+                p[axis] += dim[axis];
+//                v[axis] *= -1;
+            }
+            if (p[axis] > dim[axis]/2) {
+                p[axis] -= dim[axis];
+//                v[axis] *= -1;
+            }
+        }
+        (*bodies)[bIndx].pos.back() = p;
+//        cout << body.vel.back()[0] << endl;
+    }
+}
+
 void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt){
     for (auto & bIndx : activeBods) {
         (*bodies)[bIndx].vel.emplace_back(vecAdd((*bodies)[bIndx].vel.back(),

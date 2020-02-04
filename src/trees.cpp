@@ -64,6 +64,14 @@ barnesHut::barnesHut(vector<body> &bods, vector<double> &dim, vector<double> &ce
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// barnesHut functions
 
+void barnesHut::initActiveBods(){
+    vector<int> tmp;
+    for (int i=0; i<(*bodies).size(); i++){
+        tmp.emplace_back(i);
+    }
+    activeBods = tmp;
+}
+
 bool barnesHut::inNode(const vector<double>& pos, node* nod){
     vector<double> displacement = vecAdd(pos, scalMult(-1, nod->centre));
     for (int j=0; j<3; j++) {

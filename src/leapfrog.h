@@ -9,6 +9,7 @@ void interaction(barnesHut& hut);
 void treeBreak(barnesHut& hut);
 void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt, vector<double> dim);
 void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt);
+void PBC(vector<body>* bodies, const vector<int>& activeBods, vector<double> dim);
 void partialUpdate(node* tree, vector<body>* bodies, double dt);
 void boundaryInteract(barnesHut& bh, vector<body>& boundary);
 

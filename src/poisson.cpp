@@ -123,7 +123,7 @@ void grid::solveField(){
 //    diff(-1);
 }
 
-void grid::interpW(vector<body>* bods){
+void grid::interpW(vector<body>* bods, bool resetForce){
     for (auto & bIndx : activeBods){
         vector<double> f(3, 0);
         vector<vector<int>> mPos = meshPos((*bods)[bIndx].pos.back());
@@ -135,7 +135,10 @@ void grid::interpW(vector<body>* bods){
                         (*bods)[bIndx].mass.back();
             }
         }
-        (*bods)[bIndx].acc.emplace_back(f);
+        if (resetForce)
+            (*bods)[bIndx].acc.emplace_back(f);
+        else
+            (*bods)[bIndx].acc.back() = vecAdd((*bods)[bIndx].acc.back(), f);
 //        printVec(body.acc.back());
     }
 }
@@ -278,6 +281,15 @@ vector<vector<vector<double>>> grid::getF(int indx){
     return out;
 }
 
+void grid::initActiveBods(vector<body>* bods){
+    vector<int> tmp;
+    for (int i=0; i<(*bods).size(); i++){
+        tmp.emplace_back(i);
+    }
+    activeBods = tmp;
+}
+
+grid::grid() = default;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void compMultFFT(fftw_complex v1, fftw_complex v2, fftw_complex out) {

@@ -12,6 +12,7 @@ using namespace std;
 class sg_seed{
 public:
     int key;
+    double den;
     vector<vector<int>> indices;
     vector<int> min;
     vector<int> max;
@@ -22,24 +23,27 @@ public:
 class sub_grid : public grid{
 public:
 //    vector<int> padding;
+    double dt{};
     vector<int> min;
     vector<int> max;
     vector<int> activeBods;
 //    vector<vector<int>> subPoints;
     vector<vector<int>> mainPoints;
     vector<int> getSubIndx(vector<int> index);
-    sub_grid(const grid& g, const sg_seed& seed, vector<int> pts);
+    sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, int timeStep);
+    sub_grid();
 };
 
 class comp_grid : public grid{
 public:
     grid mainG;
     void updateCompGrid(sub_grid & sg);
-    comp_grid(const grid& g);
+    explicit comp_grid(const grid& g);
 };
 
 class tree_PM{
 public:
+    double dt;
     double den;
     double gridSpace;
     vector<double> dim;
@@ -48,16 +52,17 @@ public:
     vector<body>* bodies;
 
     grid g;
+    comp_grid cg;
 
     void genSeeds();
     void genSubGrids();
     void classiftBods();
     void runTrees();
 
-    tree_PM(vector<body>& bods, double gridSpacing, double dim, double density);
+    tree_PM(vector<body>& bods, double gridSpacing, double dim, double density, double timeStep);
 
 };
 
 
 
-#endif TPM
+#endif //TPM

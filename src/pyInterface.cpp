@@ -10,6 +10,7 @@
 #include "pyInterface.h"
 #include "treeShow.h"
 #include "poisson.h"
+#include "tpm.h"
 
 namespace py = pybind11;
 
@@ -30,23 +31,13 @@ void progbar::update(int current){
 
 vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
-//    bh.theta = 0;
-//    bh.G = bh.G*5;
+    bh.initActiveBods();
     progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
-//        cout << "Making tree" << endl;
         treeMake(bh);
-//        cout << "tree made" << endl;
-//        if (j == 1)
-//            printTree(bh.root, 0);
-//            cout << endl;
-//        cout << "computing interactions" << endl;
         interaction(bh);
-//        cout << "updating bodies" << endl;
-        bodiesUpdate(bh.bodies, dt);
-//        cout << "breaking tree" << endl;
+        bodiesUpdate(bh.bodies, bh.activeBods, dt);
         treeBreak(bh);
-//        printTree(bh.root, 0);
         prog.update(j);
     }
     cout << endl;
@@ -56,13 +47,14 @@ vector<body> basicRun(vector<body>& bodies, vector<double> centre, vector<double
 vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<double> centre,
         vector<double> width, int numIter, double dt){
     barnesHut bh = barnesHut(bodies, width, centre);
+    bh.initActiveBods();
     cout << "bodLen: " << boundary.size() << endl;
     progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
         treeMake(bh);
         interaction(bh);
         boundaryInteract(bh, boundary);
-        bodiesUpdate(bh.bodies, dt);
+        bodiesUpdate(bh.bodies, bh.activeBods, dt);
         treeBreak(bh);
         prog.update(j);
     }
@@ -73,12 +65,13 @@ vector<body> fixedBoundary(vector<body>& bodies, vector<body>& boundary, vector<
 vector<body> particleMesh(vector<body>& bodies, double spacing, double width, int numIter, double dt){
     vector<body>* bods = &bodies;
     grid g = grid(spacing, width);
+    g.initActiveBods(bods);
     progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
         g.updateGrid(bods);
         g.solveField();
-        g.interpW(bods);
-        bodiesUpdate(bods, dt, g.dim);
+        g.interpW(bods, true);
+        bodiesUpdate(bods, g.activeBods, dt, g.dim);
         prog.update(j);
     }
     cout << endl;
@@ -100,12 +93,25 @@ grid PMTest(vector<body>& bodies, double spacing, double width, double dt){
 vector<body> PMTest1(vector<body>& bodies, double spacing, double width, double dt){
     vector<body>* bods = &bodies;
     grid g = grid(spacing, width);
+    g.initActiveBods(bods);
     g.updateGrid(bods);
     g.solveField();
 //    g.ctor(g.realPot);
 //    g.magF();
     g.interp(bods);
-    bodiesUpdate(bods, dt);
+    bodiesUpdate(bods, g.activeBods, dt);
+    return bodies;
+}
+
+vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double width,
+        double density, int numIter, double dt){
+    tree_PM tpm = tree_PM(bodies, spacing, width, density, dt);
+    for(int j=0; j<numIter; j++) {
+        tpm.genSeeds();
+        tpm.genSubGrids();
+        tpm.classiftBods();
+        tpm.runTrees();
+    }
     return bodies;
 }
 
@@ -116,6 +122,7 @@ PYBIND11_MODULE(treecode, m) {
     m.def("particleMesh", &particleMesh);
     m.def("PMTest", &PMTest);
     m.def("PMTest1", &PMTest1);
+    m.def("TreePareticleMesh", &TreePareticleMesh);
 
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
