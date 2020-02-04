@@ -3,8 +3,11 @@
 
 #include <fftw3.h>
 #include <cmath>
+#include <map>
 #include "bodies.h"
 #include "poisson.h"
+
+using namespace std;
 
 class sg_seed{
 public:
@@ -26,6 +29,33 @@ public:
     vector<vector<int>> mainPoints;
     vector<int> getSubIndx(vector<int> index);
     sub_grid(const grid& g, const sg_seed& seed, vector<int> pts);
+};
+
+class comp_grid : public grid{
+public:
+    grid mainG;
+    void updateCompGrid(sub_grid & sg);
+    comp_grid(const grid& g);
+};
+
+class tree_PM{
+public:
+    double den;
+    double gridSpace;
+    vector<double> dim;
+    vector<sg_seed> seedVec;
+    map<int, sub_grid> sgVec;
+    vector<body>* bodies;
+
+    grid g;
+
+    void genSeeds();
+    void genSubGrids();
+    void classiftBods();
+    void runTrees();
+
+    tree_PM(vector<body>& bods, double gridSpacing, double dim, double density);
+
 };
 
 

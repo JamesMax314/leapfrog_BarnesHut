@@ -27,10 +27,10 @@ void interaction(barnesHut &hut){
 //    partialUpdate(tree, bodies, dt);
 //}
 
-void bodiesUpdate(vector<body>* bodies, double dt, vector<double> dim){
-    for (auto & body : (*bodies)) {
-        auto v = vecAdd(body.vel.back(), scalMult(dt, body.acc.back()));
-        auto p = vecAdd(body.pos.back(), scalMult(dt, body.vel.back()));
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt, vector<double> dim){
+    for (auto & bIndx : activeBods) {
+        auto v = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt, (*bodies)[bIndx].acc.back()));
+        auto p = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt, (*bodies)[bIndx].vel.back()));
         for (int axis=0; axis<3; axis++){
             if (p[axis] < -dim[axis]/2) {
                 p[axis] += dim[axis];
@@ -41,16 +41,18 @@ void bodiesUpdate(vector<body>* bodies, double dt, vector<double> dim){
 //                v[axis] *= -1;
             }
         }
-        body.vel.emplace_back(v);
-        body.pos.emplace_back(p);
+        (*bodies)[bIndx].vel.emplace_back(v);
+        (*bodies)[bIndx].pos.emplace_back(p);
 //        cout << body.vel.back()[0] << endl;
     }
 }
 
-void bodiesUpdate(vector<body>* bodies, double dt){
-    for (auto & body : (*bodies)) {
-        body.vel.emplace_back(vecAdd(body.vel.back(), scalMult(dt, body.acc.back())));
-        body.pos.emplace_back(vecAdd(body.pos.back(), scalMult(dt, body.vel.back())));
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt){
+    for (auto & bIndx : activeBods) {
+        (*bodies)[bIndx].vel.emplace_back(vecAdd((*bodies)[bIndx].vel.back(),
+                scalMult(dt, (*bodies)[bIndx].acc.back())));
+        (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
+                scalMult(dt, (*bodies)[bIndx].vel.back())));
     }
 }
 

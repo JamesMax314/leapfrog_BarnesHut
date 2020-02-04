@@ -83,7 +83,7 @@ node* barnesHut::whichChild(node* tree, int i){
     for(int j=0; j<8; j++) {
         /// For each child in parent
         child = tree->children[j];
-        if (inNode((*bodies)[i].pos.back(), child)) {
+        if (inNode((*bodies)[activeBods[i]].pos.back(), child)) {
             /// If in child j
             break;
         }
@@ -101,8 +101,8 @@ void barnesHut::treeBuild(){
     }
 //    vector<vector<int>> segments = segment(root, (*bodies));
 //#pragma omp parallel for
-    for(int i=0; i<int((*bodies).size()); i++){
-        if(inNode((*bodies)[i].pos.back(), root) && (*bodies)[i].active[0]){
+    for(int i=0; i<int(activeBods.size()); i++){
+        if(inNode((*bodies)[activeBods[i]].pos.back(), root) && (*bodies)[activeBods[i]].active.back()){
             treeInsert(root, i);
         }
     }
@@ -129,7 +129,7 @@ void barnesHut::addChildren(node* tree){
     }
 }
 
-/// Segment bodies according to octant
+/// Segment bodies according to octant !!! Contains legacy code; no activeBods !!!
 vector<vector<int>> barnesHut::segment(node* nod, vector<body> bods){
     vector<vector<int>> out = {{}, {}, {}, {}, {}, {}, {}, {}};
     if (!bods.empty()) {
@@ -169,8 +169,8 @@ void barnesHut::treeInsert(node* tree, int i){
         /// Update current pos and COM
         current->num += 1;
         current->pos = vecAdd(scalMult(current->mass, current->pos),
-                              scalMult((*bodies)[i].mass.back(), (*bodies)[i].pos.back()));
-        current->mass += (*bodies)[i].mass.back();
+                              scalMult((*bodies)[activeBods[i]].mass.back(), (*bodies)[activeBods[i]].pos.back()));
+        current->mass += (*bodies)[activeBods[i]].mass.back();
         current->pos = scalMult(1 / current->mass, current->pos);
         if (current->num == 2){
             /// Add children to saturated node
@@ -194,9 +194,9 @@ void barnesHut::treeInsert(node* tree, int i){
 
     /// Fill in leaf data
     current->num += 1;
-    current->bodyindx = i;
-    current->pos = (*bodies)[i].pos.back();
-    current->mass = (*bodies)[i].mass.back();
+    current->bodyindx = activeBods[i];
+    current->pos = (*bodies)[activeBods[i]].pos.back();
+    current->mass = (*bodies)[activeBods[i]].mass.back();
     if (current->parent != nullptr) {
         current->parent->liveChildren.emplace_back(current->childIndx);
     }
@@ -234,8 +234,8 @@ void barnesHut::treeChop(node* tree){
 /// Kinematic functions
 
 void barnesHut::acceleration(node* tree){
-    for(int i=0; i<int((*bodies).size()); i++){
-        (*bodies)[i].acc.emplace_back(treeAcc(tree, i));
+    for(int i=0; i<int(activeBods.size()); i++){
+        (*bodies)[activeBods[i]].acc.emplace_back(treeAcc(tree, i));
     }
 }
 
@@ -244,17 +244,17 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 	vector<double> f(3, 0);
 	if (tree->num == 1 && tree->bodyindx != i){
 	    /// Particle-particle interaction
-		f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass,
-		        (*bodies)[i].softening + (*bodies)[tree->bodyindx].softening);
+		f = ngl((*bodies)[activeBods[i]].pos.back(), tree->pos, tree->mass,
+		        (*bodies)[activeBods[i]].softening + (*bodies)[tree->bodyindx].softening);
 	} else{
-		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[i].pos.back()), tree->pos), false);
+		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[activeBods[i]].pos.back()), tree->pos), false);
 		vector<double> w = tree->width;
 		double minWidth = *min_element(w.begin(), w.end());
         /// Checking approximation...
 		if (minWidth/distance < theta){
 		    /// Bulk node computation
-			f = ngl((*bodies)[i].pos.back(), tree->pos, tree->mass,
-			        (*bodies)[i].softening + (*bodies)[tree->bodyindx].softening);
+			f = ngl((*bodies)[activeBods[i]].pos.back(), tree->pos, tree->mass,
+			        (*bodies)[activeBods[i]].softening + (*bodies)[tree->bodyindx].softening);
 		} else{
 		    vector<double> fs = {0, 0, 0};
             for(int j=0; j<tree->liveChildren.size(); j++){

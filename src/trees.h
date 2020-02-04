@@ -41,6 +41,7 @@ class barnesHut{
     void treeInsert(node*, int);
 public:
     vector<body>* bodies;
+    vector<int> activeBods;
     node* root;
     double theta = 0.9;
     double G = 6.674e-11;

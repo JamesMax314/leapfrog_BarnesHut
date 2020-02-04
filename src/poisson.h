@@ -20,13 +20,16 @@ public:
     fftw_complex* realPot;
     double* realField[3];
     double* realField1;
+    int* keys;
     fftw_complex* comp[3];
     fftw_complex* cField[3];
     fftw_complex* compFFTRho;
     fftw_complex* compFFTRho1;
+    vector<int> activeBods;
 
     grid(double gridSpacing, double dim);
     grid(double gridSpacing, vector<int> numPs);
+    grid(grid const &g);
 
     void updateGrid(vector<body>* bods);
     void solveField();
