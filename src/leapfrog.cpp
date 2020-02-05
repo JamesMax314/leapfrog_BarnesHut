@@ -43,6 +43,7 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
         }
         (*bodies)[bIndx].vel.emplace_back(v);
         (*bodies)[bIndx].pos.emplace_back(p);
+        (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
 //        cout << body.vel.back()[0] << endl;
     }
 }
@@ -71,6 +72,7 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
                 scalMult(dt, (*bodies)[bIndx].acc.back())));
         (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
                 scalMult(dt, (*bodies)[bIndx].vel.back())));
+        (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
     }
 }
 

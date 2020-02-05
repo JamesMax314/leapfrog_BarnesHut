@@ -11,7 +11,8 @@ struct body{
 	vector<vector<double>> pos;
 	vector<vector<double>> vel;
 	vector<vector<double>> acc;
-	vector<double> ek;
+    vector<double> time;
+    vector<double> ek;
 	vector<double> ep;
 	vector<bool> active;
 

@@ -123,10 +123,10 @@ void tree_PM::genSubGrids(){
         vector<int> points(3, 0);
         for (int axis = 0; axis < 3; axis++) {
             /// Compute tha buffering required for non periodicity
-            points[axis] = 3 * (seed.max[axis] - seed.min[axis]);
+            points[axis] = 3 * (seed.max[axis] - seed.min[axis] + 1);
         }
         int subTimeStep = dt / (den - seed.den + 1);
-        sgs.insert(pair<int, sub_grid>(seed.key, sub_grid(g, seed, points, dt)));
+        sgs.insert(pair<int, sub_grid>(seed.key, sub_grid(g, seed, points, subTimeStep)));
     }
     sgVec = sgs;
 }
@@ -144,6 +144,8 @@ void tree_PM::classiftBods() {
         }
         if (currKey >= 0)
             sgVec[currKey].activeBods.emplace_back(i); /// Adds body index to active bodies list
+        else
+            g.activeBods.emplace_back(i);
     }
 }
 

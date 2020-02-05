@@ -8,7 +8,7 @@
 
 grid::grid(double gridSpacing, double dim): dim({dim, dim, dim}), spacing(gridSpacing) {
     for (int axis=0; axis<3; axis++)
-        numPts[axis] = (int) (this->dim[axis] / gridSpacing);
+        numPts.emplace_back((int) (dim / gridSpacing));
 //    cout << "numPts: " << numPts << endl;
     realPot = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * numPts[0]*numPts[1]*numPts[2]);
     realField1 = (double *) fftw_malloc(sizeof(double) * numPts[0]*numPts[1]*numPts[2]);
@@ -30,10 +30,9 @@ grid::grid(double gridSpacing, double dim): dim({dim, dim, dim}), spacing(gridSp
     }
 }
 
-grid::grid(double gridSpacing, vector<int> numPs): spacing(gridSpacing) {
+grid::grid(double gridSpacing, vector<int> numPs): spacing(gridSpacing), numPts(numPs) {
     for (int axis=0; axis<3; axis++)
-        dim[axis] = (int) (numPs[axis] * gridSpacing);
-//    cout << "numPts: " << numPts << endl;
+        dim.emplace_back((int) (numPs[axis] * gridSpacing));
     realPot = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * numPts[0]*numPts[1]*numPts[2]);
     realField1 = (double *) fftw_malloc(sizeof(double) * numPts[0]*numPts[1]*numPts[2]);
     compFFTRho = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * numPts[0]*numPts[1]*numPts[2]);
@@ -45,10 +44,8 @@ grid::grid(double gridSpacing, vector<int> numPs): spacing(gridSpacing) {
     for (int i=0; i<3; i++) {
         comp[i] = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * numPts[0]*numPts[1]*numPts[2]);
         cField[i] = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * numPts[0]*numPts[1]*numPts[2]);
-//        realField[i] = (double *) fftw_malloc(sizeof(double) * pow(numPts, 3));
     }
     fwrd = fftw_plan_dft_3d(numPts[0], numPts[1], numPts[2], realPot, compFFTRho, FFTW_FORWARD, FFTW_MEASURE);
-//    bwrd = fftw_plan_dft_3d(numPts, numPts, numPts, compFFTRho1, realPot, FFTW_BACKWARD, FFTW_MEASURE);
     for (int i = 0; i < 3; i++) {
         bwrd[i] = fftw_plan_dft_3d(numPts[0], numPts[1], numPts[2], comp[i], cField[i], FFTW_BACKWARD, FFTW_MEASURE);
     }
@@ -56,7 +53,7 @@ grid::grid(double gridSpacing, vector<int> numPs): spacing(gridSpacing) {
 
 grid::grid(const grid & g) : numPts(g.numPts) {
     for (int axis=0; axis<3; axis++)
-        dim[axis] = g.dim[axis];
+        dim.emplace_back(g.dim[axis]);
     for (auto & i : realField) {
         i = new double[int(numPts[0]*numPts[1]*numPts[2])];
     }

@@ -106,12 +106,15 @@ vector<body> PMTest1(vector<body>& bodies, double spacing, double width, double 
 vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double width,
         double density, int numIter, double dt){
     tree_PM tpm = tree_PM(bodies, spacing, width, density, dt);
+    progbar prog = progbar(numIter, 20);
     for(int j=0; j<numIter; j++) {
         tpm.genSeeds();
         tpm.genSubGrids();
         tpm.classiftBods();
         tpm.runTrees();
+        prog.update(j);
     }
+    cout << endl;
     return bodies;
 }
 
