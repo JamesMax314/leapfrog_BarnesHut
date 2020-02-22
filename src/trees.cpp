@@ -91,7 +91,8 @@ node* barnesHut::whichChild(node* tree, int i){
     for(int j=0; j<8; j++) {
         /// For each child in parent
         child = tree->children[j];
-        if (inNode((*bodies)[activeBods[i]].pos.back(), child)) {
+        if (inNode((*bodies)[i].pos.back(), child)) {
+            /// activeBods[i] replaced with i
             /// If in child j
             break;
         }

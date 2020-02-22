@@ -30,7 +30,9 @@ public:
     grid(double gridSpacing, double dim);
     grid(double gridSpacing, vector<int> numPs);
     grid(grid const &g);
+    grid(const grid & g, bool comp);
     grid();
+    ~grid();
 
     void updateGrid(vector<body>* bods);
     void solveField();
@@ -44,7 +46,8 @@ public:
 
     void ctor(fftw_complex* arr, double* out);
     void magF();
-    vector<vector<vector<double>>> getF(int indx);
+    void getF1(int axis);
+    vector<vector<vector<double>>> getF(int axis);
 
     /// Pybinding getters ///
     double *data() { return realField1; }

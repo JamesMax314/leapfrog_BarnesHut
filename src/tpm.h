@@ -26,12 +26,15 @@ public:
     double dt{};
     vector<int> min;
     vector<int> max;
-    vector<int> activeBods;
-//    vector<vector<int>> subPoints;
+//    vector<int> activeBods;
     vector<vector<int>> mainPoints;
+
+    //    vector<vector<int>> subPoints;
     vector<int> getSubIndx(vector<int> index);
-    sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, int timeStep);
+    sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, double timeStep);
     sub_grid();
+    sub_grid(const sub_grid &sg);
+    ~sub_grid();
 };
 
 class comp_grid : public grid{

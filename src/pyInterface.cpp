@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -70,24 +71,33 @@ vector<body> particleMesh(vector<body>& bodies, double spacing, double width, in
     for(int j=0; j<numIter; j++) {
         g.updateGrid(bods);
         g.solveField();
+//        g.interp(bods);
         g.interpW(bods, true);
         bodiesUpdate(bods, g.activeBods, dt, g.dim);
+//        g.spacing = g.spacing*1.01;
+//        for (int i=0; i<3; i++){
+//            g.dim[i] = g.dim[i]*1.01;
+//        }
         prog.update(j);
     }
     cout << endl;
     return bodies;
 }
 
-grid PMTest(vector<body>& bodies, double spacing, double width, double dt){
+vector<vector<vector<double>>> PMTest(vector<body>& bodies, double spacing, double width, int axis){
     vector<body>* bods = &bodies;
     grid g = grid(spacing, width);
+    g.initActiveBods(bods);
     g.updateGrid(bods);
     g.solveField();
+//    g.getF1(axis);
+//    cout << g.realField[0][int(100)] << endl;
+    auto out = g.getF(axis);
 //    g.ctor(g.realPot);
-    g.magF();
+//    g.magF();
 //    g.interp(bods);
 //    bodiesUpdate(bods, dt);
-    return g;
+    return out;
 }
 
 vector<body> PMTest1(vector<body>& bodies, double spacing, double width, double dt){
@@ -103,18 +113,95 @@ vector<body> PMTest1(vector<body>& bodies, double spacing, double width, double 
     return bodies;
 }
 
+vector<vector<vector<double>>> PMTestPot(vector<body>& bodies, double spacing, double width){
+    vector<body>* bods = &bodies;
+    grid g = grid(spacing, width);
+    g.initActiveBods(bods);
+    g.updateGrid(bods);
+//    g.solveField();
+//    g.ctor(g.realPot);
+//    g.magF();
+//    g.interp(bods);
+//    bodiesUpdate(bods, g.activeBods, dt);
+    double* out = new double[int(g.numPts[0]*g.numPts[1]*g.numPts[2])];
+    g.ctor(g.realPot, out);
+    vector<vector<vector<double>>> vOut;
+    for (int i=0; i<g.numPts[0]; i++){
+        vector<vector<double>> tmp1;
+        for (int j=0; j<g.numPts[0]; j++) {
+            vector<double> tmp2;
+            for (int k = 0; k < g.numPts[0]; k++) {
+                tmp2.emplace_back(out[int(i * g.numPts[2] * g.numPts[1] + j * g.numPts[2] + k)]);
+            }
+            tmp1.emplace_back(tmp2);
+        }
+        vOut.emplace_back(tmp1);
+    }
+    return vOut;
+}
+
+vector<vector<vector<double>>> PMTestForce(vector<body>& bodies, double spacing, double width, int axis){
+    vector<body>* bods = &bodies;
+    grid g = grid(spacing, width);
+    g.initActiveBods(bods);
+    g.updateGrid(bods);
+    g.solveField();
+//    g.ctor(g.realPot);
+//    g.magF();
+//    g.interp(bods);
+//    bodiesUpdate(bods, g.activeBods, dt);
+    double* out = g.realField[axis];
+    vector<vector<vector<double>>> vOut;
+    for (int i=0; i<g.numPts[0]; i++){
+        vector<vector<double>> tmp1;
+        for (int j=0; j<g.numPts[0]; j++) {
+            vector<double> tmp2;
+            for (int k = 0; k < g.numPts[0]; k++) {
+                tmp2.emplace_back(out[int(i * g.numPts[2] * g.numPts[1] + j * g.numPts[2] + k)]);
+            }
+            tmp1.emplace_back(tmp2);
+        }
+        vOut.emplace_back(tmp1);
+    }
+    return vOut;
+}
+
 vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double width,
         double density, int numIter, double dt){
     tree_PM tpm = tree_PM(bodies, spacing, width, density, dt);
     progbar prog = progbar(numIter, 20);
+    auto t = chrono::high_resolution_clock::now();
+    auto tT = chrono::high_resolution_clock::now();
+    auto genSeeds = 0.;
+    auto genSubGrids = 0.;
+    auto classiftBods = 0.;
+    auto runTrees = 0.;
+    auto update = 0.;
+    auto tot = 0.;
     for(int j=0; j<numIter; j++) {
         tpm.genSeeds();
+        genSeeds = genSeeds + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
+        t = chrono::high_resolution_clock::now();
         tpm.genSubGrids();
+        genSubGrids = genSubGrids + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
+        t = chrono::high_resolution_clock::now();
         tpm.classiftBods();
+        classiftBods = classiftBods + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
+        t = chrono::high_resolution_clock::now();
         tpm.runTrees();
+        runTrees = runTrees + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
+        t = chrono::high_resolution_clock::now();
         prog.update(j);
+        update = update + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
+        t = chrono::high_resolution_clock::now();
     }
+    tot = chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - tT).count();
     cout << endl;
+    cout << "genSeeds: " << genSeeds/tot << endl;
+    cout << "genSubGrids: " << genSubGrids/tot << endl;
+    cout << "classiftBods: " << classiftBods/tot << endl;
+    cout << "runTrees: " << runTrees/tot << endl;
+    cout << "update: " << update/tot << endl;
     return bodies;
 }
 
@@ -126,6 +213,8 @@ PYBIND11_MODULE(treecode, m) {
     m.def("PMTest", &PMTest);
     m.def("PMTest1", &PMTest1);
     m.def("TreePareticleMesh", &TreePareticleMesh);
+    m.def("PMTestPot", &PMTestPot);
+    m.def("PMTestForce", &PMTestForce);
 
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());

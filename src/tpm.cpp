@@ -1,5 +1,7 @@
 #include <map>
+#include <omp.h>
 #include <utility>
+#include <iostream>
 #include "poisson.h"
 #include "vecMaths.h"
 #include "bodies.h"
@@ -36,11 +38,23 @@ vector<int> sub_grid::getSubIndx(vector<int> index) {
     return out;
 }
 
-sub_grid::sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, int timeStep) : grid(g.spacing, std::move(pts)){
+sub_grid::sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, double timeStep) : grid(g.spacing, move(pts)){
     dt = timeStep;
     min = seed.min;
     max = seed.max;
     mainPoints = seed.indices;
+}
+
+sub_grid::~sub_grid() {
+
+}
+
+sub_grid::sub_grid(const sub_grid& sg): grid(sg) {
+    dt = sg.dt;
+    min = sg.min;
+    max = sg.max;
+    activeBods = sg.activeBods;
+    mainPoints = sg.mainPoints;
 }
 
 sub_grid::sub_grid() = default;
@@ -57,23 +71,32 @@ tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, doubl
 }
 
 void tree_PM::genSeeds() {
+    /// keys are used to determine whether points are adjacent
     vector<int> keys;
+    /// Stores the indices of grid points that surpass the density threshold
     vector<vector<int>> indices;
     int count = 0;
+//#pragma omp parallel for
+    /// Iterate through each grid point and check the density
     for (int i = 0; i < g.numPts[0]; i++) {
         for (int j = 0; j < g.numPts[1]; j++) {
             for (int k = 0; k < g.numPts[2]; k++) {
-                g.keys[i*g.numPts[2]*g.numPts[1] + j*g.numPts[2] + k] = -1; /// Set Key value to -1
+                /// Set Key value to -1
+                g.keys[i*g.numPts[2]*g.numPts[1] + j*g.numPts[2] + k] = -1;
                 if (g.realPot[int(i*g.numPts[2]*g.numPts[1] + j*g.numPts[2] + k)][0] > den){
                     /// Above density threshold
-                    vector<int> index = {i, j, k}; /// Record index in main grid
+//                    cout << "den: " << g.realPot[int(i*g.numPts[2]*g.numPts[1] + j*g.numPts[2] + k)][0] << endl;
+                    /// Record index in main grid
+                    vector<int> index = {i, j, k};
                     indices.emplace_back(index);
-                    keys.emplace_back(count); /// Generate new key
+                    /// Generate new key
+                    keys.emplace_back(count);
                     count ++;
                 }
             }
         }
     }
+//    cout << "indices len: " << indices.size() << endl;
     for (int i=0; i<keys.size(); i++){
         for (int j=0; j<keys.size(); j++) {
             bool adjacent = true; /// Assume adjacent
@@ -97,6 +120,7 @@ void tree_PM::genSeeds() {
                  seedIndx = s;
         }
         if (seedIndx < 0) {
+            /// Initialize a new seed
             seeds.emplace_back(sg_seed(keys[i], indices[i]));
             seeds.back().min = indices[i];
             seeds.back().max = indices[i];
@@ -104,8 +128,10 @@ void tree_PM::genSeeds() {
                                          indices[i][1]*g.numPts[2] +
                                          indices[i][2])][0];
         } else {
+            /// Add current main grid index to seed
             seeds[seedIndx].indices.emplace_back(indices[i]);
             seeds[seedIndx].maxMin(indices[i]);
+            /// Update the maximum density in the subgrid
             if (seeds[seedIndx].den < g.realPot[int(indices[i][0]*g.numPts[2]*g.numPts[1] +
                                                     indices[i][1]*g.numPts[2] +
                                                     indices[i][2])][0])
@@ -118,23 +144,32 @@ void tree_PM::genSeeds() {
 }
 
 void tree_PM::genSubGrids(){
+    /// Uses the seeds to initialize sub grids
     map<int, sub_grid> sgs;
     for (auto & seed : seedVec) {
         vector<int> points(3, 0);
         for (int axis = 0; axis < 3; axis++) {
-            /// Compute tha buffering required for non periodicity
+            /// Compute the buffering required for non periodicity
             points[axis] = 3 * (seed.max[axis] - seed.min[axis] + 1);
         }
-        int subTimeStep = dt / (den - seed.den + 1);
-        sgs.insert(pair<int, sub_grid>(seed.key, sub_grid(g, seed, points, subTimeStep)));
+        /// Set variable time step
+        double subTimeStep = dt; // / (den - seed.den + 1);
+        /// Add subgrid to sgs
+        sub_grid tmp = sub_grid(g, seed, points, subTimeStep);
+        sgs.insert(pair<int, sub_grid>(seed.key, tmp));
+//        cout << sgs[seed.key].realPot[0][0] << endl;
     }
     sgVec = sgs;
 }
 
 void tree_PM::classiftBods() {
+    /// Activates bodies in appropriate sub grid
+    g.activeBods.erase(g.activeBods.begin(), g.activeBods.end());
     for (int i=0; i<(*bodies).size(); i++){
+        /// Get the <=8 nearest grid points
         vector<vector<int>> pos = g.meshPos((*bodies)[i].pos.back());
         int currKey = -1;
+        /// For each mesh pos
         for (auto & po : pos){
             int k = g.keys[po[1]*g.numPts[2]*g.numPts[1] + po[1]*g.numPts[2] + po[1]];
             if (k == -1 || (k != currKey && currKey != -1))
@@ -143,9 +178,9 @@ void tree_PM::classiftBods() {
                 currKey = k; /// If body is in a sub grid according to given mes pos
         }
         if (currKey >= 0)
-            sgVec[currKey].activeBods.emplace_back(i); /// Adds body index to active bodies list
+            sgVec[currKey].activeBods.emplace_back(i); /// Adds body index to active bodies list in subgrid
         else
-            g.activeBods.emplace_back(i);
+            g.activeBods.emplace_back(i); /// Adds body to main grid
     }
 }
 
@@ -154,19 +189,34 @@ void tree_PM::runTrees() {
     /// For efficiency this should be changed to the centre and size of the sub grids
     vector<double> width = g.dim;
     vector<double> centre = {0, 0, 0};
+//#pragma omp parallel for
+//    cout << "num subGs " << sgVec.size() << endl;
+    /// For each subgrid
     for (auto & subG : sgVec) {
+        /// Initialize tree section
         barnesHut bh = barnesHut(*bodies, width, centre);
+        bh.activeBods = subG.second.activeBods;
+//        cout << subG.second.realPot[0][0] << endl;
+//        cout << "sub iters: " << int(dt / subG.second.dt) << endl;
+        /// For each time step
         for(int j=0; j<int(dt / subG.second.dt); j++) {
+            /// Update potentials in sub grid then solve field
             subG.second.updateGrid(bodies);
             subG.second.solveField();
+            /// Remove the subgrid forces form the main grid and assign to comp grid
             cg.updateCompGrid(subG.second);
+            /// Build tree and compute forces on particles
             treeMake(bh);
             interaction(bh);
+            /// Add forces from the grid points
             cg.interpW(bodies, false);
+            /// Update the pos and vel
             bodiesUpdate(bodies, subG.second.activeBods, subG.second.dt);
             treeBreak(bh);
         }
-        PBC(bodies, subG.second.activeBods, g.dim); /// Put particles into the correct location with PBCs
+        /// Put particles into the correct location with PBCs
+        /// i.e. Account for the particle moving outside the boundary box
+//        PBC(bodies, subG.second.activeBods, g.dim);
     }
     /// Update outside particles
     g.updateGrid(bodies);
@@ -177,9 +227,10 @@ void tree_PM::runTrees() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-comp_grid::comp_grid(const grid &g) : grid(g), mainG(g) {}
+comp_grid::comp_grid(const grid &g) : grid(g, true), mainG(g) {}
 
 void comp_grid::updateCompGrid(sub_grid & sg) {
+    /// Remove regional forces from the main grid to generate a comp grid
     activeBods = sg.activeBods;
     for (int i = 0; i < numPts[0]; i++) {
         for (int j = 0; j < numPts[1]; j++) {
@@ -187,9 +238,9 @@ void comp_grid::updateCompGrid(sub_grid & sg) {
                 vector<int> sI = sg.getSubIndx({i, j, k});
                 for (int axis=0; axis<3; axis++) {
                     if (sI[axis] > 0) {
-                        realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
-                                mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] -
-                                sg.realField[axis][int(sI[0] * numPts[2] * numPts[1] + sI[1] * numPts[2] + sI[2])];
+//                        realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
+                              double a = // mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] -
+                                sg.realField[axis][int(sI[0] * sg.numPts[2] * sg.numPts[1] + sI[1] * sg.numPts[2] + sI[2])];
                     } else {
                         realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
                                 mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)];

@@ -28,7 +28,9 @@ void interaction(barnesHut &hut){
 //}
 
 void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt, vector<double> dim){
-    for (auto & bIndx : activeBods) {
+#pragma omp parallel for
+    for (int i=0; i<activeBods.size(); i++) {
+        auto bIndx = activeBods[i];
         auto v = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt, (*bodies)[bIndx].acc.back()));
         auto p = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt, (*bodies)[bIndx].vel.back()));
         for (int axis=0; axis<3; axis++){
@@ -49,7 +51,9 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
 }
 
 void PBC(vector<body>* bodies, const vector<int>& activeBods, vector<double> dim){
-    for (auto & bIndx : activeBods) {
+#pragma omp parallel for
+    for (int i=0; i<activeBods.size(); i++) {
+        auto bIndx = activeBods[i];
         auto p = (*bodies)[bIndx].pos.back();
         for (int axis=0; axis<3; axis++){
             if (p[axis] < -dim[axis]/2) {
@@ -67,7 +71,9 @@ void PBC(vector<body>* bodies, const vector<int>& activeBods, vector<double> dim
 }
 
 void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt){
-    for (auto & bIndx : activeBods) {
+#pragma omp parallel for
+    for (int i=0; i<activeBods.size(); i++) {
+        auto bIndx = activeBods[i];
         (*bodies)[bIndx].vel.emplace_back(vecAdd((*bodies)[bIndx].vel.back(),
                 scalMult(dt, (*bodies)[bIndx].acc.back())));
         (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
