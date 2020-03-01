@@ -42,17 +42,21 @@ public:
     grid mainG;
     void updateCompGrid(sub_grid & sg);
     explicit comp_grid(const grid& g);
+    comp_grid();
 };
 
 class tree_PM{
 public:
-    double dt;
-    double den;
-    double gridSpace;
+    double nu;
+    double a;
+    double t;
+    double dt{};
+    double den{};
+    double gridSpace{};
     vector<double> dim;
     vector<sg_seed> seedVec;
     map<int, sub_grid> sgVec;
-    vector<body>* bodies;
+    vector<body>* bodies{};
 
     grid g;
     comp_grid cg;
@@ -61,8 +65,11 @@ public:
     void genSubGrids();
     void classiftBods();
     void runTrees();
+    void update_a_t();
 
+    tree_PM(vector<body>& bods, double gridSpacing, double dim, double density, double timeStep, double time);
     tree_PM(vector<body>& bods, double gridSpacing, double dim, double density, double timeStep);
+    tree_PM();
 
 };
 

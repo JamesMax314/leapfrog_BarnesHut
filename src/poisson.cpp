@@ -150,7 +150,7 @@ void grid::solveField(){
 }
 
 void grid::interpW(vector<body>* bods, bool resetForce){
-//#pragma omp parallel for
+#pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++){
         vector<double> f(3, 0);
         vector<vector<int>> mPos = meshPos((*bods)[activeBods[i]].pos.back());

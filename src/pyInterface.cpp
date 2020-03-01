@@ -167,10 +167,10 @@ vector<vector<vector<double>>> PMTestForce(vector<body>& bodies, double spacing,
 }
 
 vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double width,
-        double density, int numIter, double dt){
-    tree_PM tpm = tree_PM(bodies, spacing, width, density, dt);
+        double density, int numIter, double dt, double t){
+    tree_PM tpm = tree_PM(bodies, spacing, width, density, dt, t);
     progbar prog = progbar(numIter, 20);
-    auto t = chrono::high_resolution_clock::now();
+    auto t1 = chrono::high_resolution_clock::now();
     auto tT = chrono::high_resolution_clock::now();
     auto genSeeds = 0.;
     auto genSubGrids = 0.;
@@ -180,20 +180,20 @@ vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double widt
     auto tot = 0.;
     for(int j=0; j<numIter; j++) {
         tpm.genSeeds();
-        genSeeds = genSeeds + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
-        t = chrono::high_resolution_clock::now();
+        genSeeds = genSeeds + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
+        t1 = chrono::high_resolution_clock::now();
         tpm.genSubGrids();
-        genSubGrids = genSubGrids + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
-        t = chrono::high_resolution_clock::now();
+        genSubGrids = genSubGrids + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
+        t1 = chrono::high_resolution_clock::now();
         tpm.classiftBods();
-        classiftBods = classiftBods + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
-        t = chrono::high_resolution_clock::now();
+        classiftBods = classiftBods + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
+        t1 = chrono::high_resolution_clock::now();
         tpm.runTrees();
-        runTrees = runTrees + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
-        t = chrono::high_resolution_clock::now();
+        runTrees = runTrees + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
+        t1 = chrono::high_resolution_clock::now();
         prog.update(j);
-        update = update + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t).count();
-        t = chrono::high_resolution_clock::now();
+        update = update + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
+        t1 = chrono::high_resolution_clock::now();
     }
     tot = chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - tT).count();
     cout << endl;
@@ -205,6 +205,40 @@ vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double widt
     return bodies;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+vector<body> runTPM(vector<body>& bodies, double spacing, double width,
+                    double density, int numIter, double dt){
+    tree_PM tpm = tree_PM(bodies, spacing, width, density, dt);
+
+    progbar prog = progbar(numIter, 20);
+    for(int j=0; j<numIter; j++) {
+        tpm.genSeeds();
+        tpm.genSubGrids();
+        tpm.classiftBods();
+        tpm.runTrees();
+        prog.update(j);
+    }
+    return *tpm.bodies;
+}
+
+void resetTPM(vector<body>& bodies){
+    for (auto & i : bodies){
+        vector<double> tmpPos = i.pos.back();
+        i.pos.clear();
+        i.pos.emplace_back(tmpPos);
+
+        vector<double> tmpVel = i.vel.back();
+        i.vel.clear();
+        i.vel.emplace_back(tmpVel);
+
+        vector<double> tmpAcc = i.acc.back();
+        i.acc.clear();
+        i.acc.emplace_back(tmpAcc);
+    }
+}
+
+
 PYBIND11_MODULE(treecode, m) {
     //m.def("test", &test);
     m.def("basicRun", &basicRun);
@@ -215,6 +249,9 @@ PYBIND11_MODULE(treecode, m) {
     m.def("TreePareticleMesh", &TreePareticleMesh);
     m.def("PMTestPot", &PMTestPot);
     m.def("PMTestForce", &PMTestForce);
+
+    m.def("runTPM", &runTPM);
+    m.def("resetTPM", &resetTPM);
 
     py::class_<barnesHut>(m, "barnesHut")
             .def(py::init<vector<body>&, vector<double>&, vector<double>&>());
@@ -228,6 +265,8 @@ PYBIND11_MODULE(treecode, m) {
             .def_property("mass", &body::getMass, &body::setMass)
             .def_property("soft", &body::getSoftening, &body::setSoftening)
             .def_property("pos", &body::getPos, &body::setPos);
+    py::class_<tree_PM>(m, "tree_PM")
+            .def(py::init<>());
 
     py::class_<grid>(m, "grid", py::buffer_protocol())
             .def("getF", &grid::getF)

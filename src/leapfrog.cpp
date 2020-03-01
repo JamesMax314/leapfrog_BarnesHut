@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <iostream>
 #include <omp.h>
+#include <cmath>
 
 #include "bodies.h"
 #include "trees.h"
@@ -50,6 +51,29 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
     }
 }
 
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double a, double dt, vector<double> dim){
+#pragma omp parallel for
+    for (int i=0; i<activeBods.size(); i++) {
+        auto bIndx = activeBods[i];
+        auto v = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt, (*bodies)[bIndx].acc.back()));
+        auto p = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt/pow(a, 3), (*bodies)[bIndx].vel.back()));
+        for (int axis=0; axis<3; axis++){
+            if (p[axis] < -dim[axis]/2) {
+                p[axis] += dim[axis];
+//                v[axis] *= -1;
+            }
+            if (p[axis] > dim[axis]/2) {
+                p[axis] -= dim[axis];
+//                v[axis] *= -1;
+            }
+        }
+        (*bodies)[bIndx].vel.emplace_back(v);
+        (*bodies)[bIndx].pos.emplace_back(p);
+        (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
+//        cout << body.vel.back()[0] << endl;
+    }
+}
+
 void PBC(vector<body>* bodies, const vector<int>& activeBods, vector<double> dim){
 #pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
@@ -78,6 +102,18 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
                 scalMult(dt, (*bodies)[bIndx].acc.back())));
         (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
                 scalMult(dt, (*bodies)[bIndx].vel.back())));
+        (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
+    }
+}
+
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double a, double dt){
+#pragma omp parallel for
+    for (int i=0; i<activeBods.size(); i++) {
+        auto bIndx = activeBods[i];
+        (*bodies)[bIndx].vel.emplace_back(vecAdd((*bodies)[bIndx].vel.back(),
+                                                 scalMult(dt/pow(a, 3), (*bodies)[bIndx].acc.back())));
+        (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
+                                                 scalMult(dt, (*bodies)[bIndx].vel.back())));
         (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
     }
 }

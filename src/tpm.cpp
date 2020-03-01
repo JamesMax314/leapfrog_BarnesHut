@@ -2,6 +2,7 @@
 #include <omp.h>
 #include <utility>
 #include <iostream>
+#include <cmath>
 #include "poisson.h"
 #include "vecMaths.h"
 #include "bodies.h"
@@ -60,6 +61,17 @@ sub_grid::sub_grid(const sub_grid& sg): grid(sg) {
 sub_grid::sub_grid() = default;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, double density, double timeStep, double time) :
+        g(grid(gridSpacing, dimension)), cg(comp_grid(g)) {
+    dt = timeStep;
+    dim = {dimension, dimension, dimension};
+    gridSpace = gridSpacing;
+    den = density;
+    bodies = &bods;
+    nu = 0;
+    t = time;
+}
+
 tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, double density, double timeStep) :
         g(grid(gridSpacing, dimension)), cg(comp_grid(g)) {
     dt = timeStep;
@@ -67,8 +79,11 @@ tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, doubl
     gridSpace = gridSpacing;
     den = density;
     bodies = &bods;
-
+    nu = 0;
+    t = 1e9*365*24*3600;
 }
+
+tree_PM::tree_PM() : g(), cg() {}
 
 void tree_PM::genSeeds() {
     /// keys are used to determine whether points are adjacent
@@ -186,6 +201,7 @@ void tree_PM::classiftBods() {
 
 void tree_PM::runTrees() {
     g.solveField();
+    update_a_t();
     /// For efficiency this should be changed to the centre and size of the sub grids
     vector<double> width = g.dim;
     vector<double> centre = {0, 0, 0};
@@ -200,6 +216,7 @@ void tree_PM::runTrees() {
 //        cout << "sub iters: " << int(dt / subG.second.dt) << endl;
         /// For each time step
         for(int j=0; j<int(dt / subG.second.dt); j++) {
+//            cout << "Running tree" << endl;
             /// Update potentials in sub grid then solve field
             subG.second.updateGrid(bodies);
             subG.second.solveField();
@@ -211,23 +228,39 @@ void tree_PM::runTrees() {
             /// Add forces from the grid points
             cg.interpW(bodies, false);
             /// Update the pos and vel
-            bodiesUpdate(bodies, subG.second.activeBods, subG.second.dt);
+            bodiesUpdate(bodies, subG.second.activeBods, a, subG.second.dt);
             treeBreak(bh);
         }
         /// Put particles into the correct location with PBCs
         /// i.e. Account for the particle moving outside the boundary box
-//        PBC(bodies, subG.second.activeBods, g.dim);
+        PBC(bodies, subG.second.activeBods, g.dim);
     }
     /// Update outside particles
     g.updateGrid(bodies);
     g.solveField();
     g.interpW(bodies, true);
-    bodiesUpdate(bodies, g.activeBods, dt, g.dim);
+    bodiesUpdate(bodies, g.activeBods, a, dt, g.dim);
 }
+
+void tree_PM::update_a_t() {
+    /// On the first run through the average comoving density is computed
+    if (nu == 0){
+        for (int i=0; i<g.numPts[0]*g.numPts[1]*g.numPts[2]; i++){
+            nu += g.realPot[i][0];
+        }
+        nu = nu / g.numPts[0]*g.numPts[1]*g.numPts[2];
+    }
+    /// The scale factor is calculated according to the Freidmann equation
+    a = 1.154e-27*pow(t, 2/3); // pow(8*g.pi*g.G*nu/3, 1/3) * pow(t*3/2, 2/3);
+    t += dt;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 comp_grid::comp_grid(const grid &g) : grid(g, true), mainG(g) {}
+comp_grid::comp_grid() {}
 
 void comp_grid::updateCompGrid(sub_grid & sg) {
     /// Remove regional forces from the main grid to generate a comp grid
@@ -238,8 +271,8 @@ void comp_grid::updateCompGrid(sub_grid & sg) {
                 vector<int> sI = sg.getSubIndx({i, j, k});
                 for (int axis=0; axis<3; axis++) {
                     if (sI[axis] > 0) {
-//                        realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
-                              double a = // mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] -
+                        realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
+                              mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] -
                                 sg.realField[axis][int(sI[0] * sg.numPts[2] * sg.numPts[1] + sI[1] * sg.numPts[2] + sI[2])];
                     } else {
                         realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
@@ -250,4 +283,5 @@ void comp_grid::updateCompGrid(sub_grid & sg) {
         }
     }
 }
+
 
