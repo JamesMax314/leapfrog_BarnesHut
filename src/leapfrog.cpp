@@ -57,37 +57,34 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t,
 //#pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
         double a_0 = tpm_instance.get_a(t);
-        double a_1 = tpm_instance.get_a(t-dt);
+        double a_1 = tpm_instance.get_a(t);
         double ad_0 = tpm_instance.get_ad(t);
-        double ad_1 = tpm_instance.get_ad(t-dt);
+        double ad_1 = tpm_instance.get_ad(t);
         double add_0 = tpm_instance.get_add(t);
-        double add_1 = tpm_instance.get_add(t-dt);
+        double add_1 = tpm_instance.get_add(t);
         auto bIndx = activeBods[i];
-        /// scale the force to get real value
-        auto acc = vecAdd(scalMult(pow(a_0, -2.), (*bodies)[bIndx].acc.back()), scalMult(-add_0, (*bodies)[bIndx].pos.back())); //)
-        /// Compute the real space force
-        auto v = vecAdd(scalMult(a_0, (*bodies)[bIndx].vel.back()), scalMult(dt, acc));
+        /// step 1 in computing the acceleration in cc
+        auto acc = vecAdd(scalMult(pow(a_0, -2.), (*bodies)[bIndx].acc.back()), scalMult(-add_0, (*bodies)[bIndx].pos.back()));
+        /// Compute the cc acceleration
+        auto ud = vecAdd(scalMult(-ad_0, (*bodies)[bIndx].vel.back()), acc);
+        /// Update the cc velocity
+        auto xd = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt/a_0, ud));
         /// Compute the real position
-        auto p = vecAdd(scalMult(a_0, (*bodies)[bIndx].pos.back()), scalMult(dt, v));
-
-        /// Compute co-moving position
-        auto R_1 = scalMult(1/a_1, p);
-        /// Compute co-moving velocity
-        auto Rd_1 = scalMult(1/a_1, v);
+        auto x = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt, xd));
         /// Apply periodic BC's
         for (int axis=0; axis<3; axis++){
-            if (R_1[axis] < -dim[axis]/2) {
-                R_1[axis] += dim[axis];
+            if (x[axis] < -dim[axis]/2) {
+                x[axis] += dim[axis];
 //                v[axis] *= -1;
             }
-            if (Rd_1[axis] > dim[axis]/2) {
-                Rd_1[axis] -= dim[axis];
+            if (x[axis] > dim[axis]/2) {
+                x[axis] -= dim[axis];
 //                v[axis] *= -1;
             }
         }
         /// Append results to body
-        (*bodies)[bIndx].vel.emplace_back(Rd_1);
-        (*bodies)[bIndx].pos.emplace_back(R_1);
+        (*bodies)[bIndx].vel.emplace_back(xd);
+        (*bodies)[bIndx].pos.emplace_back(x);
         (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
 //        cout << body.vel.back()[0] << endl;
     }
@@ -129,25 +126,24 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t,
     tree_PM tpm_instance = tree_PM();
 #pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
-        double a_0 = tpm_instance.get_a(t-dt);
+        double a_0 = tpm_instance.get_a(t);
         double a_1 = tpm_instance.get_a(t);
-        double ad_0 = tpm_instance.get_ad(t-dt);
+        double ad_0 = tpm_instance.get_ad(t);
         double ad_1 = tpm_instance.get_ad(t);
+        double add_0 = tpm_instance.get_add(t);
+        double add_1 = tpm_instance.get_add(t);
         auto bIndx = activeBods[i];
-        /// scale the force to get real value
-        auto acc = scalMult(0., (*bodies)[bIndx].acc.back()); // 1/(pow(a_0, 2))
-        /// Compute the real space force
-        auto v = vecAdd(scalMult(ad_0, (*bodies)[bIndx].pos.back()),
-                        vecAdd(scalMult(a_0, (*bodies)[bIndx].vel.back()), scalMult(dt, acc)));
+        /// step 1 in computing the acceleration in cc
+        auto fi = vecAdd(scalMult(pow(a_0, -2.), (*bodies)[bIndx].acc.back()), scalMult(-add_0, (*bodies)[bIndx].pos.back()));
+        /// Compute the cc acceleration
+        auto ud = vecAdd(scalMult(-ad_0, (*bodies)[bIndx].vel.back()), fi);
+        /// Update the cc velocity
+        auto xd = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt/a_0, ud));
         /// Compute the real position
-        auto p = vecAdd(scalMult(a_0, (*bodies)[bIndx].pos.back()), scalMult(dt, v));
-        /// Compute co-moving position
-        auto R_1 = scalMult(1/a_1, p);
-        /// Compute co-moving velocity
-        auto Rd_1 = vecAdd(scalMult(1/a_1, v), scalMult(-ad_1/a_1, p));
-        /// Append results to body
-        (*bodies)[bIndx].vel.emplace_back(Rd_1);
-        (*bodies)[bIndx].pos.emplace_back(R_1);
+        auto x = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt, xd));
+        /// Apply periodic BC's
+        (*bodies)[bIndx].vel.emplace_back(xd);
+        (*bodies)[bIndx].pos.emplace_back(x);
         (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
     }
 }
