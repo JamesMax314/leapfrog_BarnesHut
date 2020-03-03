@@ -8,6 +8,7 @@
 #include "trees.h"
 #include "vecMaths.h"
 #include "leapfrog.h"
+#include "tpm.h"
 
 /// Leapfrog functions
 void treeMake(barnesHut &hut){
@@ -51,24 +52,42 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
     }
 }
 
-void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double a, double dt, vector<double> dim){
-#pragma omp parallel for
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t, double dt, vector<double> dim){
+    tree_PM tpm_instance = tree_PM();
+//#pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
+        double a_0 = tpm_instance.get_a(t);
+        double a_1 = tpm_instance.get_a(t-dt);
+        double ad_0 = tpm_instance.get_ad(t);
+        double ad_1 = tpm_instance.get_ad(t-dt);
+        double add_0 = tpm_instance.get_add(t);
+        double add_1 = tpm_instance.get_add(t-dt);
         auto bIndx = activeBods[i];
-        auto v = vecAdd((*bodies)[bIndx].vel.back(), scalMult(dt, (*bodies)[bIndx].acc.back()));
-        auto p = vecAdd((*bodies)[bIndx].pos.back(), scalMult(dt/pow(a, 3), (*bodies)[bIndx].vel.back()));
+        /// scale the force to get real value
+        auto acc = vecAdd(scalMult(pow(a_0, -2.), (*bodies)[bIndx].acc.back()), scalMult(-add_0, (*bodies)[bIndx].pos.back())); //)
+        /// Compute the real space force
+        auto v = vecAdd(scalMult(a_0, (*bodies)[bIndx].vel.back()), scalMult(dt, acc));
+        /// Compute the real position
+        auto p = vecAdd(scalMult(a_0, (*bodies)[bIndx].pos.back()), scalMult(dt, v));
+
+        /// Compute co-moving position
+        auto R_1 = scalMult(1/a_1, p);
+        /// Compute co-moving velocity
+        auto Rd_1 = scalMult(1/a_1, v);
+        /// Apply periodic BC's
         for (int axis=0; axis<3; axis++){
-            if (p[axis] < -dim[axis]/2) {
-                p[axis] += dim[axis];
+            if (R_1[axis] < -dim[axis]/2) {
+                R_1[axis] += dim[axis];
 //                v[axis] *= -1;
             }
-            if (p[axis] > dim[axis]/2) {
-                p[axis] -= dim[axis];
+            if (Rd_1[axis] > dim[axis]/2) {
+                Rd_1[axis] -= dim[axis];
 //                v[axis] *= -1;
             }
         }
-        (*bodies)[bIndx].vel.emplace_back(v);
-        (*bodies)[bIndx].pos.emplace_back(p);
+        /// Append results to body
+        (*bodies)[bIndx].vel.emplace_back(Rd_1);
+        (*bodies)[bIndx].pos.emplace_back(R_1);
         (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
 //        cout << body.vel.back()[0] << endl;
     }
@@ -106,14 +125,29 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double dt
     }
 }
 
-void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double a, double dt){
+void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t, double dt){
+    tree_PM tpm_instance = tree_PM();
 #pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
+        double a_0 = tpm_instance.get_a(t-dt);
+        double a_1 = tpm_instance.get_a(t);
+        double ad_0 = tpm_instance.get_ad(t-dt);
+        double ad_1 = tpm_instance.get_ad(t);
         auto bIndx = activeBods[i];
-        (*bodies)[bIndx].vel.emplace_back(vecAdd((*bodies)[bIndx].vel.back(),
-                                                 scalMult(dt/pow(a, 3), (*bodies)[bIndx].acc.back())));
-        (*bodies)[bIndx].pos.emplace_back(vecAdd((*bodies)[bIndx].pos.back(),
-                                                 scalMult(dt, (*bodies)[bIndx].vel.back())));
+        /// scale the force to get real value
+        auto acc = scalMult(0., (*bodies)[bIndx].acc.back()); // 1/(pow(a_0, 2))
+        /// Compute the real space force
+        auto v = vecAdd(scalMult(ad_0, (*bodies)[bIndx].pos.back()),
+                        vecAdd(scalMult(a_0, (*bodies)[bIndx].vel.back()), scalMult(dt, acc)));
+        /// Compute the real position
+        auto p = vecAdd(scalMult(a_0, (*bodies)[bIndx].pos.back()), scalMult(dt, v));
+        /// Compute co-moving position
+        auto R_1 = scalMult(1/a_1, p);
+        /// Compute co-moving velocity
+        auto Rd_1 = vecAdd(scalMult(1/a_1, v), scalMult(-ad_1/a_1, p));
+        /// Append results to body
+        (*bodies)[bIndx].vel.emplace_back(Rd_1);
+        (*bodies)[bIndx].pos.emplace_back(R_1);
         (*bodies)[bIndx].time.emplace_back((*bodies)[bIndx].time.back() + dt);
     }
 }

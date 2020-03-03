@@ -69,6 +69,7 @@ tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, doubl
     den = density;
     bodies = &bods;
     nu = 0;
+    c = 1.066e-12;
     t = time;
 }
 
@@ -80,10 +81,14 @@ tree_PM::tree_PM(vector<body>& bods, double gridSpacing, double dimension, doubl
     den = density;
     bodies = &bods;
     nu = 0;
+    c = 1.066e-12;
     t = 1e9*365*24*3600;
 }
 
-tree_PM::tree_PM() : g(), cg() {}
+tree_PM::tree_PM() : g(), cg() {
+    nu = 0;
+    c = 1.066e-12;
+}
 
 void tree_PM::genSeeds() {
     /// keys are used to determine whether points are adjacent
@@ -228,7 +233,7 @@ void tree_PM::runTrees() {
             /// Add forces from the grid points
             cg.interpW(bodies, false);
             /// Update the pos and vel
-            bodiesUpdate(bodies, subG.second.activeBods, a, subG.second.dt);
+            bodiesUpdate(bodies, subG.second.activeBods, t, subG.second.dt);
             treeBreak(bh);
         }
         /// Put particles into the correct location with PBCs
@@ -239,7 +244,7 @@ void tree_PM::runTrees() {
     g.updateGrid(bodies);
     g.solveField();
     g.interpW(bodies, true);
-    bodiesUpdate(bodies, g.activeBods, a, dt, g.dim);
+    bodiesUpdate(bodies, g.activeBods, t, dt, g.dim);
 }
 
 void tree_PM::update_a_t() {
@@ -251,11 +256,25 @@ void tree_PM::update_a_t() {
         nu = nu / g.numPts[0]*g.numPts[1]*g.numPts[2];
     }
     /// The scale factor is calculated according to the Freidmann equation
-    a = 1.154e-27*pow(t, 2/3); // pow(8*g.pi*g.G*nu/3, 1/3) * pow(t*3/2, 2/3);
+//    a =  // pow(8*g.pi*g.G*nu/3, 1/3) * pow(t*3/2, 2/3);
+//    ad = c*2/3*pow(t, -1./3.);
+//    add = -c*2/3*1/3*pow(t, -4./3.);
+//    cout << "dv: " << dt*add/a*dim[0] << ", V: " << ad/a*dim[0] << endl;
+//    for (int i=0; i<3; i++) { dim[i] += ad*dt/a; }
     t += dt;
 }
 
+double tree_PM::get_a(double tc) {
+    return c*pow(tc, 2./3.);
+}
 
+double tree_PM::get_ad(double tc) {
+    return c*2/3*pow(tc, -1./3.);
+}
+
+double tree_PM::get_add(double tc) {
+    return c*2/3*-1/3*pow(tc, -4./3.);
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

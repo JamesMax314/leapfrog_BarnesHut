@@ -38,7 +38,7 @@ vector<int> vecAdd(vector<int> v1, vector<int> v2){
 }
 
 vector<double> scalMult(double scal, vector<double> v){
-	vector<double> out(30);
+	vector<double> out(3);
 	for(int i=0; i<3; i++){
 		out[i] = scal*v[i];
 	}

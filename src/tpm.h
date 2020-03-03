@@ -48,7 +48,10 @@ public:
 class tree_PM{
 public:
     double nu;
+    double c;
     double a;
+    double ad;
+    double add;
     double t;
     double dt{};
     double den{};
@@ -66,6 +69,10 @@ public:
     void classiftBods();
     void runTrees();
     void update_a_t();
+
+    double get_a(double t);
+    double get_ad(double t);
+    double get_add(double t);
 
     tree_PM(vector<body>& bods, double gridSpacing, double dim, double density, double timeStep, double time);
     tree_PM(vector<body>& bods, double gridSpacing, double dim, double density, double timeStep);
