@@ -221,7 +221,7 @@ void tree_PM::runTrees() {
 //        cout << "sub iters: " << int(dt / subG.second.dt) << endl;
         /// For each time step
         for(int j=0; j<int(dt / subG.second.dt); j++) {
-//            cout << "Running tree" << endl;
+            cout << "Running tree" << endl;
             /// Update potentials in sub grid then solve field
             subG.second.updateGrid(bodies);
             subG.second.solveField();
