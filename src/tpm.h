@@ -26,7 +26,7 @@ public:
     double dt{};
     vector<int> min;
     vector<int> max;
-//    vector<int> activeBods;
+    vector<int> activeBods;
     vector<vector<int>> mainPoints;
 
     //    vector<vector<int>> subPoints;
@@ -56,6 +56,9 @@ public:
     double dt{};
     double den{};
     double gridSpace{};
+    vector<int> numTrees;
+    vector<double> avrgR;
+    vector<double> avrgM;
     vector<double> dim;
     vector<sg_seed> seedVec;
     map<int, sub_grid> sgVec;

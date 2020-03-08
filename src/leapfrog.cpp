@@ -126,9 +126,9 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t,
     tree_PM tpm_instance = tree_PM();
 #pragma omp parallel for
     for (int i=0; i<activeBods.size(); i++) {
-        double a_0 = tpm_instance.get_a(t-dt);
+        double a_0 = tpm_instance.get_a(t);
         double a_1 = tpm_instance.get_a(t);
-        double ad_0 = tpm_instance.get_ad(t-dt);
+        double ad_0 = tpm_instance.get_ad(t);
         double ad_1 = tpm_instance.get_ad(t);
         double add_0 = tpm_instance.get_add(t);
         double add_1 = tpm_instance.get_add(t);

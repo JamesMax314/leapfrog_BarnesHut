@@ -178,6 +178,7 @@ vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double widt
     auto runTrees = 0.;
     auto update = 0.;
     auto tot = 0.;
+    tpm.runTrees();
     for(int j=0; j<numIter; j++) {
         tpm.genSeeds();
         genSeeds = genSeeds + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();
@@ -202,6 +203,9 @@ vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double widt
     cout << "classiftBods: " << classiftBods/tot << endl;
     cout << "runTrees: " << runTrees/tot << endl;
     cout << "update: " << update/tot << endl;
+    bodies[0].avrgM = tpm.avrgM;
+    bodies[0].avrgR = tpm.avrgR;
+    bodies[0].numTrees = tpm.numTrees;
     return bodies;
 }
 
@@ -264,7 +268,10 @@ PYBIND11_MODULE(treecode, m) {
             .def_property("vel", &body::getVel, &body::setVel)
             .def_property("mass", &body::getMass, &body::setMass)
             .def_property("soft", &body::getSoftening, &body::setSoftening)
-            .def_property("pos", &body::getPos, &body::setPos);
+            .def_property("pos", &body::getPos, &body::setPos)
+            .def_property("numTrees", &body::get_numTrees, &body::set_numTrees)
+            .def_property("avrgR", &body::get_avrgR, &body::set_avrgR)
+            .def_property("avrgM", &body::get_avrgM, &body::set_avrgM);
     py::class_<tree_PM>(m, "tree_PM")
             .def(py::init<>());
 

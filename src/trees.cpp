@@ -91,7 +91,7 @@ node* barnesHut::whichChild(node* tree, int i){
     for(int j=0; j<8; j++) {
         /// For each child in parent
         child = tree->children[j];
-        if (inNode((*bodies)[i].pos.back(), child)) {
+        if (inNode((*bodies)[activeBods[i]].pos.back(), child)) {
             /// activeBods[i] replaced with i
             /// If in child j
             break;
@@ -190,8 +190,8 @@ void barnesHut::treeInsert(node* tree, int i){
             current->liveChildren.emplace_back(child->childIndx);
             child->num += 1;
             child->bodyindx = current->bodyindx;
-            child->pos = (*bodies)[current->bodyindx].pos.back();
-    		child->mass = (*bodies)[current->bodyindx].mass.back();
+            child->pos = (*bodies)[activeBods[current->bodyindx]].pos.back();
+    		child->mass = (*bodies)[activeBods[current->bodyindx]].mass.back();
 
     		/// Update current
             current = whichChild(current, i);
@@ -209,6 +209,7 @@ void barnesHut::treeInsert(node* tree, int i){
     if (current->parent != nullptr) {
         current->parent->liveChildren.emplace_back(current->childIndx);
     }
+//    printTree(root, 5);
 }
 
 /// Fill in root node
@@ -254,7 +255,7 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 	if (tree->num == 1 && tree->bodyindx != i){
 	    /// Particle-particle interaction
 		f = ngl((*bodies)[activeBods[i]].pos.back(), tree->pos, tree->mass,
-		        (*bodies)[activeBods[i]].softening + (*bodies)[tree->bodyindx].softening);
+		        (*bodies)[activeBods[i]].softening + (*bodies)[activeBods[tree->bodyindx]].softening);
 	} else{
 		double distance = m_modulus(vecAdd(scalMult(-1, (*bodies)[activeBods[i]].pos.back()), tree->pos), false);
 		vector<double> w = tree->width;
@@ -263,7 +264,7 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 		if (minWidth/distance < theta){
 		    /// Bulk node computation
 			f = ngl((*bodies)[activeBods[i]].pos.back(), tree->pos, tree->mass,
-			        (*bodies)[activeBods[i]].softening + (*bodies)[tree->bodyindx].softening);
+			        (*bodies)[activeBods[i]].softening + (*bodies)[activeBods[tree->bodyindx]].softening);
 		} else{
 		    vector<double> fs = {0, 0, 0};
             for(int j=0; j<tree->liveChildren.size(); j++){
@@ -279,6 +280,6 @@ vector<double> barnesHut::treeAcc(node* tree, int i){
 vector<double> barnesHut::ngl(vector<double> &r1, vector<double> &r2, double mass, double softening){
 	vector<double> out;
 	vector<double> delta = vecAdd(scalMult(-1, r1), r2);
-	out = scalMult(mass*G/pow(m_modulus(delta, false) + softening, 3), delta);
+	out = scalMult(mass*G/pow(pow(m_modulus(delta, false), 2.) + pow(softening, 2.), 3./2.), delta);
 	return out;
 }

@@ -16,6 +16,11 @@ struct body{
 	vector<double> ep;
 	vector<bool> active;
 
+	/// Meta Data: store in the first body for easy access in python
+    vector<int> numTrees;
+    vector<double> avrgR;
+    vector<double> avrgM;
+
 	void setPos(const vector<double>&);
     void setAcc(const vector<double>&);
     void setVel(const vector<double>&);
@@ -25,6 +30,12 @@ struct body{
     vector<vector<double>> getAcc();
     vector<vector<double>> getVel();
     vector<double> getMass();
+    vector<int> get_numTrees();
+    vector<double> get_avrgR();
+    vector<double> get_avrgM();
+    vector<int> set_numTrees();
+    vector<double> set_avrgR();
+    vector<double> set_avrgM();
     double getSoftening();
 
     body();

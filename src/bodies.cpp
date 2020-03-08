@@ -47,3 +47,27 @@ vector<double> body::getMass(){
 double body::getSoftening(){
     return softening;
 }
+
+vector<int> body::get_numTrees() {
+    return numTrees;
+}
+
+vector<double> body::get_avrgR() {
+    return avrgR;
+}
+
+vector<double> body::get_avrgM() {
+    return avrgM;
+}
+
+vector<int> body::set_numTrees() {
+    return vector<int>();
+}
+
+vector<double> body::set_avrgR() {
+    return vector<double>();
+}
+
+vector<double> body::set_avrgM() {
+    return vector<double>();
+}

@@ -44,10 +44,10 @@ sub_grid::sub_grid(const grid& g, const sg_seed& seed, vector<int> pts, double t
     min = seed.min;
     max = seed.max;
     mainPoints = seed.indices;
+    activeBods = {};
 }
 
 sub_grid::~sub_grid() {
-
 }
 
 sub_grid::sub_grid(const sub_grid& sg): grid(sg) {
@@ -111,6 +111,7 @@ void tree_PM::genSeeds() {
                     indices.emplace_back(index);
                     /// Generate new key
                     keys.emplace_back(count);
+                    g.keys[i*g.numPts[2]*g.numPts[1] + j*g.numPts[2] + k] = count;
                     count ++;
                 }
             }
@@ -190,12 +191,24 @@ void tree_PM::classiftBods() {
         vector<vector<int>> pos = g.meshPos((*bodies)[i].pos.back());
         int currKey = -1;
         /// For each mesh pos
-        for (auto & po : pos){
-            int k = g.keys[po[1]*g.numPts[2]*g.numPts[1] + po[1]*g.numPts[2] + po[1]];
-            if (k == -1 || (k != currKey && currKey != -1))
+        for (auto & po : pos) {
+            int k = g.keys[po[1] * g.numPts[2] * g.numPts[1] + po[1] * g.numPts[2] + po[1]];
+            /// If associated with multiple keys then it is not in a HD region
+            /// If not near a HD region k==-1 if in between ...
+            if (k == -1){
+                /// If not HD
+                currKey = -1;
                 break;
-            else
-                currKey = k; /// If body is in a sub grid according to given mes pos
+            }else {
+                if (k != currKey && currKey != -1) {
+                    /// If in between
+                    currKey = -1;
+                    break;
+                } else {
+                    /// If all points are in same HD section
+                    currKey = k; /// If body is in a sub grid according to given mes pos
+                }
+            }
         }
         if (currKey >= 0)
             sgVec[currKey].activeBods.emplace_back(i); /// Adds body index to active bodies list in subgrid
@@ -213,33 +226,50 @@ void tree_PM::runTrees() {
 //#pragma omp parallel for
 //    cout << "num subGs " << sgVec.size() << endl;
     /// For each subgrid
-    for (auto & subG : sgVec) {
-        /// Initialize tree section
-        barnesHut bh = barnesHut(*bodies, width, centre);
-        bh.activeBods = subG.second.activeBods;
+    double partAvrgM = 0;
+    double partAvrgR = 0;
+    for (auto &subG : sgVec) {
+//        if (subG.second.activeBods.size() > 0) {
+            cout << "Running tree" << endl;
+            partAvrgM += double(subG.second.activeBods.size());
+            cout << subG.second.activeBods.size() << endl;
+            vector<int> tmp = vecAdd(subG.second.max, scalMult(-1, subG.second.min));
+            partAvrgR += m_modulus({double(tmp[0]), double(tmp[1]), double(tmp[2])}, false);
+            /// Initialize tree section
+            barnesHut bh = barnesHut(*bodies, width, centre);
+            bh.activeBods = subG.second.activeBods;
 //        cout << subG.second.realPot[0][0] << endl;
 //        cout << "sub iters: " << int(dt / subG.second.dt) << endl;
-        /// For each time step
-        for(int j=0; j<int(dt / subG.second.dt); j++) {
-            cout << "Running tree" << endl;
-            /// Update potentials in sub grid then solve field
-            subG.second.updateGrid(bodies);
-            subG.second.solveField();
-            /// Remove the subgrid forces form the main grid and assign to comp grid
-            cg.updateCompGrid(subG.second);
-            /// Build tree and compute forces on particles
-            treeMake(bh);
-            interaction(bh);
-            /// Add forces from the grid points
-            cg.interpW(bodies, false);
-            /// Update the pos and vel
-            bodiesUpdate(bodies, subG.second.activeBods, t, subG.second.dt);
-            treeBreak(bh);
-        }
-        /// Put particles into the correct location with PBCs
-        /// i.e. Account for the particle moving outside the boundary box
-        PBC(bodies, subG.second.activeBods, g.dim);
+            /// For each time step
+            for (int j = 0; j < int(dt / subG.second.dt); j++) {
+                /// Update potentials in sub grid then solve field
+                subG.second.updateGrid(bodies);
+                subG.second.solveField();
+                /// Remove the subgrid forces form the main grid and assign to comp grid
+                cg.updateCompGrid(subG.second);
+                /// Build tree and compute forces on particles
+                treeMake(bh);
+                interaction(bh);
+                /// Add forces from the grid points
+                cg.interpW(bodies, false);
+                /// Update the pos and vel
+                bodiesUpdate(bodies, subG.second.activeBods, t, subG.second.dt);
+                treeBreak(bh);
+            }
+            /// Put particles into the correct location with PBCs
+            /// i.e. Account for the particle moving outside the boundary box
+            PBC(bodies, subG.second.activeBods, g.dim);
+//        }
     }
+    /// Store the meta date
+    if (sgVec.size() == 0) {
+        avrgM.emplace_back(0.);
+        avrgR.emplace_back(0.);
+    } else {
+        avrgM.emplace_back(partAvrgM / sgVec.size());
+        avrgR.emplace_back(partAvrgR / sgVec.size());
+    }
+    numTrees.emplace_back(sgVec.size());
     /// Update outside particles
     g.updateGrid(bodies);
     g.solveField();
@@ -289,7 +319,7 @@ void comp_grid::updateCompGrid(sub_grid & sg) {
             for (int k = 0; k < numPts[2]; k++) {
                 vector<int> sI = sg.getSubIndx({i, j, k});
                 for (int axis=0; axis<3; axis++) {
-                    if (sI[axis] > 0) {
+                    if (sI[axis] >= 0) {
                         realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] =
                               mainG.realField[axis][int(i * numPts[2] * numPts[1] + j * numPts[2] + k)] -
                                 sg.realField[axis][int(sI[0] * sg.numPts[2] * sg.numPts[1] + sI[1] * sg.numPts[2] + sI[2])];
