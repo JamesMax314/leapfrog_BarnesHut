@@ -91,6 +91,8 @@ tree_PM::tree_PM() : g(), cg() {
 }
 
 void tree_PM::genSeeds() {
+    /// Compute densities
+    g.updateGrid(bodies);
     /// keys are used to determine whether points are adjacent
     vector<int> keys;
     /// Stores the indices of grid points that surpass the density threshold
@@ -122,16 +124,21 @@ void tree_PM::genSeeds() {
         for (int j=0; j<keys.size(); j++) {
             bool adjacent = true; /// Assume adjacent
             for (int axis=0; axis<3; axis++){
-                if (abs(indices[i][axis] - indices[j][axis]) > 1)
+                if (pow(indices[i][axis] - indices[j][axis], 2.) > 1)
                     adjacent = false; /// if not adjacent in one dimension
             }
             if (adjacent){
                 /// Set key values equal
+//                cout << "adjacent: " << keys[i] << keys[j] << endl;
                 keys[j] = keys[i];
                 g.keys[indices[j][0]*g.numPts[2]*g.numPts[1] + indices[j][1]*g.numPts[2] + indices[j][2]] = keys[i];
             }
         }
     }
+//    cout << "keys: " << endl;
+//    for (int i=0; i<keys.size(); i++){
+//        cout << keys[i] << " " << endl;
+//    }
     vector<sg_seed> seeds;
     /// Add indices (on main grid) to seeds based on key
     for (int i=0; i<keys.size(); i++){
@@ -193,25 +200,18 @@ void tree_PM::classiftBods() {
         /// For each mesh pos
         for (auto & po : pos) {
             int k = g.keys[po[1] * g.numPts[2] * g.numPts[1] + po[1] * g.numPts[2] + po[1]];
-            /// If associated with multiple keys then it is not in a HD region
-            /// If not near a HD region k==-1 if in between ...
-            if (k == -1){
-                /// If not HD
-                currKey = -1;
+//            cout << "k: " << k << endl;
+            /// If k != -1 then particle is in high density region
+            if (k != -1) {
+                /// If HD
+                currKey = k;
                 break;
-            }else {
-                if (k != currKey && currKey != -1) {
-                    /// If in between
-                    currKey = -1;
-                    break;
-                } else {
-                    /// If all points are in same HD section
-                    currKey = k; /// If body is in a sub grid according to given mes pos
-                }
             }
         }
-        if (currKey >= 0)
+        if (currKey >= 0) {
             sgVec[currKey].activeBods.emplace_back(i); /// Adds body index to active bodies list in subgrid
+//            cout << "body: " << i << endl;
+        }
         else
             g.activeBods.emplace_back(i); /// Adds body to main grid
     }
@@ -229,12 +229,12 @@ void tree_PM::runTrees() {
     double partAvrgM = 0;
     double partAvrgR = 0;
     for (auto &subG : sgVec) {
-//        if (subG.second.activeBods.size() > 0) {
-            cout << "Running tree" << endl;
+        vector<int> tmp = vecAdd(subG.second.max, scalMult(-1, subG.second.min));
+        partAvrgR += 1 + m_modulus({double(tmp[0]), double(tmp[1]), double(tmp[2])}, false);
+        if (subG.second.activeBods.size() > 0) {
+//            cout << "Running tree" << endl;
             partAvrgM += double(subG.second.activeBods.size());
-            cout << subG.second.activeBods.size() << endl;
-            vector<int> tmp = vecAdd(subG.second.max, scalMult(-1, subG.second.min));
-            partAvrgR += m_modulus({double(tmp[0]), double(tmp[1]), double(tmp[2])}, false);
+//            cout << subG.second.activeBods.size() << endl;
             /// Initialize tree section
             barnesHut bh = barnesHut(*bodies, width, centre);
             bh.activeBods = subG.second.activeBods;
@@ -259,7 +259,7 @@ void tree_PM::runTrees() {
             /// Put particles into the correct location with PBCs
             /// i.e. Account for the particle moving outside the boundary box
             PBC(bodies, subG.second.activeBods, g.dim);
-//        }
+        }
     }
     /// Store the meta date
     if (sgVec.size() == 0) {
@@ -271,7 +271,6 @@ void tree_PM::runTrees() {
     }
     numTrees.emplace_back(sgVec.size());
     /// Update outside particles
-    g.updateGrid(bodies);
     g.solveField();
     g.interpW(bodies, true);
     bodiesUpdate(bodies, g.activeBods, t, dt, g.dim);

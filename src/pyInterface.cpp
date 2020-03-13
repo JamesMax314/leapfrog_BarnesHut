@@ -178,7 +178,7 @@ vector<body> TreePareticleMesh(vector<body>& bodies, double spacing, double widt
     auto runTrees = 0.;
     auto update = 0.;
     auto tot = 0.;
-    tpm.runTrees();
+//    tpm.runTrees();
     for(int j=0; j<numIter; j++) {
         tpm.genSeeds();
         genSeeds = genSeeds + chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now() - t1).count();

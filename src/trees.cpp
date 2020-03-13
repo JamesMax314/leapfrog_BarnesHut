@@ -203,7 +203,7 @@ void barnesHut::treeInsert(node* tree, int i){
 
     /// Fill in leaf data
     current->num += 1;
-    current->bodyindx = activeBods[i];
+    current->bodyindx = i;
     current->pos = (*bodies)[activeBods[i]].pos.back();
     current->mass = (*bodies)[activeBods[i]].mass.back();
     if (current->parent != nullptr) {

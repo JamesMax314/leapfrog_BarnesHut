@@ -134,7 +134,7 @@ void bodiesUpdate(vector<body>* bodies, const vector<int>& activeBods, double t,
         double add_1 = tpm_instance.get_add(t);
         auto bIndx = activeBods[i];
         /// step 1 in computing the acceleration in cc
-        auto acc = vecAdd(scalMult(1/pow(a_0, 3), (*bodies)[bIndx].acc.back()), scalMult(-ad_0/a_0, (*bodies)[bIndx].vel.back()));
+        auto acc = vecAdd(scalMult(1/a_0, (*bodies)[bIndx].acc.back()), scalMult(-ad_0/a_0, (*bodies)[bIndx].vel.back()));
 //        Compute the cc acceleration
 //        auto ud = vecAdd(scalMult(-ad_0, (*bodies)[bIndx].vel.back()), fi);
         /// Update the cc velocity
